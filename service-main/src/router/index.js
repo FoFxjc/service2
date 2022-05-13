@@ -160,12 +160,14 @@ export const constantRoutes = [
         component: () => import("@/views/satelliteCompany/index"),
         meta: { title: "地上局", icon: "table" },
       },
-      // {
-      //   path: "tree",
-      //   name: "Add Company",
-      //   component: () => import("@/views/satelliteCompany/form"),
-      //   meta: { title: "新規追加", icon: "form" },
-      // },
+      {
+        path: "createcompany",
+        name: "Createcompany",
+        hidden: true,
+        component: () => import("@/views/satelliteCompany/satelliteCompany"),
+        meta: { title: "新規作成" },
+      },
+
     ],
   },
 
