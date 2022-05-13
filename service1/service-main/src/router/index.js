@@ -47,6 +47,7 @@ export const constantRoutes = [
     path: "/",
     component: Layout,
     redirect: "/dashboard",
+    // alwaysShow: true,
     children: [
       {
         path: "dashboard",
@@ -61,9 +62,10 @@ export const constantRoutes = [
     path: "/plan",
     component: Layout,
     redirect: "/plan/list",
+    alwaysShow: true,
     name: "Satellite plan",
     meta: {
-      title: "運用計画管理",
+      title: "運用計画立案",
       icon: "fa-briefcase",
     },
     children: [
@@ -72,7 +74,7 @@ export const constantRoutes = [
         path: "calender",
         name: "calender",
         component: () => import("@/views/shootingplan/index"),
-        meta: { title: "長期運用計画", icon: "form" },
+        meta: { title: "カレンダー", icon: "form" },
       },
 
     ],
@@ -175,13 +177,13 @@ export const constantRoutes = [
         path: "table",
         name: "Table",
         component: () => import("@/views/videoresouce/index"),
-        meta: { title: "一覧表", icon: "table" },
+        meta: { title: "データ取得管理", icon: "table" },
       },
       {
         path: "tree",
         name: "Video Detail",
         component: () => import("@/views/videoresouce/detail"),
-        meta: { title: "撮影詳細", icon: "form" },
+        meta: { title: "撮影データ", icon: "form" },
       },
     ],
   },
@@ -231,41 +233,7 @@ export const constantRoutes = [
     ],
   },
 
-  {
-    path: "/satellite",
-    component: Layout,
-    redirect: "/satellite/list",
-    name: "Satellite",
-    meta: { title: "メンテナンス", icon: "el-icon-s-management" },
-    children: [
-      {
-        path: "table",
-        name: "Table",
-        component: () => import("@/views/satellite/index"),
-        meta: { title: "一覧表", icon: "table" },
-      },
-      {
-        path: "tree",
-        name: "Add Satellite",
-        component: () => import("@/views/satellite/form"),
-        meta: { title: "新規追加", icon: "form" },
-      },
-    ],
-  },
 
-  {
-    path: "/statusdashboard",
-    component: Layout,
-    redirect: "/statusdashboard",
-    children: [
-      {
-        path: "statusdashboard",
-        name: "Status Dashboard",
-        component: () => import("@/views/notification/index"),
-        meta: { title: "データ分析", icon: "el-icon-s-management" },
-      },
-    ],
-  },
 
 
   { path: "*", redirect: "/404", hidden: true },
