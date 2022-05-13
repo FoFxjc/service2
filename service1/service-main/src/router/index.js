@@ -52,7 +52,7 @@ export const constantRoutes = [
         path: "dashboard",
         name: "Dashboard",
         component: () => import("@/views/dashboard/index"),
-        meta: { title: "ダッシュボード", icon: "dashboard" },
+        meta: { title: "サービスダッシュボード", icon: "dashboard" },
       },
     ],
   },
@@ -67,12 +67,7 @@ export const constantRoutes = [
       icon: "fa-briefcase",
     },
     children: [
-      // {
-      //   path: "table",
-      //   name: "Table",
-      //   component: () => import("@/views/satelliteCompany/index"),
-      //   meta: { title: "一覧表", icon: "table" },
-      // },
+
       {
         path: "calender",
         name: "calender",
@@ -83,30 +78,6 @@ export const constantRoutes = [
     ],
   },
 
-  // {
-  //   path: "/satellitecompany",
-  //   component: Layout,
-  //   redirect: "/satellitecompany/list",
-  //   name: "Satellite Company",
-  //   meta: {
-  //     title: "地上局",
-  //     icon: "fa-briefcase",
-  //   },
-  //   children: [
-  //     {
-  //       path: "table",
-  //       name: "Table",
-  //       component: () => import("@/views/satelliteCompany/index"),
-  //       meta: { title: "一覧表", icon: "table" },
-  //     },
-  //     {
-  //       path: "tree",
-  //       name: "Add Company",
-  //       component: () => import("@/views/satelliteCompany/form"),
-  //       meta: { title: "新規追加", icon: "form" },
-  //     },
-  //   ],
-  // },
 
   {
     path: "/example",
