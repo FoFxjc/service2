@@ -65,31 +65,14 @@ export default {
       this.chart.setOption({
         xAxis: {
           data: [
-            "00:00",
-            "01:15",
-            "02:30",
-            "03:45",
-            "05:00",
-            "06:15",
-            "07:30",
-            "08:45",
-            "10:00",
-            "11:15",
-            "12:30",
-            "13:45",
-            "15:00",
-            "16:15",
-            "17:30",
-            "18:45",
-            "20:00",
-            "21:15",
-            "22:30",
-            "23:45",
+            "4月11日",
+            "4月12日",
+            "4月13日",
+            "4月14日",
+            "4月15日",
+            "4月16日",
+            "4月17日",
           ],
-          boundaryGap: false,
-          axisTick: {
-            show: false,
-          },
         },
         grid: {
           left: 10,
@@ -98,6 +81,7 @@ export default {
           top: 30,
           containLabel: true,
         },
+        symbolSize: 3,
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -106,7 +90,6 @@ export default {
           padding: [5, 10],
         },
         yAxis: {
-          data: [0, 1, 2],
           axisTick: {
             show: false,
           },
@@ -123,6 +106,10 @@ export default {
                 lineStyle: {
                   color: "#E6A23C",
                   width: 2,
+                },
+                label: {
+                  show: true,
+                  position: "top",
                 },
               },
             },
