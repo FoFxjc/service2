@@ -29,35 +29,99 @@
           style="margin: 5px"
           shadow="hover"
         >
-          <el-select
-            v-model="selected_satellite"
-            placeholder="Type"
-            class="filter-item"
-            style="width: 130px"
-            @change="handleSatelliteChange"
-          >
-            <el-option value="s01" label="Satellite 01">Satellite 01</el-option>
-            <el-option value="s02" label="Satellite 02">Satellite 02</el-option>
-            <el-option value="s03" label="Satellite 03">Satellite 03</el-option>
-          </el-select>
-
-          <el-input
-            placeholder="Title or Description"
-            style="width: 450px"
-            class="filter-item"
-            v-model="search_title"
-            @keyup.enter.native="handleFilter"
-          />
-
-          <el-button
-            class="filter-item"
-            style="margin-left: 10px; float: right"
-            type="primary"
-            icon="el-icon-circle-plus-outline"
-            @click="dialogCreationVisible = true"
-          >
-            Create Event
-          </el-button>
+          <el-row>
+            <el-col :span="8">
+              <el-select
+                v-model="selected_satellite"
+                placeholder="Type"
+                class="filter-item"
+                style="width: 130px"
+                @change="handleSatelliteChange"
+              >
+                <el-option value="s01" label="Satellite 01"
+                  >Satellite 01</el-option
+                >
+                <el-option value="s02" label="Satellite 02"
+                  >Satellite 02</el-option
+                >
+                <el-option value="s03" label="Satellite 03"
+                  >Satellite 03</el-option
+                >
+              </el-select>
+              <el-button
+                @click="activeView = 'month'"
+                type="text"
+                style="margin-left: 15px"
+                :disabled="activeView == 'month'"
+                >月</el-button
+              >
+              <el-button
+                @click="activeView = 'week'"
+                type="text"
+                :disabled="activeView == 'week'"
+                >周</el-button
+              >
+            </el-col>
+            <el-col :span="12" :offset="4">
+              <el-row type="flex" justify="end">
+                <el-button
+                  type="text"
+                  icon="el-icon-circle-plus-outline"
+                  @click="dialogCreationVisible = true"
+                >
+                  Create Event
+                </el-button>
+              </el-row>
+              <el-row type="flex" justify="end">
+                <el-input
+                  placeholder="Title or Description"
+                  style="width: 200px"
+                  class="filter-item"
+                  v-model="search_title"
+                  @keyup.enter.native="handleFilter"
+                />
+                <el-button type="info" style="width: 200px; height: 40px" plain
+                  >Global Search</el-button
+                >
+                <div
+                  style="
+                    width: 100px;
+                    height: 40px;
+                    display: flex;
+                    justify-content: center;
+                  "
+                >
+                  <el-button
+                    @click="$refs.vuecal.previous()"
+                    icon="el-icon-caret-left"
+                    type="text"
+                    style="font-size: 25px"
+                  ></el-button>
+                  <el-button
+                    @click="$refs.vuecal.next()"
+                    icon="el-icon-caret-right"
+                    type="text"
+                    style="font-size: 25px"
+                  ></el-button>
+                </div>
+              </el-row>
+              <el-row style="margin-top: 5px" type="flex" justify="end">
+                <el-date-picker
+                  type="date"
+                  placeholder="Start"
+                  style="width: 200px"
+                ></el-date-picker>
+                <el-date-picker
+                  type="date"
+                  placeholder="End"
+                  style="width: 200px"
+                ></el-date-picker>
+                <el-button style="width: 100px" type="info" plain
+                  >Search</el-button
+                >
+              </el-row>
+            </el-col>
+          </el-row>
         </el-card>
         <el-card
           :body-style="{ padding: '5px 5px 10px 5px' }"
@@ -66,14 +130,17 @@
           class="box-card demo"
         >
           <vue-cal
+            ref="vuecal"
             class="full-cal vuecal--full-height-delete"
             hide-weekends="hide-weekends"
             :selected-date="selectedDate"
+            :active-view.sync="activeView"
             :time-from="5 * 60"
             :time-to="24 * 60"
             sticky-split-labels="sticky-split-labels"
             :events.sync="showingevents"
             events-on-month-view="short"
+            :disable-views="['years', 'year', 'day']"
             @cell-focus="selectedDate = $event.date || $event"
             style="height: 900px"
           >
@@ -253,6 +320,7 @@ export default {
     selected_satellite: "s01",
     search_title: "",
     selectedEvent: {},
+    activeView: "week",
     demoExample: {
       editable: {
         title: false,
