@@ -68,17 +68,14 @@ export const constantRoutes = [
       icon: "fa-briefcase",
     },
     children: [
-
       {
         path: "calender",
         name: "calender",
         component: () => import("@/views/shootingplan/index"),
         meta: { title: "カレンダー", icon: "form" },
       },
-
     ],
   },
-
 
   {
     path: "/example",
@@ -94,7 +91,6 @@ export const constantRoutes = [
         component: () => import("@/views/table/index"),
         meta: { title: "衛星運用者", icon: "table" },
       },
-
     ],
   },
   {
@@ -140,9 +136,15 @@ export const constantRoutes = [
         component: () => import("@/views/satellite/form"),
         meta: { title: "テレメトリ", icon: "form" },
       },
+      {
+        path: "detail",
+        name: "Detail Satellite",
+        component: () => import("@/views/satellite/detail"),
+        meta: { title: "Detail", icon: "form" },
+      },
     ],
   },
-  
+
   {
     path: "/satellitecompany",
     component: Layout,
@@ -167,7 +169,6 @@ export const constantRoutes = [
         component: () => import("@/views/satelliteCompany/satelliteCompany"),
         meta: { title: "新規作成" },
       },
-
     ],
   },
 
@@ -185,20 +186,17 @@ export const constantRoutes = [
       {
         path: "alivemonitoring",
         name: "alivemonitoring",
-        component: () => import("@/views/notification/index"),
+        component: () => import("@/views/notification/alivemonitoring"),
         meta: { title: "死活監視", icon: "el-icon-s-management" },
       },
       {
         path: "statusdashboard",
         name: "Status Dashboard",
-        component: () => import("@/views/notification/index"),
+        component: () => import("@/views/notification/actionlog"),
         meta: { title: "操作ログ管理", icon: "el-icon-s-management" },
       },
     ],
   },
-
-
-
 
   { path: "*", redirect: "/404", hidden: true },
 ];
