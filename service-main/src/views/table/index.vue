@@ -1,6 +1,22 @@
 <template>
   <div class="app-container">
-    <el-card class="box-card"> ユーザーアカウント一覧</el-card>
+        <el-card
+      :body-style="{ padding: '10px' }"
+      style="margin: 5px"
+      shadow="hover"
+    >
+
+      <el-button
+        align="center"
+        v-waves
+        class="filter-item"
+        type="primary"
+        style="margin-left: 10px; float: right"
+        @click="handleCreate"
+      >
+        新規作成
+      </el-button>
+    </el-card>
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -14,33 +30,18 @@
           {{ scope.$index }}
         </template>
       </el-table-column>
-      <!-- <el-table-column label="名前" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.name }}
-        </template>
-      </el-table-column> -->
-      <el-table-column label="ニックネーム" align="center">
+
+      <el-table-column label="名前" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.nickname }}</span>
         </template>
       </el-table-column>
-      <!-- <el-table-column label="メール" align="center">
+      <el-table-column label="所属" align="center">
         <template slot-scope="scope">
-          {{ scope.row.email }}
-        </template>
-      </el-table-column> -->
-      <el-table-column
-        class-name="status-col"
-        label="支払"
-        width="110"
-        align="center"
-      >
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.payment | statusFilter">{{
-            scope.row.payment
-          }}</el-tag>
+          <span>{{ scope.row.nickname }}</span>
         </template>
       </el-table-column>
+
       <el-table-column
         align="center"
         prop="created_at"
@@ -54,11 +55,9 @@
       </el-table-column>
       <el-table-column label="操作" width="300" align="center">
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" size="mini" type="info"
-            >コンテンツ</el-button
-          >
-          <!-- <el-button size="mini" type="danger">削除</el-button>
-          <el-button size="mini" type="warning">パスワード変更</el-button> -->
+          <el-button size="mini" type="info" @click="handleCompanyDetail"
+            >詳細
+            </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -95,6 +94,12 @@ export default {
         this.list = response.data.items;
         this.listLoading = false;
       });
+    },
+    handleCreate() {
+      this.$router.push("/example/Createuser");
+    },
+    handleCompanyDetail() {
+      this.$router.push("/example/Userdetail");
     },
   },
 };

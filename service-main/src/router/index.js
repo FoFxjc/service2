@@ -91,6 +91,20 @@ export const constantRoutes = [
         component: () => import("@/views/table/index"),
         meta: { title: "衛星運用者", icon: "table" },
       },
+      {
+        path: "createuser",
+        name: "Createuser",
+        hidden: true,
+        component: () => import("@/views/table/createuser"),
+        meta: { title: "新規作成" },
+      },
+      {
+        path: "userdetail",
+        name: "Userdetail",
+        hidden: true,
+        component: () => import("@/views/table/userdetail"),
+        meta: { title: "詳細" },
+      },
     ],
   },
   {
