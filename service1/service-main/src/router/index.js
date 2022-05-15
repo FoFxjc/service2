@@ -69,17 +69,14 @@ export const constantRoutes = [
       icon: "fa-briefcase",
     },
     children: [
-
       {
         path: "calender",
         name: "calender",
         component: () => import("@/views/shootingplan/index"),
         meta: { title: "カレンダー", icon: "form" },
       },
-
     ],
   },
-
 
   {
     path: "/example",
@@ -102,7 +99,6 @@ export const constantRoutes = [
             component: () => import("@/views/table/companydetail"),
             meta: { title: "詳細" },
           },
-
         ],
       },
       {
@@ -164,7 +160,6 @@ export const constantRoutes = [
     ],
   },
 
-  
   {
     path: "/videoresouce",
     component: Layout,
@@ -203,10 +198,40 @@ export const constantRoutes = [
         meta: { title: "撮影枠", icon: "table" },
       },
       {
+        path: "table2",
+        name: "Table2",
+        component: () => import("@/views/Shootingframe/index2"),
+        meta: { title: "撮影枠2", icon: "table" },
+      },
+      {
         path: "tree",
         name: "Video Detail",
         component: () => import("@/views/Shootingframe/detail"),
         meta: { title: "ムーブメント枠", icon: "form" },
+      },
+      {
+        path: "tree2",
+        name: "Video Detail2",
+        component: () => import("@/views/Shootingframe/index3"),
+        meta: { title: "ムーブメント枠2", icon: "form" },
+      },
+      {
+        path: "detail",
+        name: "Detail",
+        component: () => import("@/views/Shootingframe/detail2"),
+        meta: { title: "Detail", icon: "form" },
+      },
+      {
+        path: "detail2",
+        name: "Detail2",
+        component: () => import("@/views/Shootingframe/detail3"),
+        meta: { title: "Detail2", icon: "form" },
+      },
+      {
+        path: "detail3",
+        name: "Detail3",
+        component: () => import("@/views/Shootingframe/detail4"),
+        meta: { title: "Detail3", icon: "form" },
       },
     ],
   },
@@ -232,9 +257,6 @@ export const constantRoutes = [
       },
     ],
   },
-
-
-
 
   { path: "*", redirect: "/404", hidden: true },
 ];
