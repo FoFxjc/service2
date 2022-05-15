@@ -64,18 +64,7 @@
           {{ scope.row.email }}
         </template>
       </el-table-column>
-      <!-- <el-table-column
-        class-name="status-col"
-        label="支払"
-        width="110"
-        align="center"
-      >
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.payment | statusFilter">{{
-            scope.row.payment
-          }}</el-tag>
-        </template>
-      </el-table-column> -->
+
       <el-table-column
         align="center"
         prop="created_at"
