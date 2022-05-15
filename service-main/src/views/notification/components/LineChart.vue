@@ -86,6 +86,10 @@ export default {
             "22:30",
             "23:45",
           ],
+          boundaryGap: false,
+          axisTick: {
+            show: false,
+          },
         },
         grid: {
           left: 10,
