@@ -78,8 +78,8 @@
       <el-table-column label="操作" width="300" align="center">
         <template slot-scope="scope">
           <el-button size="mini" type="info" @click="handleCompanyDetail"
-            >詳細</el-button
-          >
+            >詳細
+            </el-button>
           <el-button @click="handleClick(scope.row)" size="mini" type="info"
             >コンテンツ</el-button
           >
