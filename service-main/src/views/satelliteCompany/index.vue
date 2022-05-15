@@ -38,9 +38,9 @@
 
       <el-table-column label="操作" fixed="right" width="180" align="center">
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" size="mini" type="info"
-            >詳細</el-button
-          >
+          <el-button size="mini" type="info" @click="handleCompanyDetail"
+            >詳細
+            </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -82,9 +82,9 @@ export default {
     handleCreate() {
       this.$router.push("/satelliteCompany/Createcompany");
     },
-    // handleCompanyDetail() {
-    //   this.$router.push("/satelliteCompany/companydetail");
-    // },
+    handleCompanyDetail() {
+      this.$router.push("/satelliteCompany/Companydetail");
+    },
   },
 };
 </script>

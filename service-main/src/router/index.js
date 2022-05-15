@@ -175,6 +175,13 @@ export const constantRoutes = [
         meta: { title: "地上局", icon: "table" },
       },
       {
+        path: "companydetail",
+        name: "Companydetail",
+        hidden: true,
+        component: () => import("@/views/satelliteCompany/companydetail"),
+        meta: { title: "詳細" },
+      },
+      {
         path: "createcompany",
         name: "Createcompany",
         hidden: true,
