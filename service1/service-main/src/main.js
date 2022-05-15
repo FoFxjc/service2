@@ -14,6 +14,11 @@ import {
   faSatellite,
   faBriefcase,
   faSatelliteDish,
+  faPeopleGroup,
+  faCircleExclamation,
+  faCloudArrowDown,
+  faGroupArrowsRotate,
+  faCalendarCheck,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* import font awesome icon component */
@@ -33,7 +38,11 @@ library.add(faUserSecret);
 library.add(faSatellite);
 library.add(faBriefcase);
 library.add(faSatelliteDish);
-
+library.add(faPeopleGroup);
+library.add(faCircleExclamation);
+library.add(faCloudArrowDown);
+library.add(faGroupArrowsRotate);
+library.add(faCalendarCheck);
 /* add font awesome icon component */
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
