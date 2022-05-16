@@ -1,7 +1,7 @@
 <template>
   <div class="cal-container">
     <el-row>
-      <el-col :span="5">
+      <!-- <el-col :span="5">
         <el-card
           :body-style="{ padding: '5px 5px 10px 5px' }"
           style="margin: 5px; margin-top: 15px"
@@ -20,35 +20,30 @@
             :disable-views="['week', 'day']"
             @cell-click="selectedDate = $event"
             style="width: 100%; height: 380px"
+            locale="ja"
           ></vue-cal>
         </el-card>
-      </el-col>
-      <el-col :span="19">
-        <el-card
-          :body-style="{ padding: '10px' }"
-          style="margin: 5px"
-          shadow="hover"
-        >
-          <el-row>
+      </el-col> -->
+                <el-row>
             <el-col :span="8">
               <el-select
                 v-model="selected_satellite"
                 placeholder="Type"
                 class="filter-item"
-                style="width: 130px"
+                style="width: 230px"
                 @change="handleSatelliteChange"
               >
-                <el-option value="s01" label="Satellite 01"
-                  >Satellite 01</el-option
+                <el-option value="s01" label="衛星：SPHERE-01"
+                  >衛星：SPHERE-01</el-option
                 >
-                <el-option value="s02" label="Satellite 02"
-                  >Satellite 02</el-option
+                <el-option value="s02" label="衛星：SPHERE-02"
+                  >衛星：SPHERE-01</el-option
                 >
-                <el-option value="s03" label="Satellite 03"
-                  >Satellite 03</el-option
+                <el-option value="s03" label="衛星：SPHERE-03"
+                  >衛星：SPHERE-01</el-option
                 >
               </el-select>
-              <el-button
+              <!-- <el-button
                 @click="activeView = 'month'"
                 type="text"
                 style="margin-left: 15px"
@@ -60,7 +55,7 @@
                 type="text"
                 :disabled="activeView == 'week'"
                 >周</el-button
-              >
+              > -->
             </el-col>
             <el-col :span="12" :offset="4">
               <el-row type="flex" justify="end">
@@ -69,19 +64,19 @@
                   icon="el-icon-circle-plus-outline"
                   @click="dialogCreationVisible = true"
                 >
-                  Create Event
+                イベント情報追加                  
                 </el-button>
               </el-row>
               <el-row type="flex" justify="end">
                 <el-input
-                  placeholder="Title or Description"
+                  placeholder="イベント名称検索"
                   style="width: 200px"
                   class="filter-item"
                   v-model="search_title"
                   @keyup.enter.native="handleFilter"
                 />
-                <el-button type="info" style="width: 200px; height: 40px" plain
-                  >Global Search</el-button
+                <el-button type="primary" style="width: 200px; height: 40px" plain
+                  >イベント全件検索</el-button
                 >
                 <div
                   style="
@@ -108,21 +103,21 @@
               <el-row style="margin-top: 5px" type="flex" justify="end">
                 <el-date-picker
                   type="date"
-                  placeholder="Start"
+                  placeholder="開始"
                   style="width: 200px"
                 ></el-date-picker>
                 <el-date-picker
                   type="date"
-                  placeholder="End"
+                  placeholder="終了"
                   style="width: 200px"
                 ></el-date-picker>
                 <el-button style="width: 100px" type="info" plain
-                  >Search</el-button
+                  >一般公開</el-button
                 >
               </el-row>
             </el-col>
           </el-row>
-        </el-card>
+      <el-col :span="24">
         <el-card
           :body-style="{ padding: '5px 5px 10px 5px' }"
           style="margin: 5px; margin-top: 15px"
@@ -130,19 +125,16 @@
           class="box-card demo"
         >
           <vue-cal
-            ref="vuecal"
             class="full-cal vuecal--full-height-delete"
-            hide-weekends="hide-weekends"
             :selected-date="selectedDate"
-            :active-view.sync="activeView"
             :time-from="5 * 60"
             :time-to="24 * 60"
             sticky-split-labels="sticky-split-labels"
             :events.sync="showingevents"
             events-on-month-view="short"
-            :disable-views="['years', 'year', 'day']"
             @cell-focus="selectedDate = $event.date || $event"
             style="height: 900px"
+            locale="ja"
           >
             <template v-slot:split-label="{ split, view }">
               <strong :style="`color: ${split.color}`">{{
@@ -278,8 +270,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogCreationVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="handleEventCreate">Create</el-button>
+        <el-button @click="dialogCreationVisible = false">キャンセル</el-button>
+        <el-button type="primary" @click="handleEventCreate">作成</el-button>
       </div>
     </el-dialog>
 
@@ -290,8 +282,8 @@
     >
       <span>Are you sure you want to delete this event</span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogDeleteVisible = false">Cancel</el-button>
-        <el-button type="danger" @click="handleEventDelete()">Delete</el-button>
+        <el-button @click="dialogDeleteVisible = false">キャンセル</el-button>
+        <el-button type="danger" @click="handleEventDelete()">削除</el-button>
       </span>
     </el-dialog>
   </div>
@@ -302,6 +294,8 @@ import VueCal from "vue-cal";
 import { uuid } from "vue-uuid";
 
 import "vue-cal/dist/vuecal.css";
+import 'vue-cal/dist/i18n/ja.js'
+
 
 import moment from "moment";
 import { start } from "nprogress";
@@ -320,7 +314,6 @@ export default {
     selected_satellite: "s01",
     search_title: "",
     selectedEvent: {},
-    activeView: "week",
     demoExample: {
       editable: {
         title: false,
@@ -390,7 +383,7 @@ export default {
           this.demoExample.events.push({
             start: `${day} ${start_hour}:00`,
             end: `${day} ${end_hour}:00`,
-            title: "Charging",
+            title: "有料",
             class: "charging",
             background: true,
             deletable: false,
@@ -406,7 +399,7 @@ export default {
           this.demoExample.events.push({
             start: `${day} ${start_hour}:00`,
             end: `${day} ${end_hour}:00`,
-            title: "Maintain",
+            title: "メンテナンス",
             class: "maintain",
             background: true,
             deletable: false,
@@ -424,7 +417,7 @@ export default {
             id: 1,
             start: `${monday} 15:30`,
             end: `${monday} 17:30`,
-            title: "Shooting Plan 1",
+            title: "予約撮影 1",
             content: '<i class="v-icon material-icons mt-1">sports_tennis</i>',
             resizable: false,
           },
@@ -432,7 +425,7 @@ export default {
             id: 3,
             start: `${tuesday} 08:00`,
             end: `${tuesday} 10:00`,
-            title: "Shooting Plan 3",
+            title: "予約撮影 3",
             content: '<i class="v-icon material-icons mt-1">User 2</i>',
             resizable: false,
           },
@@ -440,7 +433,7 @@ export default {
             id: 4,
             start: `${thursday} 09:00`,
             end: `${thursday} 11:30`,
-            title: "Shooting Plan 4",
+            title: "予約撮影 4",
             content: '<i class="v-icon material-icons mt-2">User 1</i>',
             resizable: false,
           },
@@ -448,7 +441,7 @@ export default {
             id: 5,
             start: `${friday} 16:45`,
             end: `${friday} 18:45`,
-            title: "Shooting Plan ",
+            title: "予約撮影 ",
             content: '<i class="v-icon material-icons mt-1">User 2</i>',
             resizable: false,
           }
@@ -477,7 +470,7 @@ export default {
             id: 1,
             start: `${monday} 15:30`,
             end: `${monday} 17:30`,
-            title: "Shooting Plan 1",
+            title: "予約撮影 1",
             content: '<i class="v-icon material-icons mt-1">sports_tennis</i>',
             resizable: false,
           },
@@ -485,7 +478,7 @@ export default {
             id: 3,
             start: `${tuesday} 08:00`,
             end: `${tuesday} 10:00`,
-            title: "Shooting Plan 3",
+            title: "予約撮影 3",
             content: '<i class="v-icon material-icons mt-1">User 2</i>',
             resizable: false,
           },
@@ -493,7 +486,7 @@ export default {
             id: 4,
             start: `${thursday} 09:00`,
             end: `${thursday} 11:30`,
-            title: "Shooting Plan 4",
+            title: "予約撮影 4",
             content: '<i class="v-icon material-icons mt-2">User 1</i>',
             resizable: false,
           },
@@ -501,7 +494,7 @@ export default {
             id: 5,
             start: `${friday} 16:45`,
             end: `${friday} 18:45`,
-            title: "Shooting Plan ",
+            title: "予約撮影 ",
             content: '<i class="v-icon material-icons mt-1">User 2</i>',
             resizable: false,
           }
@@ -604,7 +597,7 @@ export default {
       this.demoExample.events.push({
         start: `${day} 21:00`,
         end: `${day} 23:00`,
-        title: "Charging",
+        title: "充電メンテナンス",
         class: "charging",
         background: true,
         deletable: false,
@@ -622,7 +615,7 @@ export default {
         id: 1,
         start: `${monday} 15:30`,
         end: `${monday} 17:30`,
-        title: "Shooting Plan 1",
+        title: "予約撮影 1",
         content: '<i class="v-icon material-icons mt-1">sports_tennis</i>',
         resizable: false,
       },
@@ -630,7 +623,7 @@ export default {
         id: 3,
         start: `${tuesday} 08:00`,
         end: `${tuesday} 10:00`,
-        title: "Shooting Plan 3",
+        title: "予約撮影 3",
         content: '<i class="v-icon material-icons mt-1">User 2</i>',
         resizable: false,
       },
@@ -638,7 +631,7 @@ export default {
         id: 4,
         start: `${thursday} 09:00`,
         end: `${thursday} 11:30`,
-        title: "Shooting Plan 4",
+        title: "予約撮影 4",
         content: '<i class="v-icon material-icons mt-2">User 1</i>',
         resizable: false,
       },
@@ -646,7 +639,7 @@ export default {
         id: 5,
         start: `${friday} 16:45`,
         end: `${friday} 18:45`,
-        title: "Shooting Plan ",
+        title: "予約撮影 ",
         content: '<i class="v-icon material-icons mt-1">User 2</i>',
         resizable: false,
       }
