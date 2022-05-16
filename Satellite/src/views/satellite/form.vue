@@ -107,17 +107,7 @@
             highlight-current-row
             style="width: 100%"
           >
-            <el-table-column
-              v-loading="loading"
-              align="left"
-              label="操作日時"
-              width="200"
-              element-loading-text="確認中"
-            >
-              <template slot-scope="scope">
-                <span>{{ scope.row.date }}</span>
-              </template>
-            </el-table-column>
+
 
             <el-table-column align="left" label="通信パスID" width="120">
               <template slot-scope="scope">
