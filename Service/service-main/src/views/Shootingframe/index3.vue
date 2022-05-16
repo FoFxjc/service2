@@ -13,16 +13,16 @@
           label-width="150px"
           style="width: 70%"
         >
-          <el-form-item label="Frame ID">
+          <el-form-item label="ムーブメント ID">
             <el-input v-model="form.name" style="width: 400px"></el-input>
           </el-form-item>
-          <el-form-item label="User ID">
+          <el-form-item label="ユーザー ID">
             <el-input v-model="form.name" style="width: 400px"></el-input>
           </el-form-item>
-          <el-form-item label="User ID">
+          <el-form-item label="撮影枠 ID">
             <el-input v-model="form.name" style="width: 400px"></el-input>
           </el-form-item>
-          <el-form-item label="摄影日期">
+          <el-form-item label="撮影日時">
             <el-row :gutter="5" type="flex" justify="flex-start">
               <el-col :span="11">
                 <el-date-picker
@@ -48,11 +48,11 @@
               </el-col>
             </el-row>
           </el-form-item>
-          <el-form-item label="利用状况">
+          <el-form-item label="利用状況">
             <el-checkbox-group v-model="checkList">
-              <el-checkbox label="PlaceHolder"></el-checkbox>
-              <el-checkbox label="PlaceHolder"></el-checkbox>
-              <el-checkbox label="PlaceHolder"></el-checkbox>
+              <el-checkbox label="未予約"></el-checkbox>
+              <el-checkbox label="予約"></el-checkbox>
+              <el-checkbox label="キャンセル"></el-checkbox>
             </el-checkbox-group>
           </el-form-item>
         </el-form>
@@ -76,7 +76,7 @@
         >
           <el-col :span="8">
             <p style="margin-left: 15px; margin-right: 15px; font-size: 16px">
-              Shooting Frame
+              ムーブメント枠情報
             </p></el-col
           >
           <el-col :offset="15" :span="1">
@@ -110,8 +110,8 @@
             <el-table-column
               v-loading="loading"
               align="left"
-              label="Frame ID"
-              width="100"
+              label="ムーブメント枠 ID"
+              width="140"
               element-loading-text="確認中"
             >
               <template slot-scope="scope">
@@ -119,25 +119,29 @@
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Shooting ID">
+            <el-table-column align="left" label="ユーザー ID">
               <template slot-scope="scope">
                 <span>{{ scope.row.shooting_id }}</span>
               </template>
             </el-table-column>
-
-            <el-table-column align="left" label="Start Date">
+            <el-table-column align="left" label="撮影枠 ID">
+              <template slot-scope="scope">
+                <span>{{ scope.row.shooting_id }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column align="left" label="開始日時">
               <template slot-scope="scope">
                 <span>{{ scope.row.start_date }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="End Date">
+            <el-table-column align="left" label="終了日時">
               <template slot-scope="scope">
                 <span>{{ scope.row.end_date }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Using Type">
+            <el-table-column align="left" label="利用状況">
               <template slot-scope="scope">
                 <span>{{ scope.row.using_type }}</span>
               </template>
@@ -149,15 +153,15 @@
                   @click="handleClick(scope.row)"
                   size="mini"
                   type="info"
-                  >详情</el-button
+                  >詳細</el-button
                 >
               </template>
             </el-table-column>
           </el-table>
         </el-card>
         <div style="margin: 20px 5px">
-          <el-button type="primary">主要按钮</el-button>
-          <el-button type="danger">删除</el-button>
+          <el-button type="primary">キャンセル</el-button>
+          <el-button type="danger">削除</el-button>
         </div>
       </el-card>
     </el-row>
@@ -233,7 +237,7 @@ export default {
           end_date: "2022-04-19 14:27:22",
           frame_type: "PlaceHolder",
           shooting_type: "PlaceHolder",
-          using_type: "PlaceHolder",
+          using_type: "予約",
           shooting_status: "PlaceHolder",
         },
         {
@@ -244,7 +248,7 @@ export default {
           end_date: "2022-04-19 14:27:22",
           frame_type: "PlaceHolder",
           shooting_type: "PlaceHolder",
-          using_type: "PlaceHolder",
+          using_type: "未予約",
           shooting_status: "PlaceHolder",
         },
       ],

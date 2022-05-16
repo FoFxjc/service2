@@ -89,8 +89,8 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-row :gutter="20">
-      <el-col :span="12">
+    <!-- <el-row :gutter="20"> -->
+      <!-- <el-col :span="12">
         <el-card
           :body-style="{ padding: '5px 5px 10px 5px' }"
           style="margin: 5px; margin-top: 15px"
@@ -252,9 +252,9 @@
             </el-table-column>
           </el-table>
         </el-card>
-      </el-col>
-      <el-col :span="12">
-        <el-card
+      </el-col> -->
+      <!-- <el-col :span="12"> -->
+        <!-- <el-card
           :body-style="{ padding: '5px 5px 10px 5px' }"
           style="margin: 5px; margin-top: 15px"
           shadow="hover"
@@ -397,9 +397,9 @@
               </template>
             </el-table-column>
           </el-table>
-        </el-card>
-      </el-col>
-    </el-row>
+        </el-card> -->
+      <!-- </el-col> -->
+    <!-- </el-row> -->
   </div>
 </template>
 

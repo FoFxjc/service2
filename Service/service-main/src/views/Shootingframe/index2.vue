@@ -13,25 +13,25 @@
           label-width="150px"
           style="width: 70%"
         >
-          <el-form-item label="Frame ID">
+          <el-form-item label="撮影枠ID">
             <el-input v-model="form.name" style="width: 400px"></el-input>
           </el-form-item>
-          <el-form-item label="User ID">
+          <el-form-item label="ユーザーID">
             <el-input v-model="form.name" style="width: 400px"></el-input>
           </el-form-item>
-          <el-form-item label="卫星">
+          <el-form-item label="衛星">
             <el-select
               value="S01"
-              placeholder="Satellite"
+              placeholder="衛星"
               clearable
               class="filter-item"
             >
-              <el-option value="S01">Satellite 01</el-option>
-              <el-option value="S02">Satellite 02</el-option>
-              <el-option value="S03">Satellite 03</el-option>
+              <el-option value="衛星 01">衛星 01</el-option>
+              <el-option value="衛星 02">衛星 02</el-option>
+              <el-option value="衛星 03">衛星 03</el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="摄影日期">
+          <el-form-item label="撮影日時">
             <el-row :gutter="5" type="flex" justify="flex-start">
               <el-col :span="11">
                 <el-date-picker
@@ -57,33 +57,33 @@
               </el-col>
             </el-row>
           </el-form-item>
-          <el-form-item label="Frame Type">
+          <el-form-item label="撮影枠種別">
             <el-checkbox-group v-model="checkList">
-              <el-checkbox label="PlaceHolder"></el-checkbox>
-              <el-checkbox label="PlaceHolder"></el-checkbox>
+              <el-checkbox label="スタンダード"></el-checkbox>
+              <el-checkbox label="ムーブメント"></el-checkbox>
             </el-checkbox-group>
           </el-form-item>
-          <el-form-item label="Shooting Type">
+          <el-form-item label="撮影種別">
             <el-checkbox-group v-model="checkList">
-              <el-checkbox label="PlaceHolder"></el-checkbox>
-              <el-checkbox label="PlaceHolder"></el-checkbox>
+              <el-checkbox label="予約"></el-checkbox>
+              <el-checkbox label="リアルタイム"></el-checkbox>
             </el-checkbox-group>
           </el-form-item>
-          <el-form-item label="利用状况">
+          <el-form-item label="利用状況">
             <el-checkbox-group v-model="checkList">
-              <el-checkbox label="PlaceHolder"></el-checkbox>
-              <el-checkbox label="PlaceHolder"></el-checkbox>
-              <el-checkbox label="PlaceHolder"></el-checkbox>
-              <el-checkbox label="PlaceHolder"></el-checkbox>
-              <el-checkbox label="PlaceHolder"></el-checkbox>
-              <el-checkbox label="PlaceHolder"></el-checkbox>
+              <el-checkbox label="未予約"></el-checkbox>
+              <el-checkbox label="一時確保"></el-checkbox>
+              <el-checkbox label="仮予約"></el-checkbox>
+              <el-checkbox label="本予約"></el-checkbox>
+              <el-checkbox label="利用済"></el-checkbox>
+              <el-checkbox label="キャンセル"></el-checkbox>
             </el-checkbox-group>
           </el-form-item>
-          <el-form-item label="拍摄状况">
+          <el-form-item label="ダウンロード状況">
             <el-checkbox-group v-model="checkList">
-              <el-checkbox label="PlaceHolder"></el-checkbox>
-              <el-checkbox label="PlaceHolder"></el-checkbox>
-              <el-checkbox label="PlaceHolder"></el-checkbox>
+              <el-checkbox label="未済"></el-checkbox>
+              <el-checkbox label="一部済"></el-checkbox>
+              <el-checkbox label="完了"></el-checkbox>
             </el-checkbox-group>
           </el-form-item>
         </el-form>
@@ -107,7 +107,7 @@
         >
           <el-col :span="8">
             <p style="margin-left: 15px; margin-right: 15px; font-size: 16px">
-              Shooting Frame
+              撮影枠情報
             </p></el-col
           >
           <el-col :offset="15" :span="1">
@@ -141,7 +141,7 @@
             <el-table-column
               v-loading="loading"
               align="left"
-              label="Frame ID"
+              label="撮影枠ID"
               width="100"
               element-loading-text="確認中"
             >
@@ -150,49 +150,49 @@
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Shooting ID" width="120">
+            <el-table-column align="left" label="ユーザー ID" width="120">
               <template slot-scope="scope">
                 <span>{{ scope.row.shooting_id }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="卫星">
+            <el-table-column align="left" label="衛星">
               <template slot-scope="scope">
                 <span>{{ scope.row.satellite_name }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Start Date" width="180">
+            <el-table-column align="left" label="開始日時" width="180">
               <template slot-scope="scope">
                 <span>{{ scope.row.start_date }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="End Date" width="180">
+            <el-table-column align="left" label="終了日時" width="180">
               <template slot-scope="scope">
                 <span>{{ scope.row.end_date }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Frame Type" width="150">
+            <el-table-column align="left" label="撮影枠種別" width="150">
               <template slot-scope="scope">
                 <span>{{ scope.row.frame_type }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Shooting Type" width="150">
+            <el-table-column align="left" label="撮影種別" width="150">
               <template slot-scope="scope">
                 <span>{{ scope.row.shooting_type }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Using Type" width="150">
+            <el-table-column align="left" label="利用状況" width="150">
               <template slot-scope="scope">
                 <span>{{ scope.row.using_type }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Shooting Status" width="150">
+            <el-table-column align="left" label="ダウンロード状況" width="150">
               <template slot-scope="scope">
                 <span>{{ scope.row.shooting_status }}</span>
               </template>
@@ -204,15 +204,15 @@
                   @click="handleClick(scope.row)"
                   size="mini"
                   type="info"
-                  >详情</el-button
+                  >詳細</el-button
                 >
               </template>
             </el-table-column>
           </el-table>
         </el-card>
         <div style="margin: 20px 5px">
-          <el-button type="primary">主要按钮</el-button>
-          <el-button type="danger">删除</el-button>
+          <el-button type="primary">予約キャンセル</el-button>
+          <el-button type="danger">削除</el-button>
         </div>
       </el-card>
     </el-row>
@@ -286,10 +286,10 @@ export default {
           shooting_id: "100",
           satellite_name: "Sphere-1",
           end_date: "2022-04-19 14:27:22",
-          frame_type: "PlaceHolder",
-          shooting_type: "PlaceHolder",
-          using_type: "PlaceHolder",
-          shooting_status: "PlaceHolder",
+          frame_type: "スタンダード",
+          shooting_type: "リアルタイム",
+          using_type: "未予約",
+          shooting_status: "未済",
         },
         {
           start_date: "2022-04-19 14:27:22",
@@ -297,10 +297,10 @@ export default {
           shooting_id: "100",
           satellite_name: "Sphere-1",
           end_date: "2022-04-19 14:27:22",
-          frame_type: "PlaceHolder",
-          shooting_type: "PlaceHolder",
-          using_type: "PlaceHolder",
-          shooting_status: "PlaceHolder",
+          frame_type: "ムーブメント",
+          shooting_type: "予約",
+          using_type: "仮予約",
+          shooting_status: "完了",
         },
       ],
     };

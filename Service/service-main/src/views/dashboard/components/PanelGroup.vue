@@ -9,7 +9,7 @@
           />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">摄影周回数</div>
+          <div class="card-panel-text">撮影周回数</div>
           <count-to
             :start-val="0"
             :end-val="180"
@@ -28,7 +28,7 @@
           />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">预约数</div>
+          <div class="card-panel-text">予約数</div>
           <count-to
             :start-val="0"
             :end-val="10"
@@ -48,7 +48,7 @@
         </div>
         <i class="fa-solid fa-cloud-arrow-down"></i>
         <div class="card-panel-description">
-          <div class="card-panel-text">下载数量</div>
+          <div class="card-panel-text">DL予定数</div>
           <count-to
             :start-val="0"
             :end-val="1500"
@@ -64,7 +64,7 @@
           <i class="el-icon-video-camera card-panel-icon"> </i>
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">データ</div>
+          <div class="card-panel-text">撮影枠データ</div>
           <count-to
             :start-val="0"
             :end-val="3569"
@@ -83,7 +83,7 @@
           />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">故障数</div>
+          <div class="card-panel-text">障害検知数</div>
           <count-to
             :start-val="0"
             :end-val="10"
@@ -102,7 +102,7 @@
           />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">用户数</div>
+          <div class="card-panel-text">ユーザー数</div>
           <count-to
             :start-val="0"
             :end-val="25"

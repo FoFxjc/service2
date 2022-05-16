@@ -10,7 +10,7 @@
             font-size: 16px;
           "
         >
-          Frame Info
+          撮影枠詳細
         </p>
         <el-divider></el-divider>
         <div style="padding: 0px 10px 20px 20px; margin-top: 10px">
@@ -20,7 +20,7 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                Frame ID
+                撮影枠 ID
               </div>
             </el-col>
             <el-col
@@ -40,7 +40,7 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                Appointment ID
+                予約 ID
               </div>
             </el-col>
             <el-col
@@ -61,7 +61,7 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                Satellite
+                衛星
               </div>
             </el-col>
             <el-col
@@ -81,7 +81,7 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                周回ID
+                運用周回ID
               </div>
             </el-col>
             <el-col
@@ -101,7 +101,7 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                PlaceHolder
+                ユーザーID
               </div>
             </el-col>
             <el-col
@@ -121,14 +121,14 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                Frame Type
+                撮影枠種別
               </div>
             </el-col>
             <el-col
               :span="8"
               style="font-weight: normal; font-size: 16px; line-height: 26px"
             >
-              <div class="text">Placeholder</div>
+              <div class="text">スタンダード</div>
             </el-col>
           </el-row>
           <el-row
@@ -141,14 +141,14 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                Shooting Type
+                撮影種別
               </div>
             </el-col>
             <el-col
               :span="8"
               style="font-weight: normal; font-size: 16px; line-height: 26px"
             >
-              <div class="text">Placeholder</div>
+              <div class="text">リアルタイム</div>
             </el-col>
           </el-row>
           <el-row
@@ -161,7 +161,7 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                Shooting Date
+                撮影可能日時
               </div>
             </el-col>
             <el-col
@@ -177,7 +177,7 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                利用状况
+                利用状況
               </div>
             </el-col>
             <el-col
@@ -185,7 +185,7 @@
               style="font-weight: normal; font-size: 16px; line-height: 26px"
             >
               <div class="text">
-                <el-tag>未预约</el-tag>
+                <el-tag>未予約</el-tag>
               </div>
             </el-col>
           </el-row>
@@ -195,7 +195,7 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                Placeholder
+                ダウンロード状況
               </div>
             </el-col>
             <el-col
@@ -203,7 +203,7 @@
               style="font-weight: normal; font-size: 16px; line-height: 26px"
             >
               <div class="text">
-                <el-tag>Placeholder</el-tag>
+                <el-tag>未済</el-tag>
               </div>
             </el-col>
           </el-row>
@@ -213,7 +213,7 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                优先度
+                優先度
               </div>
             </el-col>
             <el-col
@@ -226,11 +226,11 @@
             </el-col>
           </el-row>
           <div style="margin-top: 50px">
-            <el-button type="primary">主要按钮</el-button>
-            <el-button type="primary">主要按钮</el-button>
-            <el-button type="primary">主要按钮</el-button>
-            <el-button type="primary">主要按钮</el-button>
-            <el-button type="danger">删除</el-button>
+            <el-button type="primary">編集</el-button>
+            <el-button type="primary">シーケンス</el-button>
+            <el-button type="primary">撮影データ</el-button>
+            <el-button type="primary">予約キャンセル</el-button>
+            <el-button type="danger">削除</el-button>
           </div>
         </div>
       </el-card>
@@ -253,7 +253,7 @@
         >
           <el-col :span="8">
             <p style="margin-left: 15px; margin-right: 15px; font-size: 16px">
-              Shooting Frame
+              分割枠
             </p></el-col
           >
         </el-row>
@@ -276,8 +276,8 @@
             <el-table-column
               v-loading="loading"
               align="left"
-              label="Frame ID"
-              width="100"
+              label="ムーブメント枠 ID"
+              width="160"
               element-loading-text="確認中"
             >
               <template slot-scope="scope">
@@ -285,31 +285,31 @@
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Shooting ID">
+            <el-table-column align="left" label="ユーザー ID">
               <template slot-scope="scope">
                 <span>{{ scope.row.shooting_id }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Placeholder ID">
+            <el-table-column align="left" label="撮影枠 ID">
               <template slot-scope="scope">
                 <span>{{ scope.row.frame_id }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Start Date">
+            <el-table-column align="left" label="開始日時">
               <template slot-scope="scope">
                 <span>{{ scope.row.start_date }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="End Date">
+            <el-table-column align="left" label="終了日時">
               <template slot-scope="scope">
                 <span>{{ scope.row.end_date }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Using Type">
+            <el-table-column align="left" label="利用状況">
               <template slot-scope="scope">
                 <span>{{ scope.row.using_type }}</span>
               </template>
@@ -321,16 +321,16 @@
                   @click="handleClick(scope.row)"
                   size="mini"
                   type="info"
-                  >详情</el-button
+                  >詳細</el-button
                 >
               </template>
             </el-table-column>
           </el-table>
         </el-card>
         <div style="margin: 20px 5px">
-          <el-button type="primary">主要按钮</el-button>
-          <el-button type="primary">主要按钮</el-button>
-          <el-button type="danger">删除</el-button>
+          <el-button type="primary">追加</el-button>
+          <el-button type="primary">予約キャンセル</el-button>
+          <el-button type="danger">削除</el-button>
         </div>
       </el-card>
     </el-row>
@@ -410,7 +410,7 @@ export default {
           type: "PlaceHolder",
           date: "2022-04-19 14:27:22",
           test_result: "正常",
-          using_type: "预约",
+          using_type: "予約",
         },
         {
           start_date: "2022-04-19 14:27:22",
@@ -423,7 +423,7 @@ export default {
           type: "PlaceHolder",
           date: "2022-04-19 14:27:22",
           test_result: "正常",
-          using_type: "未预约",
+          using_type: "未予約",
         },
       ],
       tableData2: [
