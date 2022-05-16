@@ -386,8 +386,10 @@ export default {
             start: `${tuesday} 08:00`,
             end: `${tuesday} 10:00`,
             title: "予約撮影 3",
-            content: '<i class="v-icon material-icons mt-1">User 2</i>',
-            resizable: false,
+            // content: '<i class="v-icon material-icons mt-1">User 2</i>',
+            content: '<i class="v-icon material-icons">shopping_cart</i>',
+            class: 'leisure'
+            // resizable: false,
           },
           {
             id: 4,
@@ -412,7 +414,7 @@ export default {
           this.demoExample.events.push({
             start: `${day} 21:00`,
             end: `${day} 23:00`,
-            title: "Charging",
+            title: "有料",
             class: "charging",
             background: true,
             deletable: false,
