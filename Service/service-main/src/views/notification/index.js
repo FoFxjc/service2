@@ -246,13 +246,13 @@ export const constantRoutes = [
       {
         path: "alivemonitoring",
         name: "alivemonitoring",
-        component: () => import("@/views/notification/alivemonitoring"),
+        component: () => import("@/views/notification/index"),
         meta: { title: "死活監視", icon: "el-icon-s-management" },
       },
       {
         path: "statusdashboard",
         name: "Status Dashboard",
-        component: () => import("@/views/notification/actionlog"),
+        component: () => import("@/views/notification/index"),
         meta: { title: "操作ログ管理", icon: "el-icon-s-management" },
       },
     ],
