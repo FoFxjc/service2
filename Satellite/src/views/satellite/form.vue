@@ -5,28 +5,35 @@
       style="margin: 5px"
       shadow="hover"
     >
+        <p
+          style="
+            margin-bottom: -10px;
+            margin-left: 15px;
+            margin-right: 15px;
+            font-size: 16px;
+          "
+        >
+          衛星 Sphere1
+        </p>
+        <br/>
       <el-input
         placeholder="通信パス"
         style="margin-right: 10px; width: 200px"
         class="filter-item"
       />
 
-      <el-col :span="1">
         <el-date-picker
           type="date"
           placeholder="開始日時"
           v-model="form.date1"
           style="margin-right: 10px; width: 200px"
         ></el-date-picker>
-      </el-col>
-      <el-col :span="1">
         <el-date-picker
           placeholder="終了日時"
           type="date"
           v-model="form.date2"
           style="margin-right: 10px; width: 200px"
         ></el-date-picker>
-      </el-col>
       <el-input
         placeholder="テレメトリ"
         style="width: 200px"
@@ -35,7 +42,7 @@
       <el-button
         v-waves
         class="filter-item"
-        style="width: 200px"
+        style="width: 100px; margin-left: 15px;"
         type="primary"
         icon="el-icon-search"
         @click="handleFilter"
@@ -62,7 +69,7 @@
         >
           <el-col :span="8">
             <p style="margin-left: 15px; margin-right: 15px; font-size: 16px">
-              操作ログ
+               <el-checkbox v-model="checked">Raw形式で表示</el-checkbox>
             </p></el-col
           >
           <el-col :offset="13" :span="4">
@@ -112,52 +119,32 @@
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="ユーザーID" width="120">
+            <el-table-column align="left" label="通信パスID" width="120">
               <template slot-scope="scope">
                 <span>{{ scope.row.action_user_id }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="ユーザーグループ" width="200">
+            <el-table-column align="left" label="日時" width="200">
               <template slot-scope="scope">
                 <span>{{ scope.row.action_user_name }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="メールアドレス" width="200">
+            <el-table-column align="left" label="テレメトリ名" width="200">
               <template slot-scope="scope">
                 <span>{{ scope.row.action_user_email }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="操作" width="500">
+            <el-table-column align="left" label="値" width="500">
               <template slot-scope="scope">
                 <span>{{ scope.row.action }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column label="結果" align="center" width="90">
-              <template slot-scope="scope">
-                <p
-                  v-if="scope.row.action_result == 'Success'"
-                  style="color: green"
-                >
-                  {{ scope.row.action_result }}
-                </p>
-                <p
-                  v-if="scope.row.action_result == 'Failure'"
-                  style="color: red"
-                >
-                  {{ scope.row.action_result }}
-                </p>
-              </template>
-            </el-table-column>
 
-            <el-table-column align="left" label="操作対象">
-              <template slot-scope="scope">
-                <span>{{ scope.row.action_object }}</span>
-              </template>
-            </el-table-column>
+
           </el-table>
         </el-card>
       </el-card>

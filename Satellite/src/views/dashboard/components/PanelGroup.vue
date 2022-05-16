@@ -19,25 +19,7 @@
         </div>
       </div>
     </el-col>
-    <el-col :xs="12" :sm="12" :lg="4" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('messages')">
-        <div class="card-panel-icon-wrapper icon-message">
-          <font-awesome-icon
-            icon="fa-solid fa-calendar-check"
-            class="card-panel-icon"
-          />
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">予約数</div>
-          <count-to
-            :start-val="0"
-            :end-val="10"
-            :duration="3000"
-            class="card-panel-num"
-          />
-        </div>
-      </div>
-    </el-col>
+
     <el-col :xs="12" :sm="12" :lg="4" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('purchases')">
         <div class="card-panel-icon-wrapper icon-money">
@@ -93,25 +75,7 @@
         </div>
       </div>
     </el-col>
-    <el-col :xs="12" :sm="12" :lg="4" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('shoppings')">
-        <div class="card-panel-icon-wrapper icon-message">
-          <font-awesome-icon
-            icon="fa-solid fa-people-group"
-            class="card-panel-icon"
-          />
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">ユーザー数</div>
-          <count-to
-            :start-val="0"
-            :end-val="25"
-            :duration="3600"
-            class="card-panel-num"
-          />
-        </div>
-      </div>
-    </el-col>
+
   </el-row>
 </template>
 
