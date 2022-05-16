@@ -3,10 +3,13 @@
     <el-col :xs="12" :sm="12" :lg="4" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
         <div class="card-panel-icon-wrapper icon-people">
-          <i class="el-icon-user-solid card-panel-icon"> </i>
+          <font-awesome-icon
+            icon="fa-solid fa-group-arrows-rotate"
+            class="card-panel-icon"
+          />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">ユーザー</div>
+          <div class="card-panel-text">撮影周回数</div>
           <count-to
             :start-val="0"
             :end-val="180"
@@ -19,10 +22,13 @@
     <el-col :xs="12" :sm="12" :lg="4" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('messages')">
         <div class="card-panel-icon-wrapper icon-message">
-          <i class="el-icon-s-custom card-panel-icon"> </i>
+          <font-awesome-icon
+            icon="fa-solid fa-calendar-check"
+            class="card-panel-icon"
+          />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">管理者</div>
+          <div class="card-panel-text">予約数</div>
           <count-to
             :start-val="0"
             :end-val="10"
@@ -35,10 +41,14 @@
     <el-col :xs="12" :sm="12" :lg="4" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('purchases')">
         <div class="card-panel-icon-wrapper icon-money">
-          <i class="el-icon-video-camera-solid card-panel-icon"> </i>
+          <font-awesome-icon
+            icon="fa-solid fa-cloud-arrow-down"
+            class="card-panel-icon"
+          />
         </div>
+        <i class="fa-solid fa-cloud-arrow-down"></i>
         <div class="card-panel-description">
-          <div class="card-panel-text">リソース</div>
+          <div class="card-panel-text">DL予定数</div>
           <count-to
             :start-val="0"
             :end-val="1500"
@@ -54,7 +64,7 @@
           <i class="el-icon-video-camera card-panel-icon"> </i>
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">データ</div>
+          <div class="card-panel-text">撮影枠データ</div>
           <count-to
             :start-val="0"
             :end-val="3569"
@@ -68,12 +78,12 @@
       <div class="card-panel" @click="handleSetLineChartData('shoppings')">
         <div class="card-panel-icon-wrapper icon-people">
           <font-awesome-icon
-            icon="fa-solid fa-briefcase"
+            icon="fa-solid fa-circle-exclamation"
             class="card-panel-icon"
           />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">サービス</div>
+          <div class="card-panel-text">障害検知数</div>
           <count-to
             :start-val="0"
             :end-val="10"
@@ -87,12 +97,12 @@
       <div class="card-panel" @click="handleSetLineChartData('shoppings')">
         <div class="card-panel-icon-wrapper icon-message">
           <font-awesome-icon
-            icon="fa-solid fa-satellite"
+            icon="fa-solid fa-people-group"
             class="card-panel-icon"
           />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">衛星</div>
+          <div class="card-panel-text">ユーザー数</div>
           <count-to
             :start-val="0"
             :end-val="25"

@@ -33,12 +33,12 @@
             v-model="selected_satellite"
             placeholder="Type"
             class="filter-item"
-            style="width: 130px"
+            style="width: 160px"
             @change="handleSatelliteChange"
           >
-            <el-option value="s01" label="Satellite 01">Satellite 01</el-option>
-            <el-option value="s02" label="Satellite 02">Satellite 02</el-option>
-            <el-option value="s03" label="Satellite 03">Satellite 03</el-option>
+            <el-option value="s01" label="衛星: SPHERE01">衛星: SPHERE01</el-option>
+            <el-option value="s02" label="衛星: SPHERE02">衛星: SPHERE02</el-option>
+            <el-option value="s03" label="衛星: SPHERE03">衛星: SPHERE03</el-option>
           </el-select>
 
           <el-input

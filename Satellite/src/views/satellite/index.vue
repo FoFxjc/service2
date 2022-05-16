@@ -20,7 +20,7 @@
                 style="float: right; padding: 3px 0"
                 type="text"
                 slot="reference"
-                >Action</el-button
+                >詳細</el-button
               >
             </el-popover>
           </div>
@@ -47,12 +47,27 @@
                   "
                 >
                   <p>
-                    <span style="font-weight: bold">API: </span>
-                    <br />
-                    <el-button type="text">{{ item.api_url }}</el-button>
+                    <span style="font-weight: bold">衛星ID: </span>
+                    <!-- <br /> -->
+                    <el-button type="text">{{ item.id }}</el-button>
                   </p>
                   <p>
-                    <span style="font-weight: bold"> 状態: </span>
+                    <span style="font-weight: bold">衛星名: </span>
+                    <!-- <br /> -->
+                    <el-button type="text">{{ item.name }}</el-button>
+                  </p>
+                  <p>
+                    <span style="font-weight: bold">充電量: </span>
+                    <!-- <br /> -->
+                    <el-button type="text">XX%</el-button>
+                  </p>
+                  <p>
+                    <span style="font-weight: bold">メモリーカード使用量: </span>
+                    <!-- <br /> -->
+                    <el-button type="text">XX%</el-button>
+                  </p>
+                  <p>
+                    <span style="font-weight: bold"> ステータス: </span>
                     <el-tag v-if="item.status == 'Online'">
                       {{ item.status }}
                     </el-tag>

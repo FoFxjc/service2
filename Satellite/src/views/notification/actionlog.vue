@@ -10,10 +10,10 @@
         <el-form
           ref="form"
           :model="form"
-          label-width="100px"
+          label-width="200px"
           style="width: 40%"
         >
-          <el-form-item label="摄影日期">
+          <el-form-item label="撮影日時">
             <el-row :gutter="5" type="flex" justify="flex-start">
               <el-col :span="11">
                 <el-date-picker
@@ -39,17 +39,17 @@
               </el-col>
             </el-row>
           </el-form-item>
-          <el-form-item label="Action User">
+          <el-form-item label="ユーザーグループ" width="200" >
             <el-input v-model="form.name"></el-input>
           </el-form-item>
-          <el-form-item label="Action ID">
+          <el-form-item label="ユーザー ID">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
-          <el-form-item label="Result">
+          <el-form-item label="結果">
             <el-radio-group v-model="form.resource">
-              <el-radio label="Success/Failure"></el-radio>
-              <el-radio label="Success"></el-radio>
-              <el-radio label="Failure"></el-radio>
+              <el-radio label="成功/失敗"></el-radio>
+              <el-radio label="成功"></el-radio>
+              <el-radio label="失敗"></el-radio>
             </el-radio-group>
           </el-form-item>
         </el-form>
@@ -73,14 +73,14 @@
         >
           <el-col :span="8">
             <p style="margin-left: 15px; margin-right: 15px; font-size: 16px">
-              Action Log
+              操作ログ
             </p></el-col
           >
           <el-col :offset="13" :span="4">
             <el-row :gutter="30" justify="center" align="middle">
               <el-col :span="12">
                 <div style="margin: 5px 0px">
-                  <el-checkbox v-model="checked">Auto Refresh</el-checkbox>
+                  <el-checkbox v-model="checked">自動更新</el-checkbox>
                 </div>
               </el-col>
               <el-col :span="12">
@@ -114,7 +114,7 @@
             <el-table-column
               v-loading="loading"
               align="left"
-              label="Action Date"
+              label="操作日時"
               width="200"
               element-loading-text="確認中"
             >
@@ -123,31 +123,31 @@
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Placeholder" width="120">
+            <el-table-column align="left" label="ユーザーID" width="120">
               <template slot-scope="scope">
                 <span>{{ scope.row.action_user_id }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Placeholder">
+            <el-table-column align="left" label="ユーザーグループ" width="200">
               <template slot-scope="scope">
                 <span>{{ scope.row.action_user_name }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Email" width="200">
+            <el-table-column align="left" label="メールアドレス" width="200">
               <template slot-scope="scope">
                 <span>{{ scope.row.action_user_email }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Action" width="500">
+            <el-table-column align="left" label="操作" width="500">
               <template slot-scope="scope">
                 <span>{{ scope.row.action }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column label="Result" align="center" width="90">
+            <el-table-column label="結果" align="center" width="90">
               <template slot-scope="scope">
                 <p
                   v-if="scope.row.action_result == 'Success'"
@@ -164,7 +164,7 @@
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Action Object">
+            <el-table-column align="left" label="操作対象">
               <template slot-scope="scope">
                 <span>{{ scope.row.action_object }}</span>
               </template>
@@ -246,34 +246,34 @@ export default {
         {
           date: "2022-04-19 14:27:22",
           action_user_id: "18",
-          action_user_name: "卫星运用者",
+          action_user_name: "衛星運用者",
           action_user_email: "st.sph.tst004@gmail.com",
-          action: "PlaceHolder",
+          action: "撮影枠情報の取得",
           action_result: "Success",
-          action_object: "PlaceHolder",
+          action_object: "撮影枠：5",
         },
         {
           date: "2022-04-19 14:27:22",
           action_user_id: "18",
-          action_user_name: "卫星运用者",
+          action_user_name: "衛星運用者",
           action_user_email: "st.sph.tst004@gmail.com",
-          action: "PlaceHolder",
+          action: "操作履歴の取得",
           action_result: "Failure",
         },
         {
           date: "2022-04-19 14:27:22",
           action_user_id: "18",
-          action_user_name: "卫星运用者",
+          action_user_name: "衛星運用者",
           action_user_email: "st.sph.tst004@gmail.com",
-          action: "PlaceHolder",
+          action: "撮影可能時刻一覧の取得",
           action_result: "Success",
         },
         {
           date: "2022-04-19 14:27:22",
           action_user_id: "18",
-          action_user_name: "卫星运用者",
+          action_user_name: "衛星運用者",
           action_user_email: "st.sph.tst004@gmail.com",
-          action: "PlaceHolder",
+          action: "ログイン",
           action_result: "Success",
         },
       ],

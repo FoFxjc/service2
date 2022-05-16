@@ -154,7 +154,7 @@ export const constantRoutes = [
         path: "detail",
         name: "Detail Satellite",
         component: () => import("@/views/satellite/detail"),
-        meta: { title: "Detail", icon: "form" },
+        meta: { title: "詳細", icon: "form" },
       },
     ],
   },

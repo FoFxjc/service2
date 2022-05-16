@@ -10,7 +10,7 @@
             font-size: 16px;
           "
         >
-          卫星情報
+          衛星情報
         </p>
         <el-divider></el-divider>
         <div style="padding: 0px 10px 20px 20px; margin-top: 10px">
@@ -20,7 +20,7 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                Satellite ID
+                衛星 ID
               </div>
             </el-col>
             <el-col
@@ -43,7 +43,7 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                Satellite Name
+                衛星名 
               </div>
             </el-col>
             <el-col
@@ -54,7 +54,7 @@
             </el-col>
             <el-col :span="8">
               <div class="reference">
-                <el-button type="info" size="mini" plain>Edit</el-button>
+                <el-button type="info" size="mini" plain>編集</el-button>
               </div>
             </el-col>
           </el-row>
@@ -64,7 +64,7 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                Connection Status
+                通信状態
               </div>
             </el-col>
             <el-col
@@ -72,7 +72,7 @@
               style="font-weight: normal; font-size: 16px; line-height: 26px"
             >
               <div class="text">
-                <el-tag>Connected</el-tag>
+                <el-tag>通信中</el-tag>
               </div>
             </el-col>
             <el-col :span="8">
@@ -85,14 +85,14 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                Satellite Status
+                ステータス
               </div>
             </el-col>
             <el-col
               :span="8"
               style="font-weight: normal; font-size: 16px; line-height: 26px"
             >
-              <el-tag>Normal</el-tag>
+              <el-tag>正常</el-tag>
             </el-col>
             <el-col :span="8">
               <div class="reference"></div>
@@ -108,7 +108,7 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                充电量
+                充電量
               </div>
             </el-col>
             <el-col
@@ -136,7 +136,7 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                硬盘使用量
+                メモリーカード使用量
               </div>
             </el-col>
             <el-col
@@ -192,7 +192,7 @@
                 class="label"
                 style="font-weight: bold; font-size: 16px; line-height: 26px"
               >
-                Placeholder
+                バージョン
               </div>
             </el-col>
             <el-col
@@ -221,12 +221,12 @@
             font-size: 16px;
           "
         >
-          通信
+          通信パス
         </p>
         <el-divider></el-divider>
         <div style="padding: 0px 10px 20px 20px; margin-top: -10px">
           <el-tabs v-model="activeName">
-            <el-tab-pane label="预约" name="first">
+            <el-tab-pane label="予約済み" name="first">
               <el-table
                 :data="tableData"
                 border
@@ -237,8 +237,8 @@
                 <el-table-column
                   v-loading="loading"
                   align="left"
-                  label="ID"
-                  width="60"
+                  label="通信パスID"
+                  width="160"
                   element-loading-text="確認中"
                 >
                   <template slot-scope="scope">
@@ -246,13 +246,13 @@
                   </template>
                 </el-table-column>
 
-                <el-table-column align="left" label="Start Date" width="180">
+                <el-table-column align="left" label="開始日時" width="180">
                   <template slot-scope="scope">
                     <span>{{ scope.row.start_date }}</span>
                   </template>
                 </el-table-column>
 
-                <el-table-column align="left" label="End Date" width="180">
+                <el-table-column align="left" label="終了日時" width="180">
                   <template slot-scope="scope">
                     <span>{{ scope.row.end_date }}</span>
                   </template>
@@ -264,14 +264,24 @@
                   </template>
                 </el-table-column>
 
-                <el-table-column align="left" label="通信类别" width="300">
+                <el-table-column align="left" label="通信種別" width="300">
                   <template slot-scope="scope">
                     <span>{{ scope.row.type }}</span>
                   </template>
                 </el-table-column>
-                <el-table-column align="left" label="送信结果" width="180">
+                <el-table-column align="left" label="送信コマンドの検証結果" width="180">
                   <template slot-scope="scope">
                     <span>{{ scope.row.test_result }}</span>
+                  </template>
+                </el-table-column>
+                <el-table-column label="操作" fixed="right" align="left">
+                  <template slot-scope="scope">
+                    <el-button
+                      @click="handleClick(scope.row)"
+                      size="mini"
+                      type="info"
+                      >キャンセル</el-button
+                    >
                   </template>
                 </el-table-column>
               </el-table>
@@ -287,8 +297,8 @@
                 <el-table-column
                   v-loading="loading"
                   align="left"
-                  label="ID"
-                  width="60"
+                  label="通信パスID"
+                  width="160"
                   element-loading-text="確認中"
                 >
                   <template slot-scope="scope">
@@ -296,13 +306,13 @@
                   </template>
                 </el-table-column>
 
-                <el-table-column align="left" label="Start Date" width="180">
+                <el-table-column align="left" label="開始日時" width="180">
                   <template slot-scope="scope">
                     <span>{{ scope.row.start_date }}</span>
                   </template>
                 </el-table-column>
 
-                <el-table-column align="left" label="End Date" width="180">
+                <el-table-column align="left" label="終了日時" width="180">
                   <template slot-scope="scope">
                     <span>{{ scope.row.end_date }}</span>
                   </template>
@@ -314,12 +324,12 @@
                   </template>
                 </el-table-column>
 
-                <el-table-column align="left" label="通信类别" width="300">
+                <el-table-column align="left" label="通信種別" width="300">
                   <template slot-scope="scope">
                     <span>{{ scope.row.type }}</span>
                   </template>
                 </el-table-column>
-                <el-table-column align="left" label="取得日期" width="180">
+                <el-table-column align="left" label="テレメトリ取得日時" width="180">
                   <template slot-scope="scope">
                     <span>{{ scope.row.date }}</span>
                   </template>
@@ -331,13 +341,13 @@
                       @click="handleClick(scope.row)"
                       size="mini"
                       type="info"
-                      >Detail</el-button
+                      >テレメトリ確認</el-button
                     >
                   </template>
                 </el-table-column>
               </el-table>
             </el-tab-pane>
-            <el-tab-pane label="预约可能" name="third">
+            <el-tab-pane label="予約可能" name="third">
               <el-table
                 :data="tableData"
                 border
@@ -345,13 +355,13 @@
                 highlight-current-row
                 style="width: 100%"
               >
-                <el-table-column align="left" label="Start Date" width="180">
+                <el-table-column align="left" label="開始日時" width="180">
                   <template slot-scope="scope">
                     <span>{{ scope.row.start_date }}</span>
                   </template>
                 </el-table-column>
 
-                <el-table-column align="left" label="End Date" width="180">
+                <el-table-column align="left" label="終了日時" width="180">
                   <template slot-scope="scope">
                     <span>{{ scope.row.end_date }}</span>
                   </template>
@@ -363,7 +373,7 @@
                   </template>
                 </el-table-column>
 
-                <el-table-column align="left" label="通信类别" width="300">
+                <el-table-column align="left" label="通信種別" width="300">
                   <template slot-scope="scope">
                     <span>{{ scope.row.type }}</span>
                   </template>
@@ -375,7 +385,7 @@
                       @click="handleClick(scope.row)"
                       size="mini"
                       type="info"
-                      >预约</el-button
+                      >予約</el-button
                     >
                   </template>
                 </el-table-column>
@@ -403,7 +413,7 @@
         >
           <el-col :span="8">
             <p style="margin-left: 15px; margin-right: 15px; font-size: 16px">
-              送信
+              送信コマンド
             </p></el-col
           >
         </el-row>
@@ -424,7 +434,7 @@
             <el-table-column
               v-loading="loading"
               align="left"
-              label="Placeholder"
+              label="アクション"
               width="200"
               element-loading-text="確認中"
             >
@@ -433,19 +443,19 @@
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Start Date" width="180">
+            <el-table-column align="left" label="開始日時" width="180">
               <template slot-scope="scope">
                 <span>{{ scope.row.start_date }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="End Date" width="180">
+            <el-table-column align="left" label="終了日時" width="180">
               <template slot-scope="scope">
                 <span>{{ scope.row.end_date }}</span>
               </template>
             </el-table-column>
 
-            <el-table-column align="left" label="Placeholder">
+            <el-table-column align="left" label="パラメータ">
               <template slot-scope="scope">
                 <span>{{ scope.row.ref }}</span>
               </template>
@@ -521,10 +531,19 @@ export default {
       tableData: [
         {
           start_date: "2022-04-19 14:27:22",
-          id: "18",
+          id: "16",
           end_date: "2022-04-19 14:27:22",
           company: "",
-          type: "PlaceHolder",
+          type: "ダウンリンク",
+          date: "2022-04-19 14:27:22",
+          test_result: "正常",
+        },
+        {
+          start_date: "2022-04-19 14:27:22",
+          id: "17",
+          end_date: "2022-04-19 14:27:22",
+          company: "",
+          type: "アップリンク",
           date: "2022-04-19 14:27:22",
           test_result: "正常",
         },
@@ -533,16 +552,7 @@ export default {
           id: "18",
           end_date: "2022-04-19 14:27:22",
           company: "",
-          type: "PlaceHolder",
-          date: "2022-04-19 14:27:22",
-          test_result: "正常",
-        },
-        {
-          start_date: "2022-04-19 14:27:22",
-          id: "18",
-          end_date: "2022-04-19 14:27:22",
-          company: "",
-          type: "PlaceHolder",
+          type: "ダウンリンク",
           date: "2022-04-19 14:27:22",
           test_result: "正常",
         },
@@ -550,21 +560,21 @@ export default {
       tableData2: [
         {
           start_date: "2022-04-19 14:27:22",
-          action: "PlaceHolder",
+          action: "予約撮影開始準備",
           end_date: "2022-04-19 14:27:22",
-          ref: "PlaceHolder",
+          ref: "XXX",
         },
         {
           start_date: "2022-04-19 14:27:22",
-          action: "PlaceHolder",
+          action: "静止画撮影",
           end_date: "2022-04-19 14:27:22",
-          ref: "PlaceHolder",
+          ref: "XXX",
         },
         {
           start_date: "2022-04-19 14:27:22",
-          action: "PlaceHolder",
+          action: "予約撮影終了",
           end_date: "2022-04-19 14:27:22",
-          ref: "PlaceHolder",
+          ref: "XXX",
         },
       ],
     };

@@ -1,33 +1,167 @@
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="form" label-width="180px">
-      <el-form-item label="Satellite name" style="width: 50%">
-        <el-input v-model="form.name" />
-      </el-form-item>
-      <el-form-item label="Satellite company" style="width: 50%">
-        <el-select
-          value="SC Ltd."
-          placeholder="Type"
-          clearable
-          class="filter-item"
-          style="width: 130px"
+    <el-card
+      :body-style="{ padding: '10px' }"
+      style="margin: 5px"
+      shadow="hover"
+    >
+      <el-input
+        placeholder="通信パス"
+        style="margin-right: 10px; width: 200px"
+        class="filter-item"
+      />
+
+      <el-col :span="1">
+        <el-date-picker
+          type="date"
+          placeholder="開始日時"
+          v-model="form.date1"
+          style="margin-right: 10px; width: 200px"
+        ></el-date-picker>
+      </el-col>
+      <el-col :span="1">
+        <el-date-picker
+          placeholder="終了日時"
+          type="date"
+          v-model="form.date2"
+          style="margin-right: 10px; width: 200px"
+        ></el-date-picker>
+      </el-col>
+      <el-input
+        placeholder="テレメトリ"
+        style="width: 200px"
+        class="filter-item"
+      />
+      <el-button
+        v-waves
+        class="filter-item"
+        style="width: 200px"
+        type="primary"
+        icon="el-icon-search"
+        @click="handleFilter"
+      >
+        検索
+      </el-button>
+
+    </el-card>
+        <el-row>
+      <el-card
+        :body-style="{ padding: '5px 5px 10px 5px' }"
+        style="margin: 5px; margin-top: 15px"
+        shadow="hover"
+        class="box-card"
+      >
+        <el-row
+          style="
+            margin-bottom: -20px;
+            margin-left: 15px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+          "
         >
-          <el-option value="SC Ltd.">SC Ltd.</el-option>
-          <el-option value="DC Ltd.">DC Ltd.</el-option>
-          <el-option value="Awesome Ltd.">Awesome Ltd.</el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="Satellite API" style="width: 50%">
-        <el-input v-model="form.name" />
-      </el-form-item>
-      <el-form-item label="Satellite API Token" style="width: 50%">
-        <el-input v-model="form.name" />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">作成</el-button>
-        <el-button @click="onCancel">キャンセル</el-button>
-      </el-form-item>
-    </el-form>
+          <el-col :span="8">
+            <p style="margin-left: 15px; margin-right: 15px; font-size: 16px">
+              操作ログ
+            </p></el-col
+          >
+          <el-col :offset="13" :span="4">
+            <el-row :gutter="30" justify="center" align="middle">
+              <el-col :span="12">
+                <div style="margin: 5px 0px">
+                  <el-checkbox v-model="checked">自動更新</el-checkbox>
+                </div>
+              </el-col>
+              <el-col :span="12">
+                <el-button
+                  class="filter-item"
+                  type="primary"
+                  size="small"
+                  icon="el-icon-refresh-right"
+                  @click="handleFilter"
+                  circle
+                >
+                </el-button>
+              </el-col>
+            </el-row>
+          </el-col>
+        </el-row>
+
+        <el-divider></el-divider>
+        <el-card
+          :body-style="{ padding: '0px' }"
+          style="margin: 5px; margin-top: 15px"
+          shadow="hover"
+        >
+          <el-table
+            :data="tableData"
+            border
+            fit
+            highlight-current-row
+            style="width: 100%"
+          >
+            <el-table-column
+              v-loading="loading"
+              align="left"
+              label="操作日時"
+              width="200"
+              element-loading-text="確認中"
+            >
+              <template slot-scope="scope">
+                <span>{{ scope.row.date }}</span>
+              </template>
+            </el-table-column>
+
+            <el-table-column align="left" label="ユーザーID" width="120">
+              <template slot-scope="scope">
+                <span>{{ scope.row.action_user_id }}</span>
+              </template>
+            </el-table-column>
+
+            <el-table-column align="left" label="ユーザーグループ" width="200">
+              <template slot-scope="scope">
+                <span>{{ scope.row.action_user_name }}</span>
+              </template>
+            </el-table-column>
+
+            <el-table-column align="left" label="メールアドレス" width="200">
+              <template slot-scope="scope">
+                <span>{{ scope.row.action_user_email }}</span>
+              </template>
+            </el-table-column>
+
+            <el-table-column align="left" label="操作" width="500">
+              <template slot-scope="scope">
+                <span>{{ scope.row.action }}</span>
+              </template>
+            </el-table-column>
+
+            <el-table-column label="結果" align="center" width="90">
+              <template slot-scope="scope">
+                <p
+                  v-if="scope.row.action_result == 'Success'"
+                  style="color: green"
+                >
+                  {{ scope.row.action_result }}
+                </p>
+                <p
+                  v-if="scope.row.action_result == 'Failure'"
+                  style="color: red"
+                >
+                  {{ scope.row.action_result }}
+                </p>
+              </template>
+            </el-table-column>
+
+            <el-table-column align="left" label="操作対象">
+              <template slot-scope="scope">
+                <span>{{ scope.row.action_object }}</span>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-card>
+      </el-card>
+    </el-row>
   </div>
 </template>
 
