@@ -17,7 +17,17 @@
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <router-link to="/">
             <el-dropdown-item> ユーザー情報 </el-dropdown-item>
-            <el-dropdown-item> バージョン情報 </el-dropdown-item>
+            <el-popover
+              placement="bottom"
+              title="サービス運営者者アプリ"
+              width="400"
+              trigger="click"              
+              content="システムバージョン：V1.0.0">
+              <p>システムバージョン：V1.0.0</p>
+              <br/>
+              <p>Copyright 2022 Sony Group Corporation</p>
+              <el-button slot="reference">バージョン情報</el-button>
+            </el-popover>
           </router-link>
           <el-dropdown-item divided @click.native="logout">
             <span style="display: block">ログアウト</span>
