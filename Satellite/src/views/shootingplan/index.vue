@@ -875,6 +875,7 @@ import { uuid } from "vue-uuid";
 
 import "vue-cal/dist/vuecal.css";
 import "vue-cal/dist/i18n/ja.js";
+
 import moment from "moment";
 import { start } from "nprogress";
 
