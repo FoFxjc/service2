@@ -186,10 +186,10 @@
                     <div class="vuecal__event-title" v-html="event.title"></div>
                     <hr />
                     <em class="vuecal__event-time">
-                      <strong>Event start: </strong>
+                      <strong>開始時間: </strong>
                       <span>{{ event.start.formatTime() }}</span>
                       <br />
-                      <strong>Event end: </strong>
+                      <strong>終了時間: </strong>
                       <span> {{ event.end.formatTime() }}</span>
                     </em>
                   </div>
@@ -212,11 +212,11 @@
                       <span
                         v-if="Number(cell.content) <= 10"
                         style="
-                          font-size: 18px;
+                          font-size: 28px;
                           color: #409eff;
                           font-weight: bold;
                         "
-                        >确</span
+                        >確</span
                       >
                       <i
                         v-if="
@@ -224,7 +224,7 @@
                           Number(cell.content) > 10
                         "
                         style="
-                          font-size: 18px;
+                          font-size: 28px;
                           color: #67c23a;
                           font-weight: bold;
                         "
@@ -233,7 +233,7 @@
                       <i
                         v-if="Number(cell.content) > 20"
                         style="
-                          font-size: 18px;
+                          font-size: 28px;
                           color: #f56c6c;
                           font-weight: bold;
                         "
@@ -251,12 +251,15 @@
                         Number(cell.content) <= 20 && Number(cell.content) > 10
                       "
                       icon="fa-solid fa-satellite"
-                      style="color: #409eff; font-size: 20px"
+                      style="color: #409eff; font-size: 28px"
                     />
                   </el-col>
                 </el-row>
               </div>
             </template>
+
+
+
           </vue-cal>
         </el-card>
       </el-col>
