@@ -24,59 +24,62 @@
           ></vue-cal>
         </el-card>
       </el-col> -->
-                <el-row>
-            <el-col :span="8">
-              <el-select
-                v-model="selected_satellite"
-                placeholder="Type"
-                class="filter-item"
-                style="width: 230px"
-                @change="handleSatelliteChange"
-              >
-                <el-option value="s01" label="衛星：SPHERE-01"
-                  >衛星：SPHERE-01</el-option
-                >
-                <el-option value="s02" label="衛星：SPHERE-02"
-                  >衛星：SPHERE-01</el-option
-                >
-                <el-option value="s03" label="衛星：SPHERE-03"
-                  >衛星：SPHERE-01</el-option
-                >
-              </el-select>
-
-            </el-col>
-            <el-col :span="12" :offset="4">
-
-
-              <el-row style="margin-top: 5px" type="flex" justify="end">
-                 <el-button type="text" style="width: 190px;  " plain
-                  >不足通信パス数</el-button>
-                <el-date-picker
-                  type="date"
-                  placeholder="開始"
-                  style="width: 140px"
-                ></el-date-picker>
-                <el-date-picker
-                  type="date"
-                  placeholder="終了"
-                  style="width: 140px"
-                ></el-date-picker>
-                <el-button style="width: 100px" type="primary" plain
-                  >見積</el-button
-                >                 <el-button type="text" style="width: 20px;  " plain
-                  >10</el-button>
-              </el-row>
-                            <el-row type="flex" justify="end">
-
-                <el-button type="primary" style="width: 200px; height: 40px; margin-top: 5px" plain
-                  >簡易チェック</el-button
-                >
-                <el-button type="primary" style="width: 200px; height: 40px; margin-top: 5px" plain
-                  >確定チェック</el-button
-                >
-              </el-row>
-            </el-col>
+      <el-row>
+        <el-col :span="8">
+          <el-select
+            v-model="selected_satellite"
+            placeholder="Type"
+            class="filter-item"
+            style="width: 230px"
+            @change="handleSatelliteChange"
+          >
+            <el-option value="s01" label="衛星：SPHERE-01"
+              >衛星：SPHERE-01</el-option
+            >
+            <el-option value="s02" label="衛星：SPHERE-02"
+              >衛星：SPHERE-01</el-option
+            >
+            <el-option value="s03" label="衛星：SPHERE-03"
+              >衛星：SPHERE-01</el-option
+            >
+          </el-select>
+        </el-col>
+        <el-col :span="12" :offset="4">
+          <el-row style="margin-top: 5px" type="flex" justify="end">
+            <el-button type="text" style="width: 190px" plain
+              >不足通信パス数</el-button
+            >
+            <el-date-picker
+              type="date"
+              placeholder="開始"
+              style="width: 140px"
+            ></el-date-picker>
+            <el-date-picker
+              type="date"
+              placeholder="終了"
+              style="width: 140px"
+            ></el-date-picker>
+            <el-button style="width: 100px" type="primary" plain
+              >見積</el-button
+            >
+            <el-button type="text" style="width: 20px" plain>10</el-button>
           </el-row>
+          <el-row type="flex" justify="end">
+            <el-button
+              type="primary"
+              style="width: 200px; height: 40px; margin-top: 5px"
+              plain
+              >簡易チェック</el-button
+            >
+            <el-button
+              type="primary"
+              style="width: 200px; height: 40px; margin-top: 5px"
+              plain
+              >確定チェック</el-button
+            >
+          </el-row>
+        </el-col>
+      </el-row>
       <el-col :span="24">
         <el-card
           :body-style="{ padding: '5px 5px 10px 5px' }"
@@ -88,13 +91,17 @@
             class="full-cal vuecal--full-height-delete"
             :selected-date="selectedDate"
             :time-from="5 * 60"
+            :timeStep="30"
             :time-to="24 * 60"
+            startWeekOnSunday="true"
             sticky-split-labels="sticky-split-labels"
             :events.sync="showingevents"
             events-on-month-view="short"
             @cell-focus="selectedDate = $event.date || $event"
+            :disable-views="['years', 'year', 'day']"
             style="height: 900px"
             locale="ja"
+            active-view="week"
           >
             <template v-slot:split-label="{ split, view }">
               <strong :style="`color: ${split.color}`">{{
@@ -102,8 +109,12 @@
               }}</strong>
             </template>
             <template v-slot:event="{ event, view }">
-              <div v-if="view == 'month'">
-                <el-popover placement="right" trigger="hover">
+              <template v-if="view == 'month'">
+                <el-popover
+                  placement="right"
+                  trigger="hover"
+                  v-if="!event.hidden"
+                >
                   <el-row type="flex" justify="space-between">
                     <el-button
                       type="primary"
@@ -122,9 +133,14 @@
                   </el-row>
                   <div slot="reference">
                     <div class="vuecal__event-title" v-html="event.title"></div>
+                    <em class="vuecal__event-time">
+                      <span>{{ event.start.formatTime() }}</span>
+                      <br />
+                      <span> {{ event.end.formatTime() }}</span>
+                    </em>
                   </div>
                 </el-popover>
-              </div>
+              </template>
               <div v-if="view == 'week' || view == 'day'">
                 <el-popover placement="right" trigger="hover">
                   <el-row type="flex" justify="space-between">
@@ -142,7 +158,31 @@
                     ></el-button>
                   </el-row>
                   <div slot="reference">
-                    <div class="vuecal__event-title" v-html="event.title"></div>
+                    <div
+                      class="vuecal__event-title"
+                      style="border-top: 0.8px black solid"
+                    >
+                      <el-row style="height: 30px">
+                        <el-col :span="12">
+                          <div style="padding-top: 5px; font-size: 24px">
+                            <div v-html="event.title"></div>
+                          </div>
+                        </el-col>
+                        <el-col :span="10">
+                          <div
+                            style="
+                              width: 100%;
+                              display: flex;
+                              justify-content: flex-end;
+                              font-size: 24px;
+                              padding-top: 5px;
+                            "
+                          >
+                            <div v-html="event.content"></div>
+                          </div>
+                        </el-col>
+                      </el-row>
+                    </div>
                     <hr />
                     <em class="vuecal__event-time">
                       <strong>Event start: </strong>
@@ -151,16 +191,376 @@
                       <strong>Event end: </strong>
                       <span> {{ event.end.formatTime() }}</span>
                     </em>
+                    <el-row>
+                      <el-col :span="12">
+                        <div
+                          style="
+                            width: 100%;
+                            display: flex;
+                            justify-content: flex-start;
+                            font-size: 25px;
+                            padding-top: 4px;
+                          "
+                        >
+                          <div v-html="event.extra_bottom_left"></div>
+                        </div>
+                      </el-col>
+                      <el-col :span="10">
+                        <div
+                          style="
+                            width: 100%;
+                            display: flex;
+                            justify-content: flex-end;
+                            font-size: 25px;
+                            padding-top: 4px;
+                          "
+                        >
+                          <div v-html="event.extra_bottom_right"></div>
+                        </div>
+                      </el-col>
+                    </el-row>
                   </div>
                 </el-popover>
+              </div>
+            </template>
+            <template v-slot:cell-content="{ cell, view, events, goNarrower }">
+              <div
+                class="vuecal__cell-date"
+                style="width: 100%"
+                :class="view.id"
+                v-if="view.id === 'month'"
+              >
+                <el-row style="padding: 0px">
+                  <el-col :span="5">
+                    <div>
+                      {{ cell.content }}
+                    </div>
+                  </el-col>
+                  <el-col :offset="14" :span="5">
+                    <div>
+                      <span
+                        @click="
+                          dialogDetailVisible = true;
+                          selected_month_type = 1;
+                        "
+                        v-if="
+                          (cell.startDate.getMonth() + 1 == 5 &&
+                            Number(cell.content) <= 10) ||
+                          (Number(cell.content) > 12 &&
+                            Number(cell.content) <= 18) ||
+                          Number(cell.content) == 20 ||
+                          Number(cell.content) == 21
+                        "
+                        style="
+                          font-size: 18px;
+                          color: #409eff;
+                          font-weight: bold;
+                        "
+                        >确</span
+                      >
+                      <i
+                        v-if="
+                          (Number(cell.content) >= 22 &&
+                            Number(cell.content) <= 31) ||
+                          cell.startDate.getMonth() + 1 == 6
+                        "
+                        style="
+                          font-size: 18px;
+                          color: #67c23a;
+                          font-weight: bold;
+                        "
+                        class="el-icon-check"
+                        @click="
+                          dialogDetailVisible = true;
+                          selected_month_type = 4;
+                        "
+                      ></i>
+                      <i
+                        v-if="
+                          (cell.startDate.getMonth() + 1 == 5 &&
+                            Number(cell.content) == 11) ||
+                          Number(cell.content) == 19
+                        "
+                        style="
+                          font-size: 18px;
+                          color: #f56c6c;
+                          font-weight: bold;
+                        "
+                        class="el-icon-warning"
+                        @click="
+                          dialogDetailVisible = true;
+                          selected_month_type = 3;
+                        "
+                      ></i>
+                    </div>
+                  </el-col>
+                </el-row>
+              </div>
+              <div class="vuecal__cell-events-count" v-if="view.id === 'month'">
+                <el-row style="padding: 0px">
+                  <el-col :span="2">
+                    <i
+                      v-if="
+                        cell.startDate.getMonth() + 1 == 5 &&
+                        Number(cell.content) <= 7 &&
+                        Number(cell.content) >= 2
+                      "
+                      class="el-icon-message"
+                      style="color: #409eff; font-size: 20px"
+                      @click="
+                        dialogDetailVisible = true;
+                        selected_month_type = 2;
+                      "
+                    />
+                  </el-col>
+                  <el-col :offset="18" :span="2">
+                    <font-awesome-icon
+                      v-if="
+                        (cell.startDate.getMonth() + 1 == 5 &&
+                          Number(cell.content) <= 10) ||
+                        (Number(cell.content) > 12 &&
+                          Number(cell.content) <= 16) ||
+                        Number(cell.content) == 20 ||
+                        Number(cell.content) == 21
+                      "
+                      icon="fa-solid fa-satellite"
+                      style="color: #409eff; font-size: 20px"
+                      @click="
+                        dialogDetailVisible = true;
+                        selected_month_type = 5;
+                      "
+                    />
+                  </el-col>
+                </el-row>
               </div>
             </template>
           </vue-cal>
         </el-card>
       </el-col>
     </el-row>
-    <el-dialog title="Edit Event" :visible.sync="dialogFormVisible">
-      <el-form :model="form">
+    <el-dialog :visible.sync="dialogDetailVisible" width="450px">
+      <!-- 确 -->
+      <div v-if="selected_month_type == '1'">
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>详情</div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>确</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <!-- 邮件 -->
+      <div v-if="selected_month_type == '2'">
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>邮件</div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <i
+              class="el-icon-message"
+              style="color: #409eff; font-size: 20px"
+            />
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <!-- 警告 -->
+      <div v-if="selected_month_type == '3'">
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>Warning</div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <span style="font-size: 18px; color: #409eff; font-weight: bold"
+              >确</span
+            >
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <!-- 对钩 -->
+      <div v-if="selected_month_type == '4'">
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>详情</div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <i
+              style="font-size: 18px; color: #67c23a; font-weight: bold"
+              class="el-icon-check"
+            ></i>
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <!-- 卫星 -->
+      <div v-if="selected_month_type == '5'">
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>卫星</div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <font-awesome-icon
+              icon="fa-solid fa-satellite"
+              style="color: #409eff; font-size: 20px"
+            />
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="dialogDetailVisible = false"
+          >Cancel</el-button
+        >
+      </div>
+    </el-dialog>
+    <el-dialog :visible.sync="dialogFormVisible" width="450px">
+      <!-- <el-form :model="form">
         <el-form-item label="Event Title" :label-width="formLabelWidth">
           <el-input v-model="form.title" autocomplete="off"></el-input>
         </el-form-item>
@@ -183,17 +583,237 @@
         <el-form-item label="Event Description" :label-width="formLabelWidth">
           <el-input v-model="form.desc" autocomplete="off"></el-input>
         </el-form-item>
-        <!-- <el-form-item label="Event Type" :label-width="formLabelWidth">
-          <el-select v-model="form.type">
-            <el-option label="Charging" value="charging"></el-option>
-            <el-option label="Normal" value="normal"></el-option>
-            <el-option label="Maintain" value="maintain"></el-option>
-          </el-select>
-        </el-form-item> -->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">Cancel</el-button>
         <el-button type="primary" @click="handleEventChange">Confirm</el-button>
+      </div> -->
+      <!-- 绿色实心 -->
+      <div v-if="selected_week_type == '1'">
+        绿色实心
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>详情</div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <span style="font-size: 18px; color: #409eff; font-weight: bold"
+              >确</span
+            >
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <!-- 粉色条纹 -->
+      <div v-if="selected_week_type == '2'">
+        粉色条纹
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>详情<i class="el-icon-camera" style="color: #409eff"></i></div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <span style="font-size: 18px; color: #409eff; font-weight: bold"
+              >确</span
+            >
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <!-- 绿色条纹 -->
+      <div v-if="selected_week_type == '3'">
+        绿色条纹
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            Warning<i class="el-icon-camera" style="color: #409eff"></i>
+          </div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <span style="font-size: 18px; color: #409eff; font-weight: bold"
+              >确</span
+            >
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <!-- 橙色 -->
+      <div v-if="selected_week_type == '4'">
+        橙色
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>Check<i class="el-icon-camera" style="color: #409eff"></i></div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <span style="font-size: 18px; color: #409eff; font-weight: bold"
+              >确</span
+            >
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <!-- 红色 -->
+      <div v-if="selected_week_type == '5'">
+        红色
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>详情<i class="el-icon-camera" style="color: #409eff"></i></div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <span style="font-size: 18px; color: #409eff; font-weight: bold"
+              >确</span
+            >
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="dialogFormVisible = false"
+          >Cancel</el-button
+        >
       </div>
     </el-dialog>
 
@@ -254,8 +874,7 @@ import VueCal from "vue-cal";
 import { uuid } from "vue-uuid";
 
 import "vue-cal/dist/vuecal.css";
-import 'vue-cal/dist/i18n/ja.js'
-
+import "vue-cal/dist/i18n/ja.js";
 
 import moment from "moment";
 import { start } from "nprogress";
@@ -271,6 +890,9 @@ export default {
     dialogFormVisible: false,
     dialogDeleteVisible: false,
     dialogCreationVisible: false,
+    dialogDetailVisible: false,
+    selected_month_type: "1",
+    selected_week_type: "1",
     selected_satellite: "s01",
     search_title: "",
     selectedEvent: {},
@@ -284,7 +906,7 @@ export default {
       },
       events: [],
     },
-    selectedDate: new Date(),
+    selectedDate: new Date("2022-05-08"),
     form: {
       title: "",
       desc: "",
@@ -312,6 +934,18 @@ export default {
       this.form.title = event.title;
       this.form.start_time = moment(event.start);
       this.form.end_time = moment(event.end);
+      console.log(event);
+      if (!event.class) {
+        this.selected_week_type = "1";
+      } else if (event.class == "empty") {
+        this.selected_week_type = "2";
+      } else if (event.class == "charging") {
+        this.selected_week_type = "3";
+      } else if (event.class == "download") {
+        this.selected_week_type = "4";
+      } else if (event.class == "error") {
+        this.selected_week_type = "5";
+      }
       this.dialogFormVisible = true;
 
       // Prevent navigating to narrower view (default vue-cal behavior).
@@ -378,7 +1012,7 @@ export default {
             start: `${monday} 15:30`,
             end: `${monday} 17:30`,
             title: "予約撮影 1",
-            content: '<i class="v-icon material-icons mt-1">sports_tennis</i>',
+            content: '<i class="v-icon material-icons mt-1"></i>',
             resizable: false,
           },
           {
@@ -386,10 +1020,8 @@ export default {
             start: `${tuesday} 08:00`,
             end: `${tuesday} 10:00`,
             title: "予約撮影 3",
-            // content: '<i class="v-icon material-icons mt-1">User 2</i>',
-            content: '<i class="v-icon material-icons">shopping_cart</i>',
-            class: 'leisure'
-            // resizable: false,
+            content: '<i class="v-icon material-icons mt-1">User 2</i>',
+            resizable: false,
           },
           {
             id: 4,
@@ -409,19 +1041,53 @@ export default {
           }
         );
       } else {
-        for (let i = 0; i < 20; i++) {
-          const day = this.previousFirstDayOfWeek.addDays(i).format();
-          this.demoExample.events.push({
-            start: `${day} 21:00`,
-            end: `${day} 23:00`,
-            title: "有料",
-            class: "charging",
-            background: true,
-            deletable: false,
+        this.demoExample.events.push(
+          {
+            id: 1,
+            start: `2022-05-08 09:00`,
+            end: `2022-05-08 10:30`,
+            title: "予約撮影 1",
+            content: '<i class="v-icon material-icons mt-1"></i>',
             resizable: false,
-            id: uuid.v4(),
-          });
-        }
+          },
+          {
+            id: 3,
+            start: `${tuesday} 08:00`,
+            end: `${tuesday} 10:00`,
+            title: "予約撮影 3",
+            content: '<i class="v-icon material-icons mt-1">User 2</i>',
+            resizable: false,
+          },
+          {
+            id: 4,
+            start: `${thursday} 09:00`,
+            end: `${thursday} 11:30`,
+            title: "予約撮影 4",
+            content: '<i class="v-icon material-icons mt-2">User 1</i>',
+            resizable: false,
+          },
+          {
+            id: 5,
+            start: `${friday} 16:45`,
+            end: `${friday} 18:45`,
+            title: "予約撮影 ",
+            content: '<i class="v-icon material-icons mt-1">User 2</i>',
+            resizable: false,
+          }
+        );
+        // for (let i = 0; i < 20; i++) {
+        //   const day = this.previousFirstDayOfWeek.addDays(i).format();
+        //   this.demoExample.events.push({
+        //     start: `${day} 21:00`,
+        //     end: `${day} 23:00`,
+        //     title: "Charging",
+        //     class: "charging",
+        //     background: true,
+        //     deletable: false,
+        //     resizable: false,
+        //     id: uuid.v4(),
+        //   });
+        // }
         // Date.format() and Date.addDays() are helper methods added by Vue Cal.
         const monday = this.previousFirstDayOfWeek.format();
         const tuesday = this.previousFirstDayOfWeek.addDays(1).format();
@@ -433,7 +1099,7 @@ export default {
             start: `${monday} 15:30`,
             end: `${monday} 17:30`,
             title: "予約撮影 1",
-            content: '<i class="v-icon material-icons mt-1">sports_tennis</i>',
+            content: '<i class="v-icon material-icons mt-1"></i>',
             resizable: false,
           },
           {
@@ -554,59 +1220,398 @@ export default {
   },
   created() {
     // Place all the events in the real time current week.
-    for (let i = 0; i < 20; i++) {
-      const day = this.previousFirstDayOfWeek.addDays(i).format();
-      this.demoExample.events.push({
-        start: `${day} 21:00`,
-        end: `${day} 23:00`,
-        title: "充電メンテナンス",
-        class: "charging",
-        background: true,
-        deletable: false,
-        resizable: false,
-        id: uuid.v4(),
-      });
-    }
-    // Date.format() and Date.addDays() are helper methods added by Vue Cal.
-    const monday = this.previousFirstDayOfWeek.format();
-    const tuesday = this.previousFirstDayOfWeek.addDays(1).format();
-    const thursday = this.previousFirstDayOfWeek.addDays(3).format();
-    const friday = this.previousFirstDayOfWeek.addDays(4).format();
+    // for (let i = 0; i < 20; i++) {
+    //   const day = this.previousFirstDayOfWeek.addDays(i).format();
+    //   this.demoExample.events.push({
+    //     start: `${day} 21:00`,
+    //     end: `${day} 23:00`,
+    //     title: "充電メンテナンス",
+    //     class: "charging",
+    //     background: true,
+    //     deletable: false,
+    //     resizable: false,
+    //     id: uuid.v4(),
+    //   });
+    // }
+    // // Date.format() and Date.addDays() are helper methods added by Vue Cal.
+    // const monday = this.previousFirstDayOfWeek.format();
+    // const tuesday = this.previousFirstDayOfWeek.addDays(1).format();
+    // const thursday = this.previousFirstDayOfWeek.addDays(3).format();
+    // const friday = this.previousFirstDayOfWeek.addDays(4).format();
+    // this.demoExample.events.push(
+    //   {
+    //     id: 1,
+    //     start: `${monday} 15:30`,
+    //     end: `${monday} 17:30`,
+    //     title: "予約撮影 1",
+    //     content: '<i class="v-icon material-icons mt-1"></i>',
+    //     resizable: false,
+    //   },
+    //   {
+    //     id: 3,
+    //     start: `${tuesday} 08:00`,
+    //     end: `${tuesday} 10:00`,
+    //     title: "予約撮影 3",
+    //     content: '<i class="v-icon material-icons mt-1">User 2</i>',
+    //     resizable: false,
+    //   },
+    //   {
+    //     id: 4,
+    //     start: `${thursday} 09:00`,
+    //     end: `${thursday} 11:30`,
+    //     title: "予約撮影 4",
+    //     content: '<i class="v-icon material-icons mt-2">User 1</i>',
+    //     resizable: false,
+    //   },
+    //   {
+    //     id: 5,
+    //     start: `${friday} 16:45`,
+    //     end: `${friday} 18:45`,
+    //     title: "予約撮影 ",
+    //     content: '<i class="v-icon material-icons mt-1">User 2</i>',
+    //     resizable: false,
+    //   }
+    // );
     this.demoExample.events.push(
       {
         id: 1,
-        start: `${monday} 15:30`,
-        end: `${monday} 17:30`,
-        title: "予約撮影 1",
-        content: '<i class="v-icon material-icons mt-1">sports_tennis</i>',
+        hidden: true,
+        start: `2022-05-08 09:00`,
+        end: `2022-05-08 10:30`,
+        // title: "Maintain",
+        content: '<i class="el-icon-s-tools"></i>',
+        resizable: false,
+      },
+      {
+        id: 2,
+        hidden: true,
+        start: `2022-05-10 06:00`,
+        end: `2022-05-10 07:30`,
+        // title: "Maintain",
+        content: '<i class="el-icon-s-tools"></i>',
         resizable: false,
       },
       {
         id: 3,
-        start: `${tuesday} 08:00`,
-        end: `${tuesday} 10:00`,
-        title: "予約撮影 3",
-        content: '<i class="v-icon material-icons mt-1">User 2</i>',
+        hidden: true,
+        start: `2022-05-10 09:00`,
+        end: `2022-05-10 10:30`,
+        // title: "Maintain",
+        content: '<i class="el-icon-s-tools"></i>',
         resizable: false,
       },
       {
         id: 4,
-        start: `${thursday} 09:00`,
-        end: `${thursday} 11:30`,
-        title: "予約撮影 4",
-        content: '<i class="v-icon material-icons mt-2">User 1</i>',
+        hidden: true,
+        start: `2022-05-12 06:00`,
+        end: `2022-05-12 07:30`,
+        // title: "Maintain",
+        content: '<i class="el-icon-s-tools"></i>',
         resizable: false,
       },
       {
         id: 5,
-        start: `${friday} 16:45`,
-        end: `${friday} 18:45`,
-        title: "予約撮影 ",
-        content: '<i class="v-icon material-icons mt-1">User 2</i>',
+        hidden: true,
+        start: `2022-05-12 09:00`,
+        end: `2022-05-12 10:30`,
+        // title: "Maintain",
+        content: '<i class="el-icon-s-tools"></i>',
+        resizable: false,
+      },
+      {
+        id: 6,
+        hidden: true,
+        start: `2022-05-12 10:30`,
+        end: `2022-05-12 12:00`,
+        // title: "Maintain",
+        content: '<i class="el-icon-s-tools"></i>',
+        resizable: false,
+      },
+      {
+        id: 7,
+        hidden: true,
+        start: `2022-05-13 10:30`,
+        end: `2022-05-13 12:00`,
+        // title: "Maintain",
+        content: '<i class="el-icon-s-tools"></i>',
+        resizable: false,
+      },
+      {
+        id: 8,
+        hidden: true,
+        start: `2022-05-08 6:00`,
+        end: `2022-05-08 7:30`,
+        // // title: "Empty Slot",
+        class: "empty",
+        content: '<i class="el-icon-view"></i>',
+        resizable: false,
+      },
+      {
+        id: 9,
+        hidden: true,
+        start: `2022-05-08 7:30`,
+        end: `2022-05-08 9:00`,
+        // // title: "Empty Slot",
+        class: "empty",
+        content: '<i class="el-icon-view"></i>',
+        resizable: false,
+      },
+      {
+        id: 10,
+        hidden: true,
+        start: `2022-05-08 10:30`,
+        end: `2022-05-08 12:00`,
+        // // title: "Empty Slot",
+        class: "empty",
+        content: '<i class="el-icon-view"></i>',
+        resizable: false,
+      },
+      {
+        id: 11,
+        hidden: true,
+        start: `2022-05-09 07:30`,
+        end: `2022-05-08 9:00`,
+        // title: "Empty Slot",
+        class: "empty",
+        content: '<i class="el-icon-view"></i>',
+        resizable: false,
+      },
+      {
+        id: 12,
+        hidden: true,
+        start: `2022-05-09 9:00`,
+        end: `2022-05-09 10:30`,
+        // title: "Empty Slot",
+        class: "empty",
+        content: '<i class="el-icon-view"></i>',
+        resizable: false,
+      },
+      {
+        id: 19,
+        hidden: true,
+        start: `2022-05-09 7:30`,
+        end: `2022-05-09 9:00`,
+        // title: "Empty Slot",
+        class: "empty",
+        content: '<i class="el-icon-view"></i>',
+        resizable: false,
+      },
+      {
+        id: 13,
+        hidden: true,
+        start: `2022-05-11 6:00`,
+        end: `2022-05-11 07:30`,
+        // title: "Empty Slot",
+        class: "empty",
+        content: '<i class="el-icon-view"></i>',
+        resizable: false,
+      },
+      {
+        id: 14,
+        hidden: true,
+        start: `2022-05-11 7:30`,
+        end: `2022-05-11 9:00`,
+        // title: "Empty Slot",
+        class: "empty",
+        content: '<i class="el-icon-view"></i>',
+        resizable: false,
+      },
+      {
+        id: 15,
+        hidden: true,
+        start: `2022-05-11 9:00`,
+        end: `2022-05-11 10:30`,
+        // title: "Empty Slot",
+        class: "empty",
+        content: '<i class="el-icon-view"></i>',
+        resizable: false,
+      },
+      {
+        id: 16,
+        hidden: true,
+        start: `2022-05-13 6:00`,
+        end: `2022-05-13 7:30`,
+        // title: "Empty Slot",
+        class: "empty",
+        content: '<i class="el-icon-view"></i>',
+        resizable: false,
+      },
+      {
+        id: 17,
+        hidden: true,
+        start: `2022-05-13 7:30`,
+        end: `2022-05-13 9:00`,
+        // title: "Empty Slot",
+        class: "empty",
+        content: '<i class="el-icon-view"></i>',
+        resizable: false,
+      },
+      {
+        id: 18,
+        hidden: true,
+        start: `2022-05-14 6:00`,
+        end: `2022-05-14 7:30`,
+        // title: "Empty Slot",
+        class: "empty",
+        content: '<i class="el-icon-view"></i>',
+        resizable: false,
+      },
+      {
+        id: 19,
+        hidden: true,
+        start: `2022-05-14 7:30`,
+        end: `2022-05-14 9:00`,
+        // title: "Empty Slot",
+        class: "empty",
+        content: '<i class="el-icon-view"></i>',
+        resizable: false,
+      },
+      {
+        id: 20,
+        hidden: true,
+        start: `2022-05-14 10:30`,
+        end: `2022-05-14 12:00`,
+        // title: "Empty Slot",
+        class: "empty",
+        content: '<i class="el-icon-view"></i>',
+        resizable: false,
+      },
+      {
+        id: 21,
+        hidden: true,
+        start: `2022-05-09 6:00`,
+        end: `2022-05-09 7:30`,
+        // title: "预约拍摄",
+        class: "charging",
+        content: '<i class="el-icon-camera"></i>',
+        resizable: false,
+      },
+      {
+        id: 22,
+        hidden: true,
+        start: `2022-05-10 7:30`,
+        end: `2022-05-09 9:00`,
+        // title: "预约拍摄",
+        class: "charging",
+        content: '<i class="el-icon-camera"></i>',
+        resizable: false,
+      },
+      {
+        id: 22,
+        hidden: true,
+        start: `2022-05-10 7:30`,
+        end: `2022-05-10 9:00`,
+        // title: "预约拍摄",
+        class: "charging",
+        content: '<i class="el-icon-camera"></i>',
+        resizable: false,
+      },
+      {
+        id: 23,
+        hidden: true,
+        start: `2022-05-10 10:30`,
+        end: `2022-05-10 12:00`,
+        // title: "预约拍摄",
+        class: "charging",
+        content: '<i class="el-icon-camera"></i>',
+        extra_bottom_right: '<i class="el-icon-user-solid" />',
+        resizable: false,
+      },
+      {
+        id: 23,
+        hidden: true,
+        start: `2022-05-09 10:30`,
+        end: `2022-05-09 12:00`,
+        // title: "拍摄",
+        class: "charging",
+        content: '<i class="el-icon-video-camera-solid"></i>',
+        extra_bottom_right: '<i class="el-icon-user-solid" />',
+        resizable: false,
+      },
+      {
+        id: 23,
+        hidden: true,
+        start: `2022-05-12 7:30`,
+        end: `2022-05-12 9:00`,
+        title: '<i class="el-icon-place"></i>',
+        class: "charging",
+        content: '<i class="el-icon-video-camera-solid"></i>',
+        extra_bottom_right: '<i class="el-icon-user-solid" />',
+        resizable: false,
+      },
+      {
+        id: 24,
+        hidden: true,
+        start: `2022-05-13 9:00`,
+        end: `2022-05-13 10:30`,
+        title: '<i class="el-icon-place"></i>',
+        class: "charging",
+        content: '<i class="el-icon-video-camera-solid"></i>',
+        extra_bottom_right: '<i class="el-icon-user-solid" />',
+        resizable: false,
+      },
+      {
+        id: 25,
+        hidden: true,
+        start: `2022-05-11 10:30`,
+        end: `2022-05-11 12:00`,
+        title: '<i class="el-icon-place"></i>',
+        class: "download",
+        content: '<i class="el-icon-download"></i>',
+        resizable: false,
+      },
+      {
+        id: 25,
+        hidden: true,
+        start: `2022-05-14 9:00`,
+        end: `2022-05-14 10:30`,
+        // title: '<i class="el-icon-place"></i>',
+        class: "error",
+        content: '<i class="el-icon-download"></i>',
+        extra_bottom_left: '<i class="el-icon-warning" />',
+        resizable: false,
+      },
+      {
+        id: 30,
+        hidden: false,
+        start: `2022-05-20 20:00`,
+        end: `2022-05-20 21:30`,
+        title: "ABC",
+        class: "error",
+        content: '<i class="el-icon-download"></i>',
+        extra_bottom_left: '<i class="el-icon-warning" />',
         resizable: false,
       }
+      // {
+      //   id: 3,
+      //   start: `${tuesday} 08:00`,
+      //   end: `${tuesday} 10:00`,
+      //   title: "予約撮影 3",
+      //   content: '<i class="v-icon material-icons mt-1">User 2</i>',
+      //   resizable: false,
+      // },
+      // {
+      //   id: 4,
+      //   start: `${thursday} 09:00`,
+      //   end: `${thursday} 11:30`,
+      //   title: "予約撮影 4",
+      //   content: '<i class="v-icon material-icons mt-2">User 1</i>',
+      //   resizable: false,
+      // },
+      // {
+      //   id: 5,
+      //   start: `${friday} 16:45`,
+      //   end: `${friday} 18:45`,
+      //   title: "予約撮影 ",
+      //   content: '<i class="v-icon material-icons mt-1">User 2</i>',
+      //   resizable: false,
+      // }
     );
     this.showingevents = this.demoExample.events;
+    this.form.title = "Testing";
+    this.form.start_time = moment(this.demoExample.events[0].start);
+    this.form.end_time = moment(this.demoExample.events[0].end);
+    this.form.desc = "摄影周回";
   },
 };
 </script>
@@ -630,7 +1635,7 @@ $kate: #ff7fc8;
   }
 
   .vuecal--month-view .vuecal__cell-date {
-    padding: 4px;
+    padding: 4px 0px 4px 0px;
   }
   .vuecal--month-view .vuecal__no-event {
     display: none;
@@ -743,6 +1748,12 @@ $kate: #ff7fc8;
     );
     color: transparentize(darken($john, 10), 0.4);
   }
+  .download {
+    background: #e6a23c;
+  }
+  .error {
+    background: #f56c6c;
+  }
   .maintain {
     background: repeating-linear-gradient(
       45deg,
@@ -764,6 +1775,16 @@ $kate: #ff7fc8;
     background-color: rgba(lighten($kate, 5), 0.85);
     color: #fff;
   }
+  .empty {
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba($kate, 0.15) 10px,
+      rgba($kate, 0.15) 20px
+    );
+    color: transparentize(darken($kate, 10), 0.4);
+  }
   .kate .charging {
     background: repeating-linear-gradient(
       45deg,
@@ -778,5 +1799,19 @@ $kate: #ff7fc8;
 }
 .vuecal__event-title {
   font-weight: bold;
+}
+.vuecal__cell-events-count {
+  background: transparent;
+  width: 100%;
+  padding-left: 20px;
+}
+.vuecal__cell-date {
+}
+.vuecal__event .empty {
+  background: transparent;
+}
+
+.demo .vuecal__event {
+  border: none;
 }
 </style>

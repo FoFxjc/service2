@@ -135,6 +135,7 @@
             :events.sync="showingevents"
             events-on-month-view="short"
             @cell-focus="selectedDate = $event.date || $event"
+            :disable-views="['years', 'year', 'day']"
             style="height: 900px"
             locale="ja"
             active-view="week"
@@ -268,13 +269,20 @@
               >
                 <el-row style="padding: 0px">
                   <el-col :span="5">
-                    <div>{{ cell.content }}</div>
+                    <div>
+                      {{ cell.content }}
+                    </div>
                   </el-col>
                   <el-col :offset="14" :span="5">
                     <div>
                       <span
+                        @click="
+                          dialogDetailVisible = true;
+                          selected_month_type = 1;
+                        "
                         v-if="
-                          Number(cell.content) <= 10 ||
+                          (cell.startDate.getMonth() + 1 == 5 &&
+                            Number(cell.content) <= 10) ||
                           (Number(cell.content) > 12 &&
                             Number(cell.content) <= 18) ||
                           Number(cell.content) == 20 ||
@@ -289,8 +297,9 @@
                       >
                       <i
                         v-if="
-                          Number(cell.content) >= 22 &&
-                          Number(cell.content) <= 31
+                          (Number(cell.content) >= 22 &&
+                            Number(cell.content) <= 31) ||
+                          cell.startDate.getMonth() + 1 == 6
                         "
                         style="
                           font-size: 28px;
@@ -298,10 +307,15 @@
                           font-weight: bold;
                         "
                         class="el-icon-check"
+                        @click="
+                          dialogDetailVisible = true;
+                          selected_month_type = 4;
+                        "
                       ></i>
                       <i
                         v-if="
-                          Number(cell.content) == 11 ||
+                          (cell.startDate.getMonth() + 1 == 5 &&
+                            Number(cell.content) == 11) ||
                           Number(cell.content) == 19
                         "
                         style="
@@ -310,6 +324,10 @@
                           font-weight: bold;
                         "
                         class="el-icon-warning"
+                        @click="
+                          dialogDetailVisible = true;
+                          selected_month_type = 3;
+                        "
                       ></i>
                     </div>
                   </el-col>
@@ -317,10 +335,26 @@
               </div>
               <div class="vuecal__cell-events-count" v-if="view.id === 'month'">
                 <el-row style="padding: 0px">
-                  <el-col :offset="14" :span="5">
+                  <el-col :span="2">
+                    <i
+                      v-if="
+                        cell.startDate.getMonth() + 1 == 5 &&
+                        Number(cell.content) <= 7 &&
+                        Number(cell.content) >= 2
+                      "
+                      class="el-icon-message"
+                      style="color: #409eff; font-size: 20px"
+                      @click="
+                        dialogDetailVisible = true;
+                        selected_month_type = 2;
+                      "
+                    />
+                  </el-col>
+                  <el-col :offset="18" :span="2">
                     <font-awesome-icon
                       v-if="
-                        Number(cell.content) <= 10 ||
+                        (cell.startDate.getMonth() + 1 == 5 &&
+                          Number(cell.content) <= 10) ||
                         (Number(cell.content) > 12 &&
                           Number(cell.content) <= 16) ||
                         Number(cell.content) == 20 ||
@@ -328,7 +362,10 @@
                       "
                       icon="fa-solid fa-satellite"
                       style="color: #409eff; font-size: 20px"
-                      @click="dialogFormVisible = true"
+                      @click="
+                        dialogDetailVisible = true;
+                        selected_month_type = 5;
+                      "
                     />
                   </el-col>
                 </el-row>
@@ -341,8 +378,229 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-dialog title="Edit Event" :visible.sync="dialogFormVisible">
-      <el-form :model="form">
+    <el-dialog :visible.sync="dialogDetailVisible" width="450px">
+      <!-- 确 -->
+      <div v-if="selected_month_type == '1'">
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>详情</div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>确</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <!-- 邮件 -->
+      <div v-if="selected_month_type == '2'">
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>邮件</div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <i
+              class="el-icon-message"
+              style="color: #409eff; font-size: 20px"
+            />
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <!-- 警告 -->
+      <div v-if="selected_month_type == '3'">
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>Warning</div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <span style="font-size: 18px; color: #409eff; font-weight: bold"
+              >确</span
+            >
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <!-- 对钩 -->
+      <div v-if="selected_month_type == '4'">
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>详情</div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <i
+              style="font-size: 18px; color: #67c23a; font-weight: bold"
+              class="el-icon-check"
+            ></i>
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <!-- 卫星 -->
+      <div v-if="selected_month_type == '5'">
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>卫星</div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <font-awesome-icon
+              icon="fa-solid fa-satellite"
+              style="color: #409eff; font-size: 20px"
+            />
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="dialogDetailVisible = false"
+          >Cancel</el-button
+        >
+      </div>
+    </el-dialog>
+    <el-dialog :visible.sync="dialogFormVisible" width="450px">
+      <!-- <el-form :model="form">
         <el-form-item label="Event Title" :label-width="formLabelWidth">
           <el-input v-model="form.title" autocomplete="off"></el-input>
         </el-form-item>
@@ -365,17 +623,237 @@
         <el-form-item label="Event Description" :label-width="formLabelWidth">
           <el-input v-model="form.desc" autocomplete="off"></el-input>
         </el-form-item>
-        <!-- <el-form-item label="Event Type" :label-width="formLabelWidth">
-          <el-select v-model="form.type">
-            <el-option label="Charging" value="charging"></el-option>
-            <el-option label="Normal" value="normal"></el-option>
-            <el-option label="Maintain" value="maintain"></el-option>
-          </el-select>
-        </el-form-item> -->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">Cancel</el-button>
         <el-button type="primary" @click="handleEventChange">Confirm</el-button>
+      </div> -->
+      <!-- 绿色实心 -->
+      <div v-if="selected_week_type == '1'">
+        绿色实心
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>详情</div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <span style="font-size: 18px; color: #409eff; font-weight: bold"
+              >确</span
+            >
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <!-- 粉色条纹 -->
+      <div v-if="selected_week_type == '2'">
+        粉色条纹
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>详情<i class="el-icon-camera" style="color: #409eff"></i></div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <span style="font-size: 18px; color: #409eff; font-weight: bold"
+              >确</span
+            >
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <!-- 绿色条纹 -->
+      <div v-if="selected_week_type == '3'">
+        绿色条纹
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            Warning<i class="el-icon-camera" style="color: #409eff"></i>
+          </div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <span style="font-size: 18px; color: #409eff; font-weight: bold"
+              >确</span
+            >
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <!-- 橙色 -->
+      <div v-if="selected_week_type == '4'">
+        橙色
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>Check<i class="el-icon-camera" style="color: #409eff"></i></div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <span style="font-size: 18px; color: #409eff; font-weight: bold"
+              >确</span
+            >
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <!-- 红色 -->
+      <div v-if="selected_week_type == '5'">
+        红色
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>详情<i class="el-icon-camera" style="color: #409eff"></i></div>
+          <div>ABC</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <span style="font-size: 18px; color: #409eff; font-weight: bold"
+              >确</span
+            >
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="dialogFormVisible = false"
+          >Cancel</el-button
+        >
       </div>
     </el-dialog>
 
@@ -451,6 +929,9 @@ export default {
     dialogFormVisible: false,
     dialogDeleteVisible: false,
     dialogCreationVisible: false,
+    dialogDetailVisible: false,
+    selected_month_type: "1",
+    selected_week_type: "1",
     selected_satellite: "s01",
     search_title: "",
     selectedEvent: {},
@@ -492,6 +973,18 @@ export default {
       this.form.title = event.title;
       this.form.start_time = moment(event.start);
       this.form.end_time = moment(event.end);
+      console.log(event);
+      if (!event.class) {
+        this.selected_week_type = "1";
+      } else if (event.class == "empty") {
+        this.selected_week_type = "2";
+      } else if (event.class == "charging") {
+        this.selected_week_type = "3";
+      } else if (event.class == "download") {
+        this.selected_week_type = "4";
+      } else if (event.class == "error") {
+        this.selected_week_type = "5";
+      }
       this.dialogFormVisible = true;
 
       // Prevent navigating to narrower view (default vue-cal behavior).
@@ -1348,7 +1841,8 @@ $kate: #ff7fc8;
 }
 .vuecal__cell-events-count {
   background: transparent;
-  left: 82%;
+  width: 100%;
+  padding-left: 20px;
 }
 .vuecal__cell-date {
 }
