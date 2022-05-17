@@ -24,26 +24,26 @@
           ></vue-cal>
         </el-card>
       </el-col> -->
-                <el-row>
-            <el-col :span="8">
-              <el-select
-                v-model="selected_satellite"
-                placeholder="Type"
-                class="filter-item"
-                style="width: 230px"
-                @change="handleSatelliteChange"
-              >
-                <el-option value="s01" label="衛星：SPHERE-01"
-                  >衛星：SPHERE-01</el-option
-                >
-                <el-option value="s02" label="衛星：SPHERE-02"
-                  >衛星：SPHERE-01</el-option
-                >
-                <el-option value="s03" label="衛星：SPHERE-03"
-                  >衛星：SPHERE-01</el-option
-                >
-              </el-select>
-              <!-- <el-button
+      <el-row>
+        <el-col :span="8">
+          <el-select
+            v-model="selected_satellite"
+            placeholder="Type"
+            class="filter-item"
+            style="width: 230px"
+            @change="handleSatelliteChange"
+          >
+            <el-option value="s01" label="衛星：SPHERE-01"
+              >衛星：SPHERE-01</el-option
+            >
+            <el-option value="s02" label="衛星：SPHERE-02"
+              >衛星：SPHERE-01</el-option
+            >
+            <el-option value="s03" label="衛星：SPHERE-03"
+              >衛星：SPHERE-01</el-option
+            >
+          </el-select>
+          <!-- <el-button
                 @click="activeView = 'month'"
                 type="text"
                 style="margin-left: 15px"
@@ -56,67 +56,67 @@
                 :disabled="activeView == 'week'"
                 >周</el-button
               > -->
-            </el-col>
-            <el-col :span="12" :offset="4">
-              <el-row type="flex" justify="end">
-                <el-button
-                  type="text"
-                  icon="el-icon-circle-plus-outline"
-                  @click="dialogCreationVisible = true"
-                >
-                イベント情報追加                  
-                </el-button>
-              </el-row>
-              <el-row type="flex" justify="end">
-                <el-input
-                  placeholder="イベント名称検索"
-                  style="width: 200px"
-                  class="filter-item"
-                  v-model="search_title"
-                  @keyup.enter.native="handleFilter"
-                />
-                <el-button type="primary" style="width: 200px; height: 40px" plain
-                  >イベント全件検索</el-button
-                >
-                <div
-                  style="
-                    width: 100px;
-                    height: 40px;
-                    display: flex;
-                    justify-content: center;
-                  "
-                >
-                  <el-button
-                    @click="$refs.vuecal.previous()"
-                    icon="el-icon-caret-left"
-                    type="text"
-                    style="font-size: 25px"
-                  ></el-button>
-                  <el-button
-                    @click="$refs.vuecal.next()"
-                    icon="el-icon-caret-right"
-                    type="text"
-                    style="font-size: 25px"
-                  ></el-button>
-                </div>
-              </el-row>
-              <el-row style="margin-top: 5px" type="flex" justify="end">
-                <el-date-picker
-                  type="date"
-                  placeholder="開始"
-                  style="width: 200px"
-                ></el-date-picker>
-                <el-date-picker
-                  type="date"
-                  placeholder="終了"
-                  style="width: 200px"
-                ></el-date-picker>
-                <el-button style="width: 100px" type="info" plain
-                  >一般公開</el-button
-                >
-              </el-row>
-            </el-col>
+        </el-col>
+        <el-col :span="12" :offset="4">
+          <el-row type="flex" justify="end">
+            <el-button
+              type="text"
+              icon="el-icon-circle-plus-outline"
+              @click="dialogCreationVisible = true"
+            >
+              イベント情報追加
+            </el-button>
           </el-row>
+          <el-row type="flex" justify="end">
+            <el-input
+              placeholder="イベント名称検索"
+              style="width: 200px"
+              class="filter-item"
+              v-model="search_title"
+              @keyup.enter.native="handleFilter"
+            />
+            <el-button type="primary" style="width: 200px; height: 40px" plain
+              >イベント全件検索</el-button
+            >
+            <div
+              style="
+                width: 100px;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+              "
+            >
+              <el-button
+                @click="$refs.vuecal.previous()"
+                icon="el-icon-caret-left"
+                type="text"
+                style="font-size: 25px"
+              ></el-button>
+              <el-button
+                @click="$refs.vuecal.next()"
+                icon="el-icon-caret-right"
+                type="text"
+                style="font-size: 25px"
+              ></el-button>
+            </div>
+          </el-row>
+          <el-row style="margin-top: 5px" type="flex" justify="end">
+            <el-date-picker
+              type="date"
+              placeholder="開始"
+              style="width: 200px"
+            ></el-date-picker>
+            <el-date-picker
+              type="date"
+              placeholder="終了"
+              style="width: 200px"
+            ></el-date-picker>
+            <el-button style="width: 100px" type="info" plain
+              >一般公開</el-button
+            >
+          </el-row>
+        </el-col>
+      </el-row>
       <el-col :span="24">
         <el-card
           :body-style="{ padding: '5px 5px 10px 5px' }"
@@ -135,6 +135,7 @@
             @cell-focus="selectedDate = $event.date || $event"
             style="height: 900px"
             locale="ja"
+            active-view="month"
           >
             <template v-slot:split-label="{ split, view }">
               <strong :style="`color: ${split.color}`">{{
@@ -193,6 +194,67 @@
                     </em>
                   </div>
                 </el-popover>
+              </div>
+            </template>
+            <template v-slot:cell-content="{ cell, view, events, goNarrower }">
+              <div
+                class="vuecal__cell-date"
+                style="width: 100%"
+                :class="view.id"
+                v-if="view.id === 'month'"
+              >
+                <el-row style="padding: 0px">
+                  <el-col :span="5">
+                    <div>{{ cell.content }}</div>
+                  </el-col>
+                  <el-col :offset="14" :span="5">
+                    <div>
+                      <span
+                        v-if="Number(cell.content) <= 10"
+                        style="
+                          font-size: 18px;
+                          color: #409eff;
+                          font-weight: bold;
+                        "
+                        >确</span
+                      >
+                      <i
+                        v-if="
+                          Number(cell.content) <= 20 &&
+                          Number(cell.content) > 10
+                        "
+                        style="
+                          font-size: 18px;
+                          color: #67c23a;
+                          font-weight: bold;
+                        "
+                        class="el-icon-check"
+                      ></i>
+                      <i
+                        v-if="Number(cell.content) > 20"
+                        style="
+                          font-size: 18px;
+                          color: #f56c6c;
+                          font-weight: bold;
+                        "
+                        class="el-icon-warning"
+                      ></i>
+                    </div>
+                  </el-col>
+                </el-row>
+              </div>
+              <div class="vuecal__cell-events-count" v-if="view.id === 'month'">
+                <el-row style="padding: 0px">
+                  <el-col :offset="14" :span="5">
+                    <font-awesome-icon
+                      v-if="
+                        Number(cell.content) <= 20 && Number(cell.content) > 10
+                      "
+                      icon="fa-solid fa-satellite"
+                      style="color: #409eff; font-size: 20px"
+                    />
+                  </el-col>
+                </el-row>
               </div>
             </template>
           </vue-cal>
@@ -294,8 +356,7 @@ import VueCal from "vue-cal";
 import { uuid } from "vue-uuid";
 
 import "vue-cal/dist/vuecal.css";
-import 'vue-cal/dist/i18n/ja.js'
-
+import "vue-cal/dist/i18n/ja.js";
 
 import moment from "moment";
 import { start } from "nprogress";
@@ -668,7 +729,7 @@ $kate: #ff7fc8;
   }
 
   .vuecal--month-view .vuecal__cell-date {
-    padding: 4px;
+    padding: 4px 0px 4px 0px;
   }
   .vuecal--month-view .vuecal__no-event {
     display: none;
@@ -816,5 +877,10 @@ $kate: #ff7fc8;
 }
 .vuecal__event-title {
   font-weight: bold;
+}
+.vuecal__cell-events-count {
+  background: transparent;
+}
+.vuecal__cell-date {
 }
 </style>
