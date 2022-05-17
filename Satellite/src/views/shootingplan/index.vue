@@ -24,62 +24,59 @@
           ></vue-cal>
         </el-card>
       </el-col> -->
-      <el-row>
-        <el-col :span="8">
-          <el-select
-            v-model="selected_satellite"
-            placeholder="Type"
-            class="filter-item"
-            style="width: 230px"
-            @change="handleSatelliteChange"
-          >
-            <el-option value="s01" label="衛星：SPHERE-01"
-              >衛星：SPHERE-01</el-option
-            >
-            <el-option value="s02" label="衛星：SPHERE-02"
-              >衛星：SPHERE-01</el-option
-            >
-            <el-option value="s03" label="衛星：SPHERE-03"
-              >衛星：SPHERE-01</el-option
-            >
-          </el-select>
-        </el-col>
-        <el-col :span="12" :offset="4">
-          <el-row style="margin-top: 5px" type="flex" justify="end">
-            <el-button type="text" style="width: 190px" plain
-              >不足通信パス数</el-button
-            >
-            <el-date-picker
-              type="date"
-              placeholder="開始"
-              style="width: 140px"
-            ></el-date-picker>
-            <el-date-picker
-              type="date"
-              placeholder="終了"
-              style="width: 140px"
-            ></el-date-picker>
-            <el-button style="width: 100px" type="primary" plain
-              >見積</el-button
-            >
-            <el-button type="text" style="width: 20px" plain>10</el-button>
+                <el-row>
+            <el-col :span="8">
+              <el-select
+                v-model="selected_satellite"
+                placeholder="Type"
+                class="filter-item"
+                style="width: 230px"
+                @change="handleSatelliteChange"
+              >
+                <el-option value="s01" label="衛星：SPHERE-01"
+                  >衛星：SPHERE-01</el-option
+                >
+                <el-option value="s02" label="衛星：SPHERE-02"
+                  >衛星：SPHERE-01</el-option
+                >
+                <el-option value="s03" label="衛星：SPHERE-03"
+                  >衛星：SPHERE-01</el-option
+                >
+              </el-select>
+
+            </el-col>
+            <el-col :span="12" :offset="4">
+
+
+              <el-row style="margin-top: 5px" type="flex" justify="end">
+                 <el-button type="text" style="width: 190px;  " plain
+                  >不足通信パス数</el-button>
+                <el-date-picker
+                  type="date"
+                  placeholder="開始"
+                  style="width: 140px"
+                ></el-date-picker>
+                <el-date-picker
+                  type="date"
+                  placeholder="終了"
+                  style="width: 140px"
+                ></el-date-picker>
+                <el-button style="width: 100px" type="primary" plain
+                  >見積</el-button
+                >                 <el-button type="text" style="width: 20px;  " plain
+                  >10</el-button>
+              </el-row>
+                            <el-row type="flex" justify="end">
+
+                <el-button type="primary" style="width: 200px; height: 40px; margin-top: 5px" plain
+                  >簡易チェック</el-button
+                >
+                <el-button type="primary" style="width: 200px; height: 40px; margin-top: 5px" plain
+                  >確定チェック</el-button
+                >
+              </el-row>
+            </el-col>
           </el-row>
-          <el-row type="flex" justify="end">
-            <el-button
-              type="primary"
-              style="width: 200px; height: 40px; margin-top: 5px"
-              plain
-              >簡易チェック</el-button
-            >
-            <el-button
-              type="primary"
-              style="width: 200px; height: 40px; margin-top: 5px"
-              plain
-              >確定チェック</el-button
-            >
-          </el-row>
-        </el-col>
-      </el-row>
       <el-col :span="24">
         <el-card
           :body-style="{ padding: '5px 5px 10px 5px' }"
@@ -257,7 +254,8 @@ import VueCal from "vue-cal";
 import { uuid } from "vue-uuid";
 
 import "vue-cal/dist/vuecal.css";
-import "vue-cal/dist/i18n/ja.js";
+import 'vue-cal/dist/i18n/ja.js'
+
 
 import moment from "moment";
 import { start } from "nprogress";
@@ -390,7 +388,7 @@ export default {
             title: "予約撮影 3",
             // content: '<i class="v-icon material-icons mt-1">User 2</i>',
             content: '<i class="v-icon material-icons">shopping_cart</i>',
-            class: "leisure",
+            class: 'leisure'
             // resizable: false,
           },
           {
