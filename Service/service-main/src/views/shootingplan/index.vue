@@ -349,6 +349,11 @@
                         selected_month_type = 2;
                       "
                     />
+                    <i
+                      v-else
+                      class="el-icon-message"
+                      style="color: #409eff; font-size: 20px; opacity: 0"
+                    />
                   </el-col>
                   <el-col :offset="18" :span="2">
                     <font-awesome-icon
@@ -371,9 +376,6 @@
                 </el-row>
               </div>
             </template>
-
-
-
           </vue-cal>
         </el-card>
       </el-col>

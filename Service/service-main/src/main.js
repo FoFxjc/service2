@@ -19,6 +19,12 @@ import {
   faCloudArrowDown,
   faGroupArrowsRotate,
   faCalendarCheck,
+  faCircleCheck,
+  faFileImage,
+  faUsers,
+  faTrashCan,
+  faCirclePlay,
+  faUsersSlash,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* import font awesome icon component */
@@ -43,6 +49,12 @@ library.add(faCircleExclamation);
 library.add(faCloudArrowDown);
 library.add(faGroupArrowsRotate);
 library.add(faCalendarCheck);
+library.add(faCircleCheck);
+library.add(faFileImage);
+library.add(faUsers);
+library.add(faTrashCan);
+library.add(faCirclePlay);
+library.add(faUsersSlash);
 /* add font awesome icon component */
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
