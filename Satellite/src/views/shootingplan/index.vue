@@ -339,15 +339,15 @@
       </el-col>
     </el-row>
     <el-dialog :visible.sync="dialogDetailVisible" width="450px">
-      <!-- 确 -->
+      <!-- 確 -->
       <div v-if="selected_month_type == '1'">
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
-          <div>详情</div>
-          <div>ABC</div>
+          <div>イベント詳細</div>
+          <div>ABCフェス</div>
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
@@ -361,14 +361,28 @@
           align="center"
           justify="center"
         >
-          <div>20:00 - 21:00</div>
+          <div>撮影周回</div>
+          <div>●リアルタイム撮影</div>
+          <div>●一般公開</div>
+          <div>●スタンダード</div>
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
-          <div>确</div>
+          <div>通信パス：予約済み</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <span style="font-size: 18px; color: #409eff; font-weight: bold"
+              >確</span
+            ><span style="width: 100%; padding: 10px" >運用計画確定</span>
+          </div>
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
@@ -620,7 +634,7 @@
         >
           <div>
             <span style="font-size: 18px; color: #409eff; font-weight: bold"
-              >确</span
+              >確</span
             >
           </div>
         </el-row>
