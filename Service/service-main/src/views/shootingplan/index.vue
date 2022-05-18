@@ -899,12 +899,19 @@
 
     </el-dialog>
 
-    <el-dialog title="Create Event" :visible.sync="dialogCreationVisible">
+    <el-dialog title="イベント追加" :visible.sync="dialogCreationVisible">
       <el-form :model="form">
-        <el-form-item label="Event Title" :label-width="formLabelWidth">
+        <el-form-item label="イベント種別" :label-width="formLabelWidth">
+            <el-radio-group v-model="form.resource">
+              <el-radio label="1"><i class="el-icon-video-camera-solid" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i></el-radio>
+              <el-radio label="2"><i class="el-icon-s-promotion" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i></el-radio>
+              <el-radio label="3"><i class="el-icon-school" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i></el-radio>
+            </el-radio-group>
+        </el-form-item>
+        <el-form-item label="イベント名" :label-width="formLabelWidth">
           <el-input v-model="form.title" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Event Start Time" :label-width="formLabelWidth">
+        <el-form-item label="開始時間" :label-width="formLabelWidth">
           <el-date-picker
             v-model="form.start_time"
             type="datetime"
@@ -912,7 +919,7 @@
           >
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="Event End Time" :label-width="formLabelWidth">
+        <el-form-item label="終了時間" :label-width="formLabelWidth">
           <el-date-picker
             v-model="form.end_time"
             type="datetime"
@@ -920,20 +927,14 @@
           >
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="Event Description" :label-width="formLabelWidth">
+        <!-- <el-form-item label="Event Description" :label-width="formLabelWidth">
           <el-input v-model="form.desc" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="Event Type" :label-width="formLabelWidth">
-          <el-select v-model="form.type">
-            <el-option label="Charging" value="charging"></el-option>
-            <el-option label="Shooting Plan" value="normal"></el-option>
-            <el-option label="Maintain" value="maintain"></el-option>
-          </el-select>
-        </el-form-item>
+        </el-form-item> -->
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogCreationVisible = false">キャンセル</el-button>
-        <el-button type="primary" @click="handleEventCreate">作成</el-button>
+        <el-button type="primary" @click="handleEventCreate">追加</el-button>
       </div>
     </el-dialog>
 

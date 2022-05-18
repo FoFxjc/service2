@@ -384,13 +384,7 @@
             ><span style="width: 100%; padding: 10px" >運用計画確定</span>
           </div>
         </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>20:00 - 21:00</div>
-        </el-row>
+
       </div>
       <!-- 邮件 -->
       <div v-if="selected_month_type == '2'">
