@@ -171,7 +171,7 @@ export const constantRoutes = [
       {
         path: "table",
         name: "Table",
-        component: () => import("@/views/videoresouce/index"),
+        component: () => import("@/views/videoresouce/index2"),
         meta: { title: "データ取得管理", icon: "table" },
       },
       {
