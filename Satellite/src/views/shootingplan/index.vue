@@ -339,7 +339,7 @@
       </el-col>
     </el-row>
     <el-dialog :visible.sync="dialogDetailVisible" width="450px">
-      <!-- 確 -->
+      <!-- 确 -->
       <div v-if="selected_month_type == '1'">
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
@@ -347,7 +347,97 @@
           justify="center"
         >
           <div>イベント詳細</div>
-          <div>ABCフェス</div>
+          <br/>
+          <div>
+
+              <el-button
+                @click="$refs.vuecal.previous()"
+                icon="el-icon-caret-left"
+                type="text"
+                style="font-size: 25px"
+              ></el-button>
+
+               <span style="width: 100%; padding: 10px" > ABCフェス</span>
+             
+              <el-button
+                @click="$refs.vuecal.next()"
+                icon="el-icon-caret-right"
+                type="text"
+                style="font-size: 25px"
+              ></el-button>
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>撮影周回</div>
+          <div>●リアルタイム撮影</div>
+          <div>●一般公開</div>
+          <div>●スタンダード</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>通信パス：未予約</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <span style="font-size: 18px; color: #409eff; font-weight: bold"
+              >確</span
+            ><span style="width: 100%; padding: 10px" >運用計画確定</span>
+          </div>
+          
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+        <div>ダウンロード予定日：‐</div>
+        </el-row>
+      </div>
+      <!-- 邮件 -->
+      <div v-if="selected_month_type == '2'">
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>イベント詳細</div>
+          <br/>
+          <div>
+
+              <el-button
+                @click="$refs.vuecal.previous()"
+                icon="el-icon-caret-left"
+                type="text"
+                style="font-size: 25px"
+              ></el-button>
+
+               <span style="width: 100%; padding: 10px" > ABCフェス</span>
+             
+              <el-button
+                @click="$refs.vuecal.next()"
+                icon="el-icon-caret-right"
+                type="text"
+                style="font-size: 25px"
+              ></el-button>
+          </div>
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
@@ -383,51 +473,17 @@
               >確</span
             ><span style="width: 100%; padding: 10px" >運用計画確定</span>
           </div>
-        </el-row>
-
-      </div>
-      <!-- 邮件 -->
-      <div v-if="selected_month_type == '2'">
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>邮件</div>
-          <div>ABC</div>
+          
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
-          <div>20:00 - 21:00</div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>20:00 - 21:00</div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>
-            <i
-              class="el-icon-message"
-              style="color: #409eff; font-size: 20px"
-            />
-          </div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>20:00 - 21:00</div>
+        <div>ダウンロード予定日：2022―06―10 
+          <el-button type="primary" @click="dialogDetailVisible = false"
+          >通知</el-button>
+        </div>
         </el-row>
       </div>
       <!-- 警告 -->
@@ -437,9 +493,29 @@
           align="center"
           justify="center"
         >
-          <div>Warning</div>
-          <div>ABC</div>
+          <div>イベント詳細</div>
+          <br/>
+          <div>
+
+              <el-button
+                @click="$refs.vuecal.previous()"
+                icon="el-icon-caret-left"
+                type="text"
+                style="font-size: 25px"
+              ></el-button>
+              
+               <span style="width: 100%; padding: 10px" > ABCフェス<i class="el-icon-warning-outline" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i></span>
+             
+              <el-button
+                @click="$refs.vuecal.next()"
+                icon="el-icon-caret-right"
+                type="text"
+                style="font-size: 25px"
+              ></el-button>
+          </div>
         </el-row>
+
+
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
@@ -452,7 +528,17 @@
           align="center"
           justify="center"
         >
-          <div>20:00 - 21:00</div>
+          <div>撮影周回</div>
+          <div>●リアルタイム撮影</div>
+          <div>●一般公開</div>
+          <div>●スタンダード</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>通信パス：予約済み</div>
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
@@ -460,21 +546,15 @@
           justify="center"
         >
           <div>
-            <span style="font-size: 18px; color: #409eff; font-weight: bold"
-              >确</span
-            >
+              <i class="el-icon-warning-outline" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i>
+              <span style="width: 100%; padding: 10px" >通信パスが予約できませんでした</span>
           </div>
+          
         </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>20:00 - 21:00</div>
-        </el-row>
+
       </div>
       <!-- 对钩 -->
-      <div v-if="selected_month_type == '4'">
+      <!-- <div v-if="selected_month_type == '4'">
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
@@ -516,7 +596,7 @@
         >
           <div>20:00 - 21:00</div>
         </el-row>
-      </div>
+      </div> -->
       <!-- 卫星 -->
       <div v-if="selected_month_type == '5'">
         <el-row
@@ -524,33 +604,25 @@
           align="center"
           justify="center"
         >
-          <div>卫星</div>
-          <div>ABC</div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>20:00 - 21:00</div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>20:00 - 21:00</div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
+          <div>イベント詳細</div>
+          <br/>
           <div>
-            <font-awesome-icon
-              icon="fa-solid fa-satellite"
-              style="color: #409eff; font-size: 20px"
-            />
+
+              <el-button
+                @click="$refs.vuecal.previous()"
+                icon="el-icon-caret-left"
+                type="text"
+                style="font-size: 25px"
+              ></el-button>
+
+               <span style="width: 100%; padding: 10px" > ABCフェス</span>
+             
+              <el-button
+                @click="$refs.vuecal.next()"
+                icon="el-icon-caret-right"
+                type="text"
+                style="font-size: 25px"
+              ></el-button>
           </div>
         </el-row>
         <el-row
@@ -560,66 +632,22 @@
         >
           <div>20:00 - 21:00</div>
         </el-row>
-      </div>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogDetailVisible = false"
-          >Cancel</el-button
-        >
-      </div>
-    </el-dialog>
-    <el-dialog :visible.sync="dialogFormVisible" width="450px">
-      <!-- <el-form :model="form">
-        <el-form-item label="Event Title" :label-width="formLabelWidth">
-          <el-input v-model="form.title" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="Event Start Time" :label-width="formLabelWidth">
-          <el-date-picker
-            v-model="form.start_time"
-            type="datetime"
-            placeholder=""
-          >
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="Event End Time" :label-width="formLabelWidth">
-          <el-date-picker
-            v-model="form.end_time"
-            type="datetime"
-            placeholder=""
-          >
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="Event Description" :label-width="formLabelWidth">
-          <el-input v-model="form.desc" autocomplete="off"></el-input>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="handleEventChange">Confirm</el-button>
-      </div> -->
-      <!-- 绿色实心 -->
-      <div v-if="selected_week_type == '1'">
-        绿色实心
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
-          <div>详情</div>
-          <div>ABC</div>
+          <div>撮影周回</div>
+          <div>●リアルタイム撮影</div>
+          <div>●一般公開</div>
+          <div>●スタンダード</div>
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
-          <div>20:00 - 21:00</div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>20:00 - 21:00</div>
+          <div>通信パス：未予約</div>
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
@@ -629,7 +657,39 @@
           <div>
             <span style="font-size: 18px; color: #409eff; font-weight: bold"
               >確</span
-            >
+            ><span style="width: 100%; padding: 10px" >運用計画確定</span>
+          </div>
+          
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+        <div><span style="width: 100%; padding: 10px" >ダウンロード予定日：2022―06―10</span>        <el-button type="primary" @click="dialogDetailVisible = false"
+          >通知</el-button
+        ></div>
+        </el-row>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <!-- <el-button type="primary" @click="dialogDetailVisible = false"
+          >Cancel</el-button
+        > -->
+      </div>
+    </el-dialog>
+    <el-dialog :visible.sync="dialogFormVisible" width="450px">
+
+      <!-- 绿色实心 -->
+      <div v-if="selected_week_type == '1'">
+        <span style="width: 100%;" >説明：メンテナンス運用設定時</span>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+          <span style="width: 100%; padding: 10px" >周回種別：メンテナンス運用<i class="el-icon-setting" style="color: #409eff;margin-left: 10px;font-size: 20px"></i>
+          </span>  
           </div>
         </el-row>
         <el-row
@@ -637,43 +697,38 @@
           align="center"
           justify="center"
         >
-          <div>20:00 - 21:00</div>
+          <div>
+            <el-button type="primary" @click="dialogDetailVisible = false"
+          >メンテナンス運用設定</el-button>
+          </div>
+
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>周回時刻：20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>通信パス：未予約</div>
         </el-row>
       </div>
       <!-- 粉色条纹 -->
       <div v-if="selected_week_type == '2'">
-        粉色条纹
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>详情<i class="el-icon-camera" style="color: #409eff"></i></div>
-          <div>ABC</div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>20:00 - 21:00</div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>20:00 - 21:00</div>
-        </el-row>
+        <span style="width: 100%;" >説明：未設定時</span>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
           <div>
-            <span style="font-size: 18px; color: #409eff; font-weight: bold"
-              >确</span
-            >
+          <span style="width: 100%; padding: 10px" >周回種別：未設定<i class="el-icon-edit" style="color: #409eff;margin-left: 10px;font-size: 20px"></i>
+          </span>  
           </div>
         </el-row>
         <el-row
@@ -681,79 +736,102 @@
           align="center"
           justify="center"
         >
-          <div>20:00 - 21:00</div>
+          <div>
+            <el-button type="primary" @click="dialogDetailVisible = false"
+          >メンテナンス運用設定</el-button>
+          </div>
+
         </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>周回時刻：20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>通信パス：未予約</div>
+        </el-row>
+
+
       </div>
       <!-- 绿色条纹 -->
       <div v-if="selected_week_type == '3'">
-        绿色条纹
+        <span style="width: 100%;" >説明：予約撮影時</span>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
           <div>
-            Warning<i class="el-icon-camera" style="color: #409eff"></i>
-          </div>
-          <div>ABC</div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>20:00 - 21:00</div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>20:00 - 21:00</div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>
-            <span style="font-size: 18px; color: #409eff; font-weight: bold"
-              >确</span
-            >
+          <span style="width: 100%; padding: 10px" >周回種別：予約撮影<i class="el-icon-camera-solid" style="color: #409eff;margin-left: 10px;font-size: 20px"></i>
+          </span>  
           </div>
         </el-row>
+
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
-          <div>20:00 - 21:00</div>
+          <div>周回時刻：20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>通信パス：未予約</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>詳細：</div>
+          <div>●一般公開</div>
+          <div>●スタンダード</div>
+        </el-row>
+                <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>公開状況：ユーザー未公開</div>
         </el-row>
       </div>
       <!-- 橙色 -->
       <div v-if="selected_week_type == '4'">
-        橙色
+        <span style="width: 100%;" >説明：ダウンリンク運用時</span>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
-          <div>Check<i class="el-icon-camera" style="color: #409eff"></i></div>
-          <div>ABC</div>
+          <div>
+          <span style="width: 100%; padding: 10px" >周回種別：ダウンリンク運用<i class="el-icon-download" style="color: #409eff;margin-left: 10px;font-size: 20px"></i>
+          </span>  
+          </div>
         </el-row>
+
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
-          <div>20:00 - 21:00</div>
+          <div>周回時刻：20:00 - 21:00</div>
         </el-row>
+
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
-          <div>20:00 - 21:00</div>
+          <div>通信パス：予約済み<i class="el-icon-place" style="color: #409eff;margin-left: 10px;font-size: 20px"></i></div>
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
@@ -761,53 +839,24 @@
           justify="center"
         >
           <div>
-            <span style="font-size: 18px; color: #409eff; font-weight: bold"
-              >确</span
-            >
+            <el-button type="primary" @click="dialogDetailVisible = false"
+          >ダウンリンク計画作成</el-button>
           </div>
+
         </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>20:00 - 21:00</div>
-        </el-row>
+
       </div>
       <!-- 红色 -->
       <div v-if="selected_week_type == '5'">
-        红色
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>详情<i class="el-icon-camera" style="color: #409eff"></i></div>
-          <div>ABC</div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>20:00 - 21:00</div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>20:00 - 21:00</div>
-        </el-row>
+        <span style="width: 100%;" >説明：成立検証結果、問題があった場合</span>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
           <div>
-            <span style="font-size: 18px; color: #409eff; font-weight: bold"
-              >确</span
-            >
+          <span style="width: 100%; padding: 10px" >周回種別：ダウンリンク運用<i class="el-icon-warning-outline" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i>
+          </span>  
           </div>
         </el-row>
         <el-row
@@ -815,16 +864,33 @@
           align="center"
           justify="center"
         >
-          <div>20:00 - 21:00</div>
+          <div>周回時刻：20:00 - 21:00</div>
         </el-row>
-      </div>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogFormVisible = false"
-          >Cancel</el-button
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
         >
-      </div>
-    </el-dialog>
+          <div>通信パス：未予約</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div><i class="el-icon-warning-outline" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i></div>
+          <div>
+          <span style="color: #ff4240;margin-left: 10px;font-size: 20px">●成立検証に失敗しました</span>
+          </div>
+          <span style="color: #ff4240;margin-left: 10px;font-size: 20px">●原因：XXXXX</span>
+          <div>
+          <span style="color: #ff4240;margin-left: 10px;font-size: 20px">●解決策：XXXX</span>
+          </div>
+        </el-row>
 
+      </div>
+
+    </el-dialog>
     <el-dialog title="Create Event" :visible.sync="dialogCreationVisible">
       <el-form :model="form">
         <el-form-item label="Event Title" :label-width="formLabelWidth">
