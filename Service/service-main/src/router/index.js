@@ -174,12 +174,12 @@ export const constantRoutes = [
         component: () => import("@/views/videoresouce/index2"),
         meta: { title: "データ取得管理", icon: "table" },
       },
-      {
-        path: "tree",
-        name: "Video Detail",
-        component: () => import("@/views/videoresouce/detail"),
-        meta: { title: "撮影データ", icon: "form" },
-      },
+      // {
+      //   path: "tree",
+      //   name: "Video Detail",
+      //   component: () => import("@/views/videoresouce/detail"),
+      //   meta: { title: "撮影データ", icon: "form" },
+      // },
     ],
   },
 

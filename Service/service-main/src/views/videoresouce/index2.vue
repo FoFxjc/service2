@@ -4,14 +4,14 @@
       <el-tab-pane key="Picture" label="Picture" name="Picture">
         <el-card style="background: rgb(160, 207, 255)">
           <el-row>
-            <el-col :span="5"> 一览 </el-col>
+            <el-col :span="5"> コンテンツ一覧 </el-col>
             <el-col
               :span="8"
               :offset="11"
               style="display: flex; justify-content: flex-end"
-              ><el-button type="info">信息按钮</el-button
-              ><el-button type="info">信息按钮</el-button
-              ><el-button type="info">信息按钮</el-button>
+              ><el-button type="info">すべて選択</el-button
+              ><el-button type="info">HDR画像作成</el-button
+              ><el-button type="info">TIMELAPSE動画作成</el-button>
             </el-col></el-row
           >
         </el-card>
@@ -79,7 +79,7 @@
       </el-tab-pane>
       <el-tab-pane key="Video" label="Video" name="Video">
         <el-card style="background: rgb(160, 207, 255)">
-          <el-row> <el-col :span="5"> 一览 </el-col></el-row>
+          <el-row> <el-col :span="5"> コンテンツ一覧 </el-col></el-row>
         </el-card>
         <el-card style="margin-top: 20px">
           <el-row :gutter="10">
@@ -136,7 +136,7 @@
       ></el-tab-pane>
       <el-tab-pane key="Live" label="Live" name="Live">
         <el-card style="background: rgb(160, 207, 255)">
-          <el-row> <el-col :span="5"> 一览 </el-col></el-row>
+          <el-row> <el-col :span="5"> コンテンツ一覧 </el-col></el-row>
         </el-card>
         <el-card style="margin-top: 20px">
           <el-row
@@ -158,7 +158,7 @@
     </el-tabs>
     <el-card style="margin-top: 10px">
       <el-card style="background: #e6a23c">
-        <el-row> <el-col :span="5"> 一览 </el-col></el-row>
+        <el-row> <el-col :span="5"> 作成済み動画管理・グループ公開設定 </el-col></el-row>
       </el-card>
       <el-row :gutter="10">
         <el-col :span="4" v-for="item in selected_videos" :key="item.id">

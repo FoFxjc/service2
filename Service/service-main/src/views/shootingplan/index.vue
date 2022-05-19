@@ -390,7 +390,24 @@
         >
           <div>イベント詳細</div>
           <br/>
-          <div>ABCフェス</div>
+          <div>
+
+              <el-button
+                @click="$refs.vuecal.previous()"
+                icon="el-icon-caret-left"
+                type="text"
+                style="font-size: 25px"
+              ></el-button>
+
+               <span style="width: 100%; padding: 10px" > ABCフェス</span>
+             
+              <el-button
+                @click="$refs.vuecal.next()"
+                icon="el-icon-caret-right"
+                type="text"
+                style="font-size: 25px"
+              ></el-button>
+          </div>
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
@@ -414,7 +431,7 @@
           align="center"
           justify="center"
         >
-          <div>通信パス：予約済み</div>
+          <div>通信パス：未予約</div>
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
@@ -433,9 +450,7 @@
           align="center"
           justify="center"
         >
-        <div>ダウンロード予定日：2022―06―10        <el-button type="primary" @click="dialogDetailVisible = false"
-          >通知</el-button
-        ></div>
+        <div>ダウンロード予定日：‐</div>
         </el-row>
       </div>
       <!-- 邮件 -->
@@ -447,7 +462,24 @@
         >
           <div>イベント詳細</div>
           <br/>
-          <div>ABCフェス</div>
+          <div>
+
+              <el-button
+                @click="$refs.vuecal.previous()"
+                icon="el-icon-caret-left"
+                type="text"
+                style="font-size: 25px"
+              ></el-button>
+
+               <span style="width: 100%; padding: 10px" > ABCフェス</span>
+             
+              <el-button
+                @click="$refs.vuecal.next()"
+                icon="el-icon-caret-right"
+                type="text"
+                style="font-size: 25px"
+              ></el-button>
+          </div>
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
@@ -676,8 +708,9 @@
           align="center"
           justify="center"
         >
-        <div>ダウンロード予定日：‐      
-        </div>
+        <div><span style="width: 100%; padding: 10px" >ダウンロード予定日：2022―06―10</span>        <el-button type="primary" @click="dialogDetailVisible = false"
+          >通知</el-button
+        ></div>
         </el-row>
       </div>
       <div slot="footer" class="dialog-footer">
