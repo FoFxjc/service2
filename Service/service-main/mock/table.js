@@ -3,7 +3,7 @@ const Mock = require("mockjs");
 var Random = Mock.Random;
 
 const data = Mock.mock({
-  "items|30": [
+  "items|3": [
     {
       id: "@id",
       name: "@FIRST @Last",
