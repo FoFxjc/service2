@@ -258,6 +258,29 @@ export const constantRoutes = [
     ],
   },
 
+  {
+    path: "/tree",
+    component: Layout,
+    redirect: "/tree/list",
+    alwaysShow: true,
+    name: "Tree",
+    meta: { title: "Tree", icon: "el-icon-video-camera-solid" },
+    children: [
+      {
+        path: "list",
+        name: "list",
+        component: () => import("@/views/tree/index"),
+        meta: { title: "tree", icon: "tree" },
+      },
+      // {
+      //   path: "tree",
+      //   name: "Video Detail",
+      //   component: () => import("@/views/videoresouce/detail"),
+      //   meta: { title: "撮影データ", icon: "form" },
+      // },
+    ],
+  },
+
   { path: "*", redirect: "/404", hidden: true },
 ];
 

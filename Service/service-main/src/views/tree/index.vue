@@ -1,78 +1,172 @@
 <template>
   <div class="app-container">
-    <el-input v-model="filterText" placeholder="Filter keyword" style="margin-bottom:30px;" />
+    <el-row :gutter="30">
+      <el-col :span="5">
+        <el-card>
+          <el-tree
+            :data="treeData1"
+            ref="tree1"
+            class="tree"
+            node-key="id"
+            draggable
+            default-expand-all
+            :allow-drop="returnFalse"
+            @node-drag-start="handleDragstart"
+            @node-drag-end="handleDragend"
+          ></el-tree>
+        </el-card>
+      </el-col>
+      <el-col :span="10">
+        <el-card>
+          <el-row :gutter="60">
+            <el-col
+              :span="12"
+              style="padding: 20px; border: 1px black solid; height: 200px"
+              @dragover.native="dragenter2"
+              @dragleave.native="dragleave2"
+            >
+              <div @dragover.native="dragenter2">
+                <p v-for="item in selectItems" :key="item.id">
+                  {{ item.label }}
+                </p>
+              </div>
+            </el-col>
 
-    <el-tree
-      ref="tree2"
-      :data="data2"
-      :props="defaultProps"
-      :filter-node-method="filterNode"
-      class="filter-tree"
-      default-expand-all
-    />
-
+            <el-col :span="12">
+              <el-card>
+                <el-tree
+                  :data="treeData3"
+                  ref="tree3"
+                  class="tree"
+                  node-key="id"
+                  draggable
+                  default-expand-all
+                  :allow-drop="returnTrue"
+                ></el-tree>
+              </el-card>
+            </el-col>
+          </el-row>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
 export default {
-
   data() {
     return {
-      filterText: '',
-      data2: [{
-        id: 1,
-        label: 'Level one 1',
-        children: [{
-          id: 4,
-          label: 'Level two 1-1',
-          children: [{
-            id: 9,
-            label: 'Level three 1-1-1'
-          }, {
-            id: 10,
-            label: 'Level three 1-1-2'
-          }]
-        }]
-      }, {
-        id: 2,
-        label: 'Level one 2',
-        children: [{
-          id: 5,
-          label: 'Level two 2-1'
-        }, {
-          id: 6,
-          label: 'Level two 2-2'
-        }]
-      }, {
-        id: 3,
-        label: 'Level one 3',
-        children: [{
-          id: 7,
-          label: 'Level two 3-1'
-        }, {
-          id: 8,
-          label: 'Level two 3-2'
-        }]
-      }],
-      defaultProps: {
-        children: 'children',
-        label: 'label'
-      }
-    }
-  },
-  watch: {
-    filterText(val) {
-      this.$refs.tree2.filter(val)
-    }
+      enterTree3: false,
+      enterTree2: false,
+      selectItems: [],
+      treeData1: [
+        {
+          id: 1,
+          label: "Item 1",
+          children: [
+            {
+              id: 4,
+              label: "Item 1 Child 1",
+              children: [
+                { id: 9, label: "Item 1 Grand Child 1" },
+                { id: 9, label: "Item 1 Grand Child 1" },
+              ],
+            },
+          ],
+        },
+      ],
+      treeData2: [
+        {
+          id: 2,
+          label: "Item 2",
+          children: [
+            {
+              id: 5,
+              label: "Item 2 Child 1",
+              children: [{ id: 8, label: "Item 2 Grand Child 1" }],
+            },
+          ],
+        },
+      ],
+      treeData3: [
+        {
+          id: 2,
+          label: "Item 3",
+          children: [
+            {
+              id: 5,
+              label: "Item 3 Child 1",
+              children: [{ id: 8, label: "Item 3 Grand Child 1" }],
+            },
+          ],
+        },
+      ],
+    };
   },
 
   methods: {
-    filterNode(value, data) {
-      if (!value) return true
-      return data.label.indexOf(value) !== -1
-    }
-  }
-}
-</script>
+    handleDragstart(node, event) {
+      this.$refs.tree3.$emit("tree-node-drag-start", event, { node: node });
+    },
+    handleDragend(draggingNode, endNode, position, event) {
+      if (this.enterTree2) {
+        this.selectItems.push(draggingNode.data);
+      } else {
+        let emptyData = { id: +new Date(), children: [] };
+        this.$refs.tree1.insertBefore(emptyData, draggingNode);
 
+        this.$refs.tree3.$emit("tree-node-drag-end", event);
+        this.$nextTick(() => {
+          if (this.$refs.tree1.getNode(draggingNode.data)) {
+            this.$refs.tree1.remove(emptyData);
+          } else {
+            let data = JSON.parse(JSON.stringify(draggingNode.data));
+            this.$refs.tree1.insertAfter(
+              data,
+              this.$refs.tree1.getNode(emptyData)
+            );
+            this.$refs.tree1.remove(emptyData);
+          }
+        });
+      }
+
+      this.enterTree3 = false;
+      this.enterTree2 = false;
+    },
+    returnTrue() {
+      return true;
+    },
+    returnFalse() {
+      return false;
+    },
+    dragenter3() {
+      this.enterTree3 = true;
+    },
+    dragleave3() {
+      this.enterTree3 = false;
+    },
+    dragenter2() {
+      this.enterTree2 = true;
+    },
+    dragleave2() {
+      setTimeout(() => {
+        this.enterTree2 = false;
+      }, 800);
+    },
+    append(data) {
+      const newChild = { id: id++, label: "testtest", children: [] };
+      if (!data.children) {
+        this.$set(data, "children", []);
+      }
+      data.children.push(newChild);
+    },
+
+    remove(node, data) {
+      const parent = node.parent;
+      const children = parent.data.children || parent.data;
+      const index = children.findIndex((d) => d.id === data.id);
+      children.splice(index, 1);
+    },
+  },
+};
+</script>
