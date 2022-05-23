@@ -61,7 +61,7 @@
               font-size: 16px;
             "
           >
-            ログイン数
+            ダウンリンクサイズ
           </p>
           <el-divider></el-divider>
           <line-chart :chart-data="lineChartData.messages" />
@@ -82,7 +82,7 @@
               font-size: 16px;
             "
           >
-            平均利用時間
+            障害数
           </p>
           <el-divider></el-divider>
           <line-chart :chart-data="lineChartData.newVisitis" />
