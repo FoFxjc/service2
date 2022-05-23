@@ -75,6 +75,13 @@ export const constantRoutes = [
         component: () => import("@/views/shootingplan/index"),
         meta: { title: "カレンダー", icon: "form" },
       },
+      {
+        path: "tree",
+        name: "tree",
+        hidden: true,
+        component: () => import("@/views/shootingplan/tree"),
+        meta: { title: "tree", icon: "tree" },
+      },
     ],
   },
 
@@ -160,33 +167,29 @@ export const constantRoutes = [
     ],
   },
 
-  {
-    path: "/videoresouce",
-    component: Layout,
-    redirect: "/videoresouce/list",
-    alwaysShow: true,
-    name: "Video Resource",
-    meta: { title: "撮影データ管理", icon: "el-icon-video-camera-solid" },
-    children: [
-      {
-        path: "table",
-        name: "Table",
-        component: () => import("@/views/videoresouce/index2"),
-        meta: { title: "データ取得管理", icon: "table" },
-      },
-      // {
-      //   path: "tree",
-      //   name: "Video Detail",
-      //   component: () => import("@/views/videoresouce/detail"),
-      //   meta: { title: "撮影データ", icon: "form" },
-      // },
-    ],
-  },
+  // {
+  //   path: "/videoresouce",
+  //   component: Layout,
+  //   redirect: "/videoresouce/list",
+  //   alwaysShow: true,
+  //   hidden: true,
+  //   name: "Video Resource",
+  //   meta: { title: "撮影データ管理", icon: "el-icon-video-camera-solid" },
+  //   children: [
+
+  //     // {
+  //     //   path: "tree",
+  //     //   name: "Video Detail",
+  //     //   component: () => import("@/views/videoresouce/detail"),
+  //     //   meta: { title: "撮影データ", icon: "form" },
+  //     // },
+  //   ],
+  // },
 
   {
     path: "/Shootingframe",
     component: Layout,
-    redirect: "/Shootingframe/list",
+    redirect: "/Shootingframe/table2",
     alwaysShow: true,
     name: "Shootingframe",
     meta: { title: "撮影枠管理", icon: "el-icon-video-camera-solid" },
@@ -212,26 +215,37 @@ export const constantRoutes = [
       {
         path: "tree2",
         name: "Video Detail2",
+        hidden: true,
         component: () => import("@/views/Shootingframe/index3"),
         meta: { title: "ムーブメント枠", icon: "form" },
       },
       {
         path: "detail",
         name: "Detail",
+        hidden: true,
         component: () => import("@/views/Shootingframe/detail2"),
         meta: { title: "撮影枠詳細", icon: "form" },
       },
       {
         path: "detail2",
         name: "Detail2",
+        hidden: true,
         component: () => import("@/views/Shootingframe/detail3"),
         meta: { title: "撮影枠分割枠詳細", icon: "form" },
       },
       {
         path: "detail3",
         name: "Detail3",
+        hidden: true,
         component: () => import("@/views/Shootingframe/detail4"),
         meta: { title: "ムーブメント枠詳細", icon: "form" },
+      },
+      {
+        path: "resourcelist",
+        name: "Table",
+        hidden: true,
+        component: () => import("@/views/videoresouce/index2"),
+        meta: { title: "データ取得管理", icon: "table" },
       },
     ],
   },

@@ -87,6 +87,9 @@
             </el-checkbox-group>
           </el-form-item>
         </el-form>
+        <el-button type="primary" style="float: right; margin-bottom: 20px"
+          >检索</el-button
+        >
       </el-card>
     </el-row>
     <el-row>
@@ -135,6 +138,7 @@
             fit
             highlight-current-row
             style="width: 100%"
+            @row-dblclick="handleDClick"
           >
             <el-table-column type="selection" width="55" align="center">
             </el-table-column>
@@ -197,22 +201,692 @@
                 <span>{{ scope.row.shooting_status }}</span>
               </template>
             </el-table-column>
-
-            <el-table-column label="操作" fixed="right" align="left">
-              <template slot-scope="scope">
-                <el-button
-                  @click="handleClick(scope.row)"
-                  size="mini"
-                  type="info"
-                  >詳細</el-button
-                >
-              </template>
-            </el-table-column>
           </el-table>
         </el-card>
         <div style="margin: 20px 5px">
           <el-button type="primary">予約キャンセル</el-button>
           <el-button type="danger">削除</el-button>
+        </div>
+      </el-card>
+    </el-row>
+    <el-row style="margin-top: 20px; padding: 5px" v-show="show_Type1">
+      <el-card class="box-card" :body-style="{ padding: '5px 0px 10px 0px' }">
+        <p
+          style="
+            margin-bottom: -10px;
+            margin-left: 15px;
+            margin-right: 15px;
+            font-size: 16px;
+          "
+        >
+          撮影枠詳細
+        </p>
+        <el-divider></el-divider>
+        <div style="padding: 0px 10px 20px 20px; margin-top: 10px">
+          <el-row style="width: 70%; margin-bottom: 15px">
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                撮影枠 ID
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">11</div>
+            </el-col>
+          </el-row>
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                予約 ID
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">0000000A</div>
+            </el-col>
+          </el-row>
+
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                衛星
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <el-button type="text">Sphere-1</el-button>
+            </el-col>
+          </el-row>
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                運用周回ID
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">5</div>
+            </el-col>
+          </el-row>
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                ユーザーID
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <el-button type="text">101</el-button>
+            </el-col>
+          </el-row>
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                撮影枠種別
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">スタンダード</div>
+            </el-col>
+          </el-row>
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                撮影種別
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">リアルタイム</div>
+            </el-col>
+          </el-row>
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                撮影可能日時
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">2023-03-08 15:56:01 ~ 2023-03-08 15:56:01</div>
+            </el-col>
+          </el-row>
+          <el-row style="width: 70%; margin-bottom: 15px">
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                利用状況
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">
+                <el-tag>未予約</el-tag>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row style="width: 70%; margin-bottom: 15px">
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                ダウンロード状況
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">
+                <el-tag>未済</el-tag>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row style="width: 70%; margin-bottom: 15px">
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                優先度
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">
+                <el-tag type="danger">高</el-tag>
+              </div>
+            </el-col>
+          </el-row>
+          <div style="margin-top: 50px">
+            <el-button type="primary">編集</el-button>
+            <el-button type="primary">シーケンス</el-button>
+            <el-button type="primary" @click="handleShootingData">撮影データ</el-button>
+            <el-button type="primary">予約キャンセル</el-button>
+            <el-button type="danger">削除</el-button>
+          </div>
+        </div>
+      </el-card>
+    </el-row>
+
+    <el-row v-show="show_Type2">
+      <el-card class="box-card" :body-style="{ padding: '5px 0px 10px 0px' }">
+        <p
+          style="
+            margin-bottom: -10px;
+            margin-left: 15px;
+            margin-right: 15px;
+            font-size: 16px;
+          "
+        >
+          撮影枠詳細
+        </p>
+        <el-divider></el-divider>
+        <div style="padding: 0px 10px 20px 20px; margin-top: 10px">
+          <el-row style="width: 70%; margin-bottom: 15px">
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                撮影枠 ID
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">11</div>
+            </el-col>
+          </el-row>
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                予約 ID
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">0000000A</div>
+            </el-col>
+          </el-row>
+
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                衛星
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <el-button type="text">Sphere-1</el-button>
+            </el-col>
+          </el-row>
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                運用周回ID
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">5</div>
+            </el-col>
+          </el-row>
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                ユーザーID
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <el-button type="text">101</el-button>
+            </el-col>
+          </el-row>
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                撮影枠種別
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">スタンダード</div>
+            </el-col>
+          </el-row>
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                撮影種別
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">リアルタイム</div>
+            </el-col>
+          </el-row>
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                撮影可能日時
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">2023-03-08 15:56:01 ~ 2023-03-08 15:56:01</div>
+            </el-col>
+          </el-row>
+          <el-row style="width: 70%; margin-bottom: 15px">
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                利用状況
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">
+                <el-tag>未予約</el-tag>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row style="width: 70%; margin-bottom: 15px">
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                ダウンロード状況
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">
+                <el-tag>未済</el-tag>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row style="width: 70%; margin-bottom: 15px">
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                優先度
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">
+                <el-tag type="danger">高</el-tag>
+              </div>
+            </el-col>
+          </el-row>
+          <div style="margin-top: 50px">
+            <el-button type="primary">編集</el-button>
+            <el-button type="primary">シーケンス</el-button>
+            <el-button type="primary" @click="handleShootingData">撮影データ</el-button>
+            <el-button type="primary">予約キャンセル</el-button>
+            <el-button type="danger">削除</el-button>
+          </div>
+        </div>
+      </el-card>
+    </el-row>
+    <el-row v-show="show_Type2">
+      <el-card
+        :body-style="{ padding: '5px 5px 10px 5px' }"
+        style="margin: 5px; margin-top: 15px"
+        shadow="hover"
+        class="box-card"
+      >
+        <el-row
+          style="
+            margin-bottom: -20px;
+            margin-left: 15px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+          "
+        >
+          <el-col :span="8">
+            <p style="margin-left: 15px; margin-right: 15px; font-size: 16px">
+              分割枠
+            </p></el-col
+          >
+        </el-row>
+
+        <el-divider></el-divider>
+        <el-card
+          :body-style="{ padding: '0px' }"
+          style="margin: 5px; margin-top: 15px"
+          shadow="hover"
+        >
+          <el-table
+            :data="tableData"
+            border
+            fit
+            highlight-current-row
+            style="width: 100%"
+             @row-dblclick="handleDClick2"
+          >
+            <el-table-column type="selection" width="55" align="center">
+            </el-table-column>
+            <el-table-column
+              v-loading="loading"
+              align="left"
+              label="ムーブメント枠 ID"
+              width="160"
+              element-loading-text="確認中"
+             
+            >
+              <template slot-scope="scope">
+                <span>{{ scope.row.shooting_id2 }}</span>
+              </template>
+            </el-table-column>
+
+            <el-table-column align="left" label="ユーザー ID">
+              <template slot-scope="scope">
+                <span>{{ scope.row.shooting_id }}</span>
+              </template>
+            </el-table-column>
+
+            <el-table-column align="left" label="撮影枠 ID">
+              <template slot-scope="scope">
+                <span>{{ scope.row.frame_id }}</span>
+              </template>
+            </el-table-column>
+
+            <el-table-column align="left" label="開始日時">
+              <template slot-scope="scope">
+                <span>{{ scope.row.start_date }}</span>
+              </template>
+            </el-table-column>
+
+            <el-table-column align="left" label="終了日時">
+              <template slot-scope="scope">
+                <span>{{ scope.row.end_date }}</span>
+              </template>
+            </el-table-column>
+
+            <el-table-column align="left" label="利用状況">
+              <template slot-scope="scope">
+                <span>{{ scope.row.using_type }}</span>
+              </template>
+            </el-table-column>
+
+            </el-table-column>
+          </el-table>
+        </el-card>
+        <div style="margin: 20px 5px">
+          <el-button type="primary">追加</el-button>
+          <el-button type="primary">予約キャンセル</el-button>
+          <el-button type="danger">削除</el-button>
+        </div>
+      </el-card>
+    </el-row>
+    <el-row v-show="show_Type3">
+      <el-card class="box-card" :body-style="{ padding: '5px 0px 10px 0px' }">
+        <p
+          style="
+            margin-bottom: -10px;
+            margin-left: 15px;
+            margin-right: 15px;
+            font-size: 16px;
+          "
+        >
+          ムーブメント枠詳細
+        </p>
+        <el-divider></el-divider>
+        <div style="padding: 0px 10px 20px 20px; margin-top: 10px">
+          <el-row style="width: 70%; margin-bottom: 15px">
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                ムーブメント枠 ID
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">1</div>
+            </el-col>
+          </el-row>
+
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                撮影枠 ID
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <el-button type="text">5</el-button>
+            </el-col>
+          </el-row>
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                ユーザーID
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <el-button type="text">100</el-button>
+            </el-col>
+          </el-row>
+          <el-row
+            style="width: 70%; margin-bottom: 15px"
+            type="flex"
+            align="center"
+          >
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                撮影可能日時
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">2023-03-08 15:56:01 ~ 2023-03-08 15:56:01</div>
+            </el-col>
+          </el-row>
+          <el-row style="width: 70%; margin-bottom: 15px">
+            <el-col :span="8">
+              <div
+                class="label"
+                style="font-weight: bold; font-size: 16px; line-height: 26px"
+              >
+                利用状況
+              </div>
+            </el-col>
+            <el-col
+              :span="8"
+              style="font-weight: normal; font-size: 16px; line-height: 26px"
+            >
+              <div class="text">
+                <el-tag type="success">予約</el-tag>
+              </div>
+            </el-col>
+          </el-row>
+          <div style="margin-top: 50px">
+            <el-button type="primary">編集</el-button>
+            <el-button type="primary" @click="handleShootingData">撮影データ</el-button>
+            <el-button type="primary">予約キャンセル</el-button>
+            <el-button type="danger">削除</el-button>
+          </div>
         </div>
       </el-card>
     </el-row>
@@ -259,6 +933,9 @@ export default {
   data() {
     return {
       list: null,
+      show_Type1: false,
+      show_Type2: false,
+      show_Type3: false,
       data_list: null,
       listQuery: {
         page: 1,
@@ -293,7 +970,7 @@ export default {
         },
         {
           start_date: "2022-04-19 14:27:22",
-          frame_id: "11",
+          frame_id: "12",
           shooting_id: "100",
           satellite_name: "Sphere-1",
           end_date: "2022-04-19 14:27:22",
@@ -332,6 +1009,22 @@ export default {
         this.listLoading = false;
       });
     },
+    handleDClick(row) {
+      console.log(row);
+      if (row.frame_id == 11) {
+        this.show_Type1 = true;
+        this.show_Type2 = false;
+      } else {
+        this.show_Type1 = false;
+        this.show_Type2 = true;
+      }
+    },
+    handleDClick2(row) {
+      this.show_Type3 = true;
+    },
+    handleShootingData(){
+      this.$router.push("/Shootingframe/resourcelist")
+    }
   },
 };
 </script>

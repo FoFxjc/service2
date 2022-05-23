@@ -160,13 +160,6 @@
                       circle
                       @click="(e) => onEventClick(event, e)"
                     ></el-button>
-                    <el-button
-                      type="danger"
-                      icon="el-icon-delete"
-                      size="mini"
-                      circle
-                      @click="(e) => onEventDelete(event, e)"
-                    ></el-button>
                   </el-row>
                   <div slot="reference">
                     <div class="vuecal__event-title" v-html="event.title"></div>
@@ -197,11 +190,20 @@
                   <div slot="reference">
                     <div
                       class="vuecal__event-title"
-                      style="border-top: 0.8px black solid"
+                      style="border-top: 0.8px black solid; border-left: "
                     >
                       <el-row style="height: 30px">
                         <el-col :span="12">
-                          <div style="padding-top: 5px; font-size: 24px">
+                          <div
+                            style="
+                              width: 100%;
+                              padding-left: 20px;
+                              display: flex;
+                              justify-content: flex-start;
+                              font-size: 24px;
+                              padding-top: 5px;
+                            "
+                          >
                             <div v-html="event.title"></div>
                           </div>
                         </el-col>
@@ -275,11 +277,7 @@
                   </el-col>
                   <el-col :offset="14" :span="5">
                     <div>
-                      <span
-                        @click="
-                          dialogDetailVisible = true;
-                          selected_month_type = 1;
-                        "
+                      <i
                         v-if="
                           (cell.startDate.getMonth() + 1 == 5 &&
                             Number(cell.content) <= 10) ||
@@ -287,19 +285,6 @@
                             Number(cell.content) <= 18) ||
                           Number(cell.content) == 20 ||
                           Number(cell.content) == 21
-                        "
-                        style="
-                          font-size: 28px;
-                          color: #409eff;
-                          font-weight: bold;
-                        "
-                        >確</span
-                      >
-                      <i
-                        v-if="
-                          (Number(cell.content) >= 22 &&
-                            Number(cell.content) <= 31) ||
-                          cell.startDate.getMonth() + 1 == 6
                         "
                         style="
                           font-size: 28px;
@@ -335,7 +320,7 @@
               </div>
               <div class="vuecal__cell-events-count" v-if="view.id === 'month'">
                 <el-row style="padding: 0px">
-                  <el-col :span="2">
+                  <!-- <el-col :span="2">
                     <i
                       v-if="
                         cell.startDate.getMonth() + 1 == 5 &&
@@ -372,7 +357,7 @@
                         selected_month_type = 5;
                       "
                     />
-                  </el-col>
+                  </el-col> -->
                 </el-row>
               </div>
             </template>
@@ -389,24 +374,23 @@
           justify="center"
         >
           <div>イベント詳細</div>
-          <br/>
+          <br />
           <div>
+            <el-button
+              @click="$refs.vuecal.previous()"
+              icon="el-icon-caret-left"
+              type="text"
+              style="font-size: 25px"
+            ></el-button>
 
-              <el-button
-                @click="$refs.vuecal.previous()"
-                icon="el-icon-caret-left"
-                type="text"
-                style="font-size: 25px"
-              ></el-button>
+            <span style="width: 100%; padding: 10px"> ABCフェス</span>
 
-               <span style="width: 100%; padding: 10px" > ABCフェス</span>
-             
-              <el-button
-                @click="$refs.vuecal.next()"
-                icon="el-icon-caret-right"
-                type="text"
-                style="font-size: 25px"
-              ></el-button>
+            <el-button
+              @click="$refs.vuecal.next()"
+              icon="el-icon-caret-right"
+              type="text"
+              style="font-size: 25px"
+            ></el-button>
           </div>
         </el-row>
         <el-row
@@ -441,16 +425,15 @@
           <div>
             <span style="font-size: 18px; color: #409eff; font-weight: bold"
               >確</span
-            ><span style="width: 100%; padding: 10px" >運用計画確定</span>
+            ><span style="width: 100%; padding: 10px">運用計画確定</span>
           </div>
-          
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
-        <div>ダウンロード予定日：‐</div>
+          <div>ダウンロード予定日：‐</div>
         </el-row>
       </div>
       <!-- 邮件 -->
@@ -461,24 +444,23 @@
           justify="center"
         >
           <div>イベント詳細</div>
-          <br/>
+          <br />
           <div>
+            <el-button
+              @click="$refs.vuecal.previous()"
+              icon="el-icon-caret-left"
+              type="text"
+              style="font-size: 25px"
+            ></el-button>
 
-              <el-button
-                @click="$refs.vuecal.previous()"
-                icon="el-icon-caret-left"
-                type="text"
-                style="font-size: 25px"
-              ></el-button>
+            <span style="width: 100%; padding: 10px"> ABCフェス</span>
 
-               <span style="width: 100%; padding: 10px" > ABCフェス</span>
-             
-              <el-button
-                @click="$refs.vuecal.next()"
-                icon="el-icon-caret-right"
-                type="text"
-                style="font-size: 25px"
-              ></el-button>
+            <el-button
+              @click="$refs.vuecal.next()"
+              icon="el-icon-caret-right"
+              type="text"
+              style="font-size: 25px"
+            ></el-button>
           </div>
         </el-row>
         <el-row
@@ -513,19 +495,20 @@
           <div>
             <span style="font-size: 18px; color: #409eff; font-weight: bold"
               >確</span
-            ><span style="width: 100%; padding: 10px" >運用計画確定</span>
+            ><span style="width: 100%; padding: 10px">運用計画確定</span>
           </div>
-          
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
-        <div>ダウンロード予定日：2022―06―10 
-          <el-button type="primary" @click="dialogDetailVisible = false"
-          >通知</el-button>
-        </div>
+          <div>
+            ダウンロード予定日：2022―06―10
+            <el-button type="primary" @click="dialogDetailVisible = false"
+              >通知</el-button
+            >
+          </div>
         </el-row>
       </div>
       <!-- 警告 -->
@@ -536,27 +519,30 @@
           justify="center"
         >
           <div>イベント詳細</div>
-          <br/>
+          <br />
           <div>
+            <el-button
+              @click="$refs.vuecal.previous()"
+              icon="el-icon-caret-left"
+              type="text"
+              style="font-size: 25px"
+            ></el-button>
 
-              <el-button
-                @click="$refs.vuecal.previous()"
-                icon="el-icon-caret-left"
-                type="text"
-                style="font-size: 25px"
-              ></el-button>
-              
-               <span style="width: 100%; padding: 10px" > ABCフェス<i class="el-icon-warning-outline" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i></span>
-             
-              <el-button
-                @click="$refs.vuecal.next()"
-                icon="el-icon-caret-right"
-                type="text"
-                style="font-size: 25px"
-              ></el-button>
+            <span style="width: 100%; padding: 10px">
+              ABCフェス<i
+                class="el-icon-warning-outline"
+                style="color: #ff4240; margin-left: 10px; font-size: 20px"
+              ></i
+            ></span>
+
+            <el-button
+              @click="$refs.vuecal.next()"
+              icon="el-icon-caret-right"
+              type="text"
+              style="font-size: 25px"
+            ></el-button>
           </div>
         </el-row>
-
 
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
@@ -588,12 +574,15 @@
           justify="center"
         >
           <div>
-              <i class="el-icon-warning-outline" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i>
-              <span style="width: 100%; padding: 10px" >通信パスが予約できませんでした</span>
+            <i
+              class="el-icon-warning-outline"
+              style="color: #ff4240; margin-left: 10px; font-size: 20px"
+            ></i>
+            <span style="width: 100%; padding: 10px"
+              >通信パスが予約できませんでした</span
+            >
           </div>
-          
         </el-row>
-
       </div>
       <!-- 对钩 -->
       <!-- <div v-if="selected_month_type == '4'">
@@ -647,24 +636,23 @@
           justify="center"
         >
           <div>イベント詳細</div>
-          <br/>
+          <br />
           <div>
+            <el-button
+              @click="$refs.vuecal.previous()"
+              icon="el-icon-caret-left"
+              type="text"
+              style="font-size: 25px"
+            ></el-button>
 
-              <el-button
-                @click="$refs.vuecal.previous()"
-                icon="el-icon-caret-left"
-                type="text"
-                style="font-size: 25px"
-              ></el-button>
+            <span style="width: 100%; padding: 10px"> ABCフェス</span>
 
-               <span style="width: 100%; padding: 10px" > ABCフェス</span>
-             
-              <el-button
-                @click="$refs.vuecal.next()"
-                icon="el-icon-caret-right"
-                type="text"
-                style="font-size: 25px"
-              ></el-button>
+            <el-button
+              @click="$refs.vuecal.next()"
+              icon="el-icon-caret-right"
+              type="text"
+              style="font-size: 25px"
+            ></el-button>
           </div>
         </el-row>
         <el-row
@@ -699,18 +687,22 @@
           <div>
             <span style="font-size: 18px; color: #409eff; font-weight: bold"
               >確</span
-            ><span style="width: 100%; padding: 10px" >運用計画確定</span>
+            ><span style="width: 100%; padding: 10px">運用計画確定</span>
           </div>
-          
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
-        <div><span style="width: 100%; padding: 10px" >ダウンロード予定日：2022―06―10</span>        <el-button type="primary" @click="dialogDetailVisible = false"
-          >通知</el-button
-        ></div>
+          <div>
+            <span style="width: 100%; padding: 10px"
+              >ダウンロード予定日：2022―06―10</span
+            >
+            <el-button type="primary" @click="dialogDetailVisible = false"
+              >通知</el-button
+            >
+          </div>
         </el-row>
       </div>
       <div slot="footer" class="dialog-footer">
@@ -720,18 +712,21 @@
       </div>
     </el-dialog>
     <el-dialog :visible.sync="dialogFormVisible" width="450px">
-
       <!-- 绿色实心 -->
       <div v-if="selected_week_type == '1'">
-        <span style="width: 100%;" >説明：メンテナンス運用設定時</span>
+        <span style="width: 100%">説明：メンテナンス運用設定時</span>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
           <div>
-          <span style="width: 100%; padding: 10px" >周回種別：メンテナンス運用<i class="el-icon-setting" style="color: #409eff;margin-left: 10px;font-size: 20px"></i>
-          </span>  
+            <span style="width: 100%; padding: 10px"
+              >周回種別：メンテナンス運用<i
+                class="el-icon-setting"
+                style="color: #409eff; margin-left: 10px; font-size: 20px"
+              ></i>
+            </span>
           </div>
         </el-row>
         <el-row
@@ -741,9 +736,9 @@
         >
           <div>
             <el-button type="primary" @click="dialogDetailVisible = false"
-          >メンテナンス運用設定</el-button>
+              >メンテナンス運用設定</el-button
+            >
           </div>
-
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
@@ -762,15 +757,19 @@
       </div>
       <!-- 粉色条纹 -->
       <div v-if="selected_week_type == '2'">
-        <span style="width: 100%;" >説明：未設定時</span>
+        <span style="width: 100%">説明：未設定時</span>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
           <div>
-          <span style="width: 100%; padding: 10px" >周回種別：未設定<i class="el-icon-edit" style="color: #409eff;margin-left: 10px;font-size: 20px"></i>
-          </span>  
+            <span style="width: 100%; padding: 10px"
+              >周回種別：未設定<i
+                class="el-icon-edit"
+                style="color: #409eff; margin-left: 10px; font-size: 20px"
+              ></i>
+            </span>
           </div>
         </el-row>
         <el-row
@@ -780,9 +779,9 @@
         >
           <div>
             <el-button type="primary" @click="dialogDetailVisible = false"
-          >メンテナンス運用設定</el-button>
+              >メンテナンス運用設定</el-button
+            >
           </div>
-
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
@@ -798,20 +797,22 @@
         >
           <div>通信パス：未予約</div>
         </el-row>
-
-
       </div>
       <!-- 绿色条纹 -->
       <div v-if="selected_week_type == '3'">
-        <span style="width: 100%;" >説明：予約撮影時</span>
+        <span style="width: 100%">説明：予約撮影時</span>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
           <div>
-          <span style="width: 100%; padding: 10px" >周回種別：予約撮影<i class="el-icon-camera-solid" style="color: #409eff;margin-left: 10px;font-size: 20px"></i>
-          </span>  
+            <span style="width: 100%; padding: 10px"
+              >周回種別：予約撮影<i
+                class="el-icon-camera-solid"
+                style="color: #409eff; margin-left: 10px; font-size: 20px"
+              ></i>
+            </span>
           </div>
         </el-row>
 
@@ -838,7 +839,7 @@
           <div>●一般公開</div>
           <div>●スタンダード</div>
         </el-row>
-                <el-row
+        <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
@@ -848,15 +849,19 @@
       </div>
       <!-- 橙色 -->
       <div v-if="selected_week_type == '4'">
-        <span style="width: 100%;" >説明：ダウンリンク運用時</span>
+        <span style="width: 100%">説明：ダウンリンク運用時</span>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
           <div>
-          <span style="width: 100%; padding: 10px" >周回種別：ダウンリンク運用<i class="el-icon-download" style="color: #409eff;margin-left: 10px;font-size: 20px"></i>
-          </span>  
+            <span style="width: 100%; padding: 10px"
+              >周回種別：ダウンリンク運用<i
+                class="el-icon-download"
+                style="color: #409eff; margin-left: 10px; font-size: 20px"
+              ></i>
+            </span>
           </div>
         </el-row>
 
@@ -873,7 +878,12 @@
           align="center"
           justify="center"
         >
-          <div>通信パス：予約済み<i class="el-icon-place" style="color: #409eff;margin-left: 10px;font-size: 20px"></i></div>
+          <div>
+            通信パス：予約済み<i
+              class="el-icon-place"
+              style="color: #409eff; margin-left: 10px; font-size: 20px"
+            ></i>
+          </div>
         </el-row>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
@@ -881,24 +891,27 @@
           justify="center"
         >
           <div>
-            <el-button type="primary" @click="dialogDetailVisible = false"
-          >ダウンリンク計画作成</el-button>
+            <el-button type="primary" @click="handleTreeClick"
+              >ダウンリンク計画作成</el-button
+            >
           </div>
-
         </el-row>
-
       </div>
       <!-- 红色 -->
       <div v-if="selected_week_type == '5'">
-        <span style="width: 100%;" >説明：成立検証結果、問題があった場合</span>
+        <span style="width: 100%">説明：成立検証結果、問題があった場合</span>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
         >
           <div>
-          <span style="width: 100%; padding: 10px" >周回種別：ダウンリンク運用<i class="el-icon-warning-outline" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i>
-          </span>  
+            <span style="width: 100%; padding: 10px"
+              >周回種別：ダウンリンク運用<i
+                class="el-icon-warning-outline"
+                style="color: #ff4240; margin-left: 10px; font-size: 20px"
+              ></i>
+            </span>
           </div>
         </el-row>
         <el-row
@@ -920,28 +933,170 @@
           align="center"
           justify="center"
         >
-          <div><i class="el-icon-warning-outline" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i></div>
           <div>
-          <span style="color: #ff4240;margin-left: 10px;font-size: 20px">●成立検証に失敗しました</span>
+            <i
+              class="el-icon-warning-outline"
+              style="color: #ff4240; margin-left: 10px; font-size: 20px"
+            ></i>
           </div>
-          <span style="color: #ff4240;margin-left: 10px;font-size: 20px">●原因：XXXXX</span>
           <div>
-          <span style="color: #ff4240;margin-left: 10px;font-size: 20px">●解決策：XXXX</span>
+            <span style="color: #ff4240; margin-left: 10px; font-size: 20px"
+              >●成立検証に失敗しました</span
+            >
+          </div>
+          <span style="color: #ff4240; margin-left: 10px; font-size: 20px"
+            >●原因：XXXXX</span
+          >
+          <div>
+            <span style="color: #ff4240; margin-left: 10px; font-size: 20px"
+              >●解決策：XXXX</span
+            >
           </div>
         </el-row>
-
       </div>
-
+      <!-- Test 1 -->
+      <div v-if="selected_week_type == '6'">
+        <span style="width: 100%"
+          >Test 1説明：成立検証結果、問題があった場合</span
+        >
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <span style="width: 100%; padding: 10px"
+              >周回種別：ダウンリンク運用<i
+                class="el-icon-warning-outline"
+                style="color: #ff4240; margin-left: 10px; font-size: 20px"
+              ></i>
+            </span>
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>周回時刻：20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>通信パス：未予約</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <i
+              class="el-icon-warning-outline"
+              style="color: #ff4240; margin-left: 10px; font-size: 20px"
+            ></i>
+          </div>
+          <div>
+            <span style="color: #ff4240; margin-left: 10px; font-size: 20px"
+              >●成立検証に失敗しました</span
+            >
+          </div>
+          <span style="color: #ff4240; margin-left: 10px; font-size: 20px"
+            >●原因：XXXXX</span
+          >
+          <div>
+            <span style="color: #ff4240; margin-left: 10px; font-size: 20px"
+              >●解決策：XXXX</span
+            >
+          </div>
+        </el-row>
+      </div>
+      <!-- Test 2 -->
+      <div v-if="selected_week_type == '7'">
+        <span style="width: 100%"
+          >Test 2説明：成立検証結果、問題があった場合</span
+        >
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <span style="width: 100%; padding: 10px"
+              >周回種別：ダウンリンク運用<i
+                class="el-icon-warning-outline"
+                style="color: #ff4240; margin-left: 10px; font-size: 20px"
+              ></i>
+            </span>
+          </div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>周回時刻：20:00 - 21:00</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>通信パス：未予約</div>
+        </el-row>
+        <el-row
+          style="border: 1px black solid; width: 100%; padding: 10px"
+          align="center"
+          justify="center"
+        >
+          <div>
+            <i
+              class="el-icon-warning-outline"
+              style="color: #ff4240; margin-left: 10px; font-size: 20px"
+            ></i>
+          </div>
+          <div>
+            <span style="color: #ff4240; margin-left: 10px; font-size: 20px"
+              >●成立検証に失敗しました</span
+            >
+          </div>
+          <span style="color: #ff4240; margin-left: 10px; font-size: 20px"
+            >●原因：XXXXX</span
+          >
+          <div>
+            <span style="color: #ff4240; margin-left: 10px; font-size: 20px"
+              >●解決策：XXXX</span
+            >
+          </div>
+        </el-row>
+      </div>
     </el-dialog>
 
     <el-dialog title="イベント追加" :visible.sync="dialogCreationVisible">
       <el-form :model="form">
         <el-form-item label="イベント種別" :label-width="formLabelWidth">
-            <el-radio-group v-model="form.resource">
-              <el-radio label="1"><i class="el-icon-video-camera-solid" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i></el-radio>
-              <el-radio label="2"><i class="el-icon-s-promotion" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i></el-radio>
-              <el-radio label="3"><i class="el-icon-school" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i></el-radio>
-            </el-radio-group>
+          <el-radio-group v-model="form.resource">
+            <el-radio label="1"
+              ><i
+                class="el-icon-video-camera-solid"
+                style="color: #ff4240; margin-left: 10px; font-size: 20px"
+              ></i
+            ></el-radio>
+            <el-radio label="2"
+              ><i
+                class="el-icon-s-promotion"
+                style="color: #ff4240; margin-left: 10px; font-size: 20px"
+              ></i
+            ></el-radio>
+            <el-radio label="3"
+              ><i
+                class="el-icon-school"
+                style="color: #ff4240; margin-left: 10px; font-size: 20px"
+              ></i
+            ></el-radio>
+          </el-radio-group>
         </el-form-item>
         <el-form-item label="イベント名" :label-width="formLabelWidth">
           <el-input v-model="form.title" autocomplete="off"></el-input>
@@ -965,7 +1120,6 @@
         <!-- <el-form-item label="Event Description" :label-width="formLabelWidth">
           <el-input v-model="form.desc" autocomplete="off"></el-input>
         </el-form-item> -->
-
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogCreationVisible = false">キャンセル</el-button>
@@ -1062,6 +1216,10 @@ export default {
         this.selected_week_type = "4";
       } else if (event.class == "error") {
         this.selected_week_type = "5";
+      } else if (event.class == "test1") {
+        this.selected_week_type = "6";
+      } else if (event.class == "test2") {
+        this.selected_week_type = "7";
       }
       this.dialogFormVisible = true;
 
@@ -1298,6 +1456,9 @@ export default {
         resource: "",
       };
     },
+    handleTreeClick() {
+      this.$router.push("/plan/tree");
+    },
     handleEventChange() {
       let editedUser = {
         ...this.selectedEvent,
@@ -1323,7 +1484,6 @@ export default {
     },
   },
   created() {
-
     this.demoExample.events.push(
       {
         id: 1,
@@ -1331,8 +1491,9 @@ export default {
         start: `2022-05-08 09:00`,
         end: `2022-05-08 10:30`,
         // title: "Maintain",
-        content: '<i class="el-icon-setting"></i>',
+        content: '<i class="el-icon-s-tools"></i>',
         resizable: false,
+        class: "default",
       },
       {
         id: 2,
@@ -1342,6 +1503,7 @@ export default {
         // title: "Maintain",
         content: '<i class="el-icon-s-tools"></i>',
         resizable: false,
+        class: "default",
       },
       {
         id: 3,
@@ -1351,6 +1513,7 @@ export default {
         // title: "Maintain",
         content: '<i class="el-icon-s-tools"></i>',
         resizable: false,
+        class: "default",
       },
       {
         id: 4,
@@ -1360,6 +1523,7 @@ export default {
         // title: "Maintain",
         content: '<i class="el-icon-s-tools"></i>',
         resizable: false,
+        class: "default",
       },
       {
         id: 5,
@@ -1369,6 +1533,7 @@ export default {
         // title: "Maintain",
         content: '<i class="el-icon-s-tools"></i>',
         resizable: false,
+        class: "default",
       },
       {
         id: 6,
@@ -1378,6 +1543,7 @@ export default {
         // title: "Maintain",
         content: '<i class="el-icon-s-tools"></i>',
         resizable: false,
+        class: "default",
       },
       {
         id: 7,
@@ -1387,6 +1553,7 @@ export default {
         // title: "Maintain",
         content: '<i class="el-icon-s-tools"></i>',
         resizable: false,
+        class: "default",
       },
       {
         id: 8,
@@ -1395,7 +1562,7 @@ export default {
         end: `2022-05-08 7:30`,
         // // title: "Empty Slot",
         class: "empty",
-        content: '<i class="el-icon-view"></i>',
+        content: "",
         resizable: false,
       },
       {
@@ -1405,7 +1572,7 @@ export default {
         end: `2022-05-08 9:00`,
         // // title: "Empty Slot",
         class: "empty",
-        content: '<i class="el-icon-view"></i>',
+        content: "",
         resizable: false,
       },
       {
@@ -1415,7 +1582,7 @@ export default {
         end: `2022-05-08 12:00`,
         // // title: "Empty Slot",
         class: "empty",
-        content: '<i class="el-icon-view"></i>',
+        content: "",
         resizable: false,
       },
       {
@@ -1425,7 +1592,7 @@ export default {
         end: `2022-05-08 9:00`,
         // title: "Empty Slot",
         class: "empty",
-        content: '<i class="el-icon-view"></i>',
+        content: "",
         resizable: false,
       },
       {
@@ -1435,7 +1602,7 @@ export default {
         end: `2022-05-09 10:30`,
         // title: "Empty Slot",
         class: "empty",
-        content: '<i class="el-icon-view"></i>',
+        content: "",
         resizable: false,
       },
       {
@@ -1445,7 +1612,7 @@ export default {
         end: `2022-05-09 9:00`,
         // title: "Empty Slot",
         class: "empty",
-        content: '<i class="el-icon-view"></i>',
+        content: "",
         resizable: false,
       },
       {
@@ -1455,7 +1622,7 @@ export default {
         end: `2022-05-11 07:30`,
         // title: "Empty Slot",
         class: "empty",
-        content: '<i class="el-icon-view"></i>',
+        content: "",
         resizable: false,
       },
       {
@@ -1465,7 +1632,7 @@ export default {
         end: `2022-05-11 9:00`,
         // title: "Empty Slot",
         class: "empty",
-        content: '<i class="el-icon-view"></i>',
+        content: "",
         resizable: false,
       },
       {
@@ -1475,7 +1642,7 @@ export default {
         end: `2022-05-11 10:30`,
         // title: "Empty Slot",
         class: "empty",
-        content: '<i class="el-icon-view"></i>',
+        content: "",
         resizable: false,
       },
       {
@@ -1485,7 +1652,7 @@ export default {
         end: `2022-05-13 7:30`,
         // title: "Empty Slot",
         class: "empty",
-        content: '<i class="el-icon-view"></i>',
+        content: "",
         resizable: false,
       },
       {
@@ -1495,7 +1662,7 @@ export default {
         end: `2022-05-13 9:00`,
         // title: "Empty Slot",
         class: "empty",
-        content: '<i class="el-icon-view"></i>',
+        content: "",
         resizable: false,
       },
       {
@@ -1505,7 +1672,7 @@ export default {
         end: `2022-05-14 7:30`,
         // title: "Empty Slot",
         class: "empty",
-        content: '<i class="el-icon-view"></i>',
+        content: "",
         resizable: false,
       },
       {
@@ -1515,7 +1682,7 @@ export default {
         end: `2022-05-14 9:00`,
         // title: "Empty Slot",
         class: "empty",
-        content: '<i class="el-icon-view"></i>',
+        content: "",
         resizable: false,
       },
       {
@@ -1525,7 +1692,7 @@ export default {
         end: `2022-05-14 12:00`,
         // title: "Empty Slot",
         class: "empty",
-        content: '<i class="el-icon-view"></i>',
+        content: "",
         resizable: false,
       },
       {
@@ -1534,6 +1701,7 @@ export default {
         start: `2022-05-09 6:00`,
         end: `2022-05-09 7:30`,
         // title: "预约拍摄",
+        title: '<i class="el-icon-message" style="color:#409EFF"></i>',
         class: "charging",
         content: '<i class="el-icon-camera-solid"></i>',
         resizable: false,
@@ -1543,6 +1711,7 @@ export default {
         hidden: true,
         start: `2022-05-10 7:30`,
         end: `2022-05-09 9:00`,
+        title: '<i class="el-icon-message"></i>',
         // title: "预约拍摄",
         class: "charging",
         content: '<i class="el-icon-camera-solid"></i>',
@@ -1554,6 +1723,7 @@ export default {
         start: `2022-05-10 7:30`,
         end: `2022-05-10 9:00`,
         // title: "预约拍摄",
+        title: '<i class="el-icon-message" style="color:#409EFF"></i>',
         class: "charging",
         content: '<i class="el-icon-camera-solid"></i>',
         resizable: false,
@@ -1564,7 +1734,8 @@ export default {
         start: `2022-05-10 10:30`,
         end: `2022-05-10 12:00`,
         // title: "预约拍摄",
-        class: "charging",
+        class: "shooting",
+        title: '<i class="el-icon-message" style="color:#409EFF"></i>',
         content: '<i class="el-icon-video-camera-solid"></i>',
         extra_bottom_right: '<i class="el-icon-user-solid" />',
         resizable: false,
@@ -1575,7 +1746,8 @@ export default {
         start: `2022-05-09 10:30`,
         end: `2022-05-09 12:00`,
         // title: "拍摄",
-        class: "charging",
+        class: "shooting",
+        title: '<i class="el-icon-message"></i>',
         content: '<i class="el-icon-video-camera-solid"></i>',
         extra_bottom_right: '<i class="el-icon-user-solid" />',
         resizable: false,
@@ -1586,7 +1758,7 @@ export default {
         start: `2022-05-12 7:30`,
         end: `2022-05-12 9:00`,
         title: '<i class="el-icon-place"></i>',
-        class: "charging",
+        class: "shooting",
         content: '<i class="el-icon-video-camera-solid"></i>',
         extra_bottom_right: '<i class="el-icon-user-solid" />',
         resizable: false,
@@ -1596,8 +1768,8 @@ export default {
         hidden: true,
         start: `2022-05-13 9:00`,
         end: `2022-05-13 10:30`,
-        title: '<i class="el-icon-place"></i>',
-        class: "charging",
+        title: '<i class="el-icon-lightning" style="color:#409EFF"></i>',
+        class: "shooting",
         content: '<i class="el-icon-video-camera-solid"></i>',
         extra_bottom_right: '<i class="el-icon-user-solid" />',
         resizable: false,
@@ -1607,7 +1779,7 @@ export default {
         hidden: true,
         start: `2022-05-11 10:30`,
         end: `2022-05-11 12:00`,
-        title: '<i class="el-icon-place"></i>',
+        title: '<i class="el-icon-lightning"></i>',
         class: "download",
         content: '<i class="el-icon-download"></i>',
         resizable: false,
@@ -1628,13 +1800,28 @@ export default {
         hidden: false,
         start: `2022-05-20 20:00`,
         end: `2022-05-20 21:30`,
+<<<<<<< HEAD
         title: "☆ABCフェス　その他3件",
         // class: "error",
+=======
+        title: "ABC",
+        class: "test1",
+        content: '<i class="el-icon-download"></i>',
+        extra_bottom_left: '<i class="el-icon-warning" />',
+        resizable: false,
+      },
+      {
+        id: 30,
+        hidden: false,
+        start: `2022-05-15 20:00`,
+        end: `2022-05-15 21:30`,
+        title: "ABC",
+        class: "test2",
+>>>>>>> 0c9cbf07b2a206f4a273d03c55e735c8b80cabf1
         content: '<i class="el-icon-download"></i>',
         extra_bottom_left: '<i class="el-icon-warning" />',
         resizable: false,
       }
-
     );
     this.showingevents = this.demoExample.events;
     this.form.title = "Testing";
@@ -1758,30 +1945,19 @@ $kate: #ff7fc8;
     color: #fff;
   }
   .charging {
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 10px,
-      rgba($john, 0.15) 10px,
-      rgba($john, 0.15) 20px
-    );
-    color: transparentize(darken($john, 10), 0.4);
-  }
-  .charging {
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 10px,
-      rgba($john, 0.15) 10px,
-      rgba($john, 0.15) 20px
-    );
-    color: transparentize(darken($john, 10), 0.4);
+    background: #346888;
   }
   .download {
-    background: #e6a23c;
+    background: #7aa6c2;
   }
   .error {
-    background: #f56c6c;
+    background: #ffa600;
+  }
+  .default {
+    background: #004c6d;
+  }
+  .shooting {
+    background: #5886a5;
   }
   .maintain {
     background: repeating-linear-gradient(
@@ -1805,14 +1981,8 @@ $kate: #ff7fc8;
     color: #fff;
   }
   .empty {
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 10px,
-      rgba($kate, 0.15) 10px,
-      rgba($kate, 0.15) 20px
-    );
-    color: transparentize(darken($kate, 10), 0.4);
+    background: transparent;
+    color: black;
   }
   .kate .charging {
     background: repeating-linear-gradient(
