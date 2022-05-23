@@ -28,7 +28,7 @@
           />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">予約数</div>
+          <div class="card-panel-text">通知パス数</div>
           <count-to
             :start-val="0"
             :end-val="10"
@@ -58,7 +58,7 @@
         </div>
       </div>
     </el-col>
-    <el-col :xs="12" :sm="12" :lg="4" class="card-panel-col">
+    <!-- <el-col :xs="12" :sm="12" :lg="4" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('shoppings')">
         <div class="card-panel-icon-wrapper icon-shopping">
           <i class="el-icon-video-camera card-panel-icon"> </i>
@@ -73,7 +73,7 @@
           />
         </div>
       </div>
-    </el-col>
+    </el-col> -->
     <el-col :xs="12" :sm="12" :lg="4" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('shoppings')">
         <div class="card-panel-icon-wrapper icon-people">
