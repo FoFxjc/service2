@@ -185,10 +185,10 @@
                     </div>
                     <hr />
                     <em class="vuecal__event-time">
-                      <strong>Event start: </strong>
+                      <strong>開始時間: </strong>
                       <span>{{ event.start.formatTime() }}</span>
                       <br />
-                      <strong>Event end: </strong>
+                      <strong>終了時間: </strong>
                       <span> {{ event.end.formatTime() }}</span>
                     </em>
                     <el-row>
@@ -252,7 +252,7 @@
                           Number(cell.content) == 21
                         "
                         style="
-                          font-size: 18px;
+                          font-size: 28px;
                           color: #409eff;
                           font-weight: bold;
                         "
@@ -265,7 +265,7 @@
                           cell.startDate.getMonth() + 1 == 6
                         "
                         style="
-                          font-size: 18px;
+                          font-size: 28px;
                           color: #67c23a;
                           font-weight: bold;
                         "
@@ -282,7 +282,7 @@
                           Number(cell.content) == 19
                         "
                         style="
-                          font-size: 18px;
+                          font-size: 28px;
                           color: #f56c6c;
                           font-weight: bold;
                         "
@@ -298,7 +298,7 @@
               </div>
               <div class="vuecal__cell-events-count" v-if="view.id === 'month'">
                 <el-row style="padding: 0px">
-                  <el-col :span="2">
+                  <!-- <el-col :span="2">
                     <i
                       v-if="
                         cell.startDate.getMonth() + 1 == 5 &&
@@ -306,13 +306,18 @@
                         Number(cell.content) >= 2
                       "
                       class="el-icon-message"
-                      style="color: #409eff; font-size: 20px"
+                      style="color: #409eff; font-size: 28px"
                       @click="
                         dialogDetailVisible = true;
                         selected_month_type = 2;
                       "
                     />
-                  </el-col>
+                    <i
+                      v-else
+                      class="el-icon-message"
+                      style="color: #409eff; font-size: 20px; opacity: 0"
+                    />
+                  </el-col> -->
                   <el-col :offset="18" :span="2">
                     <font-awesome-icon
                       v-if="
@@ -324,7 +329,7 @@
                         Number(cell.content) == 21
                       "
                       icon="fa-solid fa-satellite"
-                      style="color: #409eff; font-size: 20px"
+                      style="color: #409eff; font-size: 28px"
                       @click="
                         dialogDetailVisible = true;
                         selected_month_type = 5;
@@ -488,7 +493,7 @@
       </div>
       <!-- 警告 -->
       <div v-if="selected_month_type == '3'">
-        <el-row
+        <!-- <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
           justify="center"
@@ -539,7 +544,7 @@
           justify="center"
         >
           <div>通信パス：予約済み</div>
-        </el-row>
+        </el-row> -->
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
@@ -848,7 +853,7 @@
       </div>
       <!-- 红色 -->
       <div v-if="selected_week_type == '5'">
-        <span style="width: 100%;" >説明：成立検証結果、問題があった場合</span>
+        <!-- <span style="width: 100%;" >説明：成立検証結果、問題があった場合</span>
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
@@ -872,7 +877,7 @@
           justify="center"
         >
           <div>通信パス：未予約</div>
-        </el-row>
+        </el-row> -->
         <el-row
           style="border: 1px black solid; width: 100%; padding: 10px"
           align="center"
@@ -891,12 +896,20 @@
       </div>
 
     </el-dialog>
-    <el-dialog title="Create Event" :visible.sync="dialogCreationVisible">
+
+    <el-dialog title="イベント追加" :visible.sync="dialogCreationVisible">
       <el-form :model="form">
-        <el-form-item label="Event Title" :label-width="formLabelWidth">
+        <el-form-item label="イベント種別" :label-width="formLabelWidth">
+            <el-radio-group v-model="form.resource">
+              <el-radio label="1"><i class="el-icon-video-camera-solid" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i></el-radio>
+              <el-radio label="2"><i class="el-icon-s-promotion" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i></el-radio>
+              <el-radio label="3"><i class="el-icon-school" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i></el-radio>
+            </el-radio-group>
+        </el-form-item>
+        <el-form-item label="イベント名" :label-width="formLabelWidth">
           <el-input v-model="form.title" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Event Start Time" :label-width="formLabelWidth">
+        <el-form-item label="開始時間" :label-width="formLabelWidth">
           <el-date-picker
             v-model="form.start_time"
             type="datetime"
@@ -904,7 +917,7 @@
           >
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="Event End Time" :label-width="formLabelWidth">
+        <el-form-item label="終了時間" :label-width="formLabelWidth">
           <el-date-picker
             v-model="form.end_time"
             type="datetime"
@@ -912,20 +925,14 @@
           >
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="Event Description" :label-width="formLabelWidth">
+        <!-- <el-form-item label="Event Description" :label-width="formLabelWidth">
           <el-input v-model="form.desc" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="Event Type" :label-width="formLabelWidth">
-          <el-select v-model="form.type">
-            <el-option label="Charging" value="charging"></el-option>
-            <el-option label="Shooting Plan" value="normal"></el-option>
-            <el-option label="Maintain" value="maintain"></el-option>
-          </el-select>
-        </el-form-item>
+        </el-form-item> -->
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogCreationVisible = false">キャンセル</el-button>
-        <el-button type="primary" @click="handleEventCreate">作成</el-button>
+        <el-button type="primary" @click="handleEventCreate">追加</el-button>
       </div>
     </el-dialog>
 
@@ -949,7 +956,6 @@ import { uuid } from "vue-uuid";
 
 import "vue-cal/dist/vuecal.css";
 import "vue-cal/dist/i18n/ja.js";
-
 import moment from "moment";
 import { start } from "nprogress";
 
@@ -1149,20 +1155,7 @@ export default {
             resizable: false,
           }
         );
-        // for (let i = 0; i < 20; i++) {
-        //   const day = this.previousFirstDayOfWeek.addDays(i).format();
-        //   this.demoExample.events.push({
-        //     start: `${day} 21:00`,
-        //     end: `${day} 23:00`,
-        //     title: "Charging",
-        //     class: "charging",
-        //     background: true,
-        //     deletable: false,
-        //     resizable: false,
-        //     id: uuid.v4(),
-        //   });
-        // }
-        // Date.format() and Date.addDays() are helper methods added by Vue Cal.
+
         const monday = this.previousFirstDayOfWeek.format();
         const tuesday = this.previousFirstDayOfWeek.addDays(1).format();
         const thursday = this.previousFirstDayOfWeek.addDays(3).format();
@@ -1189,7 +1182,7 @@ export default {
             start: `${thursday} 09:00`,
             end: `${thursday} 11:30`,
             title: "予約撮影 4",
-            content: '<i class="v-icon material-icons mt-2">User 1</i>',
+            content: '<i class="v-icon material-icons mt-1">User 1</i>',
             resizable: false,
           },
           {
@@ -1293,59 +1286,7 @@ export default {
     },
   },
   created() {
-    // Place all the events in the real time current week.
-    // for (let i = 0; i < 20; i++) {
-    //   const day = this.previousFirstDayOfWeek.addDays(i).format();
-    //   this.demoExample.events.push({
-    //     start: `${day} 21:00`,
-    //     end: `${day} 23:00`,
-    //     title: "充電メンテナンス",
-    //     class: "charging",
-    //     background: true,
-    //     deletable: false,
-    //     resizable: false,
-    //     id: uuid.v4(),
-    //   });
-    // }
-    // // Date.format() and Date.addDays() are helper methods added by Vue Cal.
-    // const monday = this.previousFirstDayOfWeek.format();
-    // const tuesday = this.previousFirstDayOfWeek.addDays(1).format();
-    // const thursday = this.previousFirstDayOfWeek.addDays(3).format();
-    // const friday = this.previousFirstDayOfWeek.addDays(4).format();
-    // this.demoExample.events.push(
-    //   {
-    //     id: 1,
-    //     start: `${monday} 15:30`,
-    //     end: `${monday} 17:30`,
-    //     title: "予約撮影 1",
-    //     content: '<i class="v-icon material-icons mt-1"></i>',
-    //     resizable: false,
-    //   },
-    //   {
-    //     id: 3,
-    //     start: `${tuesday} 08:00`,
-    //     end: `${tuesday} 10:00`,
-    //     title: "予約撮影 3",
-    //     content: '<i class="v-icon material-icons mt-1">User 2</i>',
-    //     resizable: false,
-    //   },
-    //   {
-    //     id: 4,
-    //     start: `${thursday} 09:00`,
-    //     end: `${thursday} 11:30`,
-    //     title: "予約撮影 4",
-    //     content: '<i class="v-icon material-icons mt-2">User 1</i>',
-    //     resizable: false,
-    //   },
-    //   {
-    //     id: 5,
-    //     start: `${friday} 16:45`,
-    //     end: `${friday} 18:45`,
-    //     title: "予約撮影 ",
-    //     content: '<i class="v-icon material-icons mt-1">User 2</i>',
-    //     resizable: false,
-    //   }
-    // );
+
     this.demoExample.events.push(
       {
         id: 1,
@@ -1353,7 +1294,7 @@ export default {
         start: `2022-05-08 09:00`,
         end: `2022-05-08 10:30`,
         // title: "Maintain",
-        content: '<i class="el-icon-s-tools"></i>',
+        content: '<i class="el-icon-setting"></i>',
         resizable: false,
       },
       {
@@ -1557,7 +1498,7 @@ export default {
         end: `2022-05-09 7:30`,
         // title: "预约拍摄",
         class: "charging",
-        content: '<i class="el-icon-camera"></i>',
+        content: '<i class="el-icon-camera-solid"></i>',
         resizable: false,
       },
       {
@@ -1567,7 +1508,7 @@ export default {
         end: `2022-05-09 9:00`,
         // title: "预约拍摄",
         class: "charging",
-        content: '<i class="el-icon-camera"></i>',
+        content: '<i class="el-icon-camera-solid"></i>',
         resizable: false,
       },
       {
@@ -1577,7 +1518,7 @@ export default {
         end: `2022-05-10 9:00`,
         // title: "预约拍摄",
         class: "charging",
-        content: '<i class="el-icon-camera"></i>',
+        content: '<i class="el-icon-camera-solid"></i>',
         resizable: false,
       },
       {
@@ -1587,7 +1528,7 @@ export default {
         end: `2022-05-10 12:00`,
         // title: "预约拍摄",
         class: "charging",
-        content: '<i class="el-icon-camera"></i>',
+        content: '<i class="el-icon-video-camera-solid"></i>',
         extra_bottom_right: '<i class="el-icon-user-solid" />',
         resizable: false,
       },
@@ -1650,36 +1591,13 @@ export default {
         hidden: false,
         start: `2022-05-20 20:00`,
         end: `2022-05-20 21:30`,
-        title: "ABC",
-        class: "error",
+        title: "☆ABCフェス　その他3件",
+        // class: "error",
         content: '<i class="el-icon-download"></i>',
         extra_bottom_left: '<i class="el-icon-warning" />',
         resizable: false,
       }
-      // {
-      //   id: 3,
-      //   start: `${tuesday} 08:00`,
-      //   end: `${tuesday} 10:00`,
-      //   title: "予約撮影 3",
-      //   content: '<i class="v-icon material-icons mt-1">User 2</i>',
-      //   resizable: false,
-      // },
-      // {
-      //   id: 4,
-      //   start: `${thursday} 09:00`,
-      //   end: `${thursday} 11:30`,
-      //   title: "予約撮影 4",
-      //   content: '<i class="v-icon material-icons mt-2">User 1</i>',
-      //   resizable: false,
-      // },
-      // {
-      //   id: 5,
-      //   start: `${friday} 16:45`,
-      //   end: `${friday} 18:45`,
-      //   title: "予約撮影 ",
-      //   content: '<i class="v-icon material-icons mt-1">User 2</i>',
-      //   resizable: false,
-      // }
+
     );
     this.showingevents = this.demoExample.events;
     this.form.title = "Testing";
