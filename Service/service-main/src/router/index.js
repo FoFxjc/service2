@@ -155,6 +155,7 @@ export const constantRoutes = [
       {
         path: "table2",
         name: "Table",
+        hidden: true,
         component: () => import("@/views/table/index2"),
         meta: { title: "通知履歴", icon: "table" },
       },

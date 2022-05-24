@@ -365,7 +365,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-dialog :visible.sync="dialogDetailVisible" width="450px">
+    <el-dialog :visible.sync="dialogDetailVisible" >
       <!-- 确 -->
       <div v-if="selected_month_type == '1'">
         <el-row
@@ -513,76 +513,99 @@
       </div>
       <!-- 警告 -->
       <div v-if="selected_month_type == '3'">
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>イベント詳細</div>
-          <br />
-          <div>
-            <el-button
-              @click="$refs.vuecal.previous()"
-              icon="el-icon-caret-left"
-              type="text"
-              style="font-size: 25px"
-            ></el-button>
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>イベント詳細</span>
+                <div class="text item">
+                          <el-button
+                            @click="$refs.vuecal.previous()"
+                            icon="el-icon-caret-left"
+                            type="text"
+                            style="font-size: 20px"
+                          ></el-button>
 
-            <span style="width: 100%; padding: 10px">
-              ABCフェス<i
-                class="el-icon-warning-outline"
-                style="color: #ff4240; margin-left: 10px; font-size: 20px"
-              ></i
-            ></span>
+                              <i class="el-icon-star-on" style="color:#ffa600"></i>
+                              <span class="demonstration">ABCフェス</span>
+                              <i class="el-icon-warning" style="color:#ff6361"></i>
+                            <el-button
+                            @click="$refs.vuecal.next()"
+                            icon="el-icon-caret-right"
+                            type="text"
+                            style="font-size: 20px"
+                          ></el-button>
+                </div>
+              </div>
+              <div class="text item">
+                  <el-form :model="form">
+                    <el-form-item label="時刻" :label-width="formLabelWidth">
+                    <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+                      <el-input
+                        placeholder="20:00-21:00"
+                        v-model="input"
+                        :disabled="true">
+                      </el-input>
+                    </el-col>
+                    </el-form-item>
 
-            <el-button
-              @click="$refs.vuecal.next()"
-              icon="el-icon-caret-right"
-              type="text"
-              style="font-size: 25px"
-            ></el-button>
-          </div>
-        </el-row>
+                    <el-form-item label="撮影周回" :label-width="formLabelWidth">
 
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>20:00 - 21:00</div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>撮影周回</div>
-          <div>●リアルタイム撮影</div>
-          <div>●一般公開</div>
-          <div>●スタンダード</div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>通信パス：予約済み</div>
-        </el-row>
-        <el-row
-          style="border: 1px black solid; width: 100%; padding: 10px"
-          align="center"
-          justify="center"
-        >
-          <div>
-            <i
-              class="el-icon-warning-outline"
-              style="color: #ff4240; margin-left: 10px; font-size: 20px"
-            ></i>
-            <span style="width: 100%; padding: 10px"
-              >通信パスが予約できませんでした</span
-            >
-          </div>
-        </el-row>
+                    <el-col :span="24" style="margin-left: 10px; font-size: 20px">
+                    <el-switch v-model="value1">
+                    </el-switch>
+                    </el-col>
+
+                    <el-col :span="24" style="margin-left: 10px; font-size: 20px">
+
+
+                        <el-select v-model="form.region" placeholder="予約撮影">
+                            <el-option label="予約撮影" value="shanghai"></el-option>
+                            <el-option label="リアルタイム" value="beijing"></el-option>
+                        </el-select>
+
+                    </el-col>
+                    
+                    <el-col :span="24" style="margin-left: 10px; font-size: 20px">
+                        <el-select v-model="form.region" placeholder="一般公開">
+                            <el-option label="一般公開" value="shanghai"></el-option>
+                            <el-option label="ムーブメント枠" value="shanghai"></el-option>
+                            <el-option label="B2B利用" value="beijing"></el-option>
+                        </el-select>
+
+                    </el-col>
+
+                    <el-col :span="24" style="margin-left: 10px; font-size: 20px">
+                    <el-button type="primary"  style="margin-left: 165px;" >適用</el-button>
+                    </el-col>
+              
+                    </el-form-item>
+
+
+                    <el-form-item label="撮影補正周回" :label-width="formLabelWidth">
+
+                    <el-col :span="24" style="margin-left: 10px; font-size: 20px">
+                    <el-switch v-model="value1">
+                    </el-switch>
+                    </el-col>
+                    </el-form-item>
+
+                    <el-form-item label="通信パス" :label-width="formLabelWidth">
+                    <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+                      <el-input
+                        placeholder="未予約"
+                        v-model="input"
+                        :disabled="true">
+                      </el-input>
+                    </el-col>
+                    </el-form-item>
+
+                    <el-form-item label="" :label-width="formLabelWidth">
+                        <i class="el-icon-warning-outline" style="color: #ff4240;margin-left: 10px;font-size: 20px"></i>
+                        <span style="width: 100%; padding: 10px" >通信パスが予約できませんでした</span>
+                    </el-form-item>
+
+                  </el-form>
+              </div>
+            </el-card>
       </div>
       <!-- 对钩 -->
       <!-- <div v-if="selected_month_type == '4'">
@@ -1007,7 +1030,7 @@
             <el-card class="box-card">
               <div slot="header" class="clearfix">
                 <span>イベント詳細</span>
-                <el-button style="float: right font-size: 20px; padding: 3px 0; margin-left: 10px" type="text">
+                <div class="text item">
                           <el-button
                             @click="$refs.vuecal.previous()"
                             icon="el-icon-caret-left"
@@ -1015,7 +1038,7 @@
                             style="font-size: 20px"
                           ></el-button>
 
-                              <i class="el-icon-star-off"></i>
+                              <i class="el-icon-star-on" style="color:#ffa600"></i>
                               <span class="demonstration">ABCフェス</span>
                               
                             <el-button
@@ -1024,7 +1047,7 @@
                             type="text"
                             style="font-size: 20px"
                           ></el-button>
-                </el-button>
+                </div>
               </div>
               <div class="text item">
                   <el-form :model="form">
@@ -1070,6 +1093,15 @@
               
                     </el-form-item>
 
+
+                    <el-form-item label="撮影補正周回" :label-width="formLabelWidth">
+
+                    <el-col :span="24" style="margin-left: 10px; font-size: 20px">
+                    <el-switch v-model="value1">
+                    </el-switch>
+                    </el-col>
+                    </el-form-item>
+
                     <el-form-item label="通信パス" :label-width="formLabelWidth">
                     <el-col :span="8" style="margin-left: 10px; font-size: 20px">
                       <el-input
@@ -1079,8 +1111,6 @@
                       </el-input>
                     </el-col>
                     </el-form-item>
-
-
 
                     <el-form-item label="運用計画" :label-width="formLabelWidth">
                     <el-col :span="8" style="margin-left: 10px; font-size: 20px">
@@ -1113,24 +1143,24 @@
       <el-card class="box-card">
         <div slot="header" class="clearfix">
           <span>イベント詳細</span>
-          <el-button style="float: right font-size: 20px; padding: 3px 0; margin-left: 10px" type="text">
-                    <el-button
-                      @click="$refs.vuecal.previous()"
-                      icon="el-icon-caret-left"
-                      type="text"
-                      style="font-size: 20px"
-                    ></el-button>
+                <div class="text item">
+                          <el-button
+                            @click="$refs.vuecal.previous()"
+                            icon="el-icon-caret-left"
+                            type="text"
+                            style="font-size: 20px"
+                          ></el-button>
 
-                        <i class="el-icon-star-off"></i>
-                        <span class="demonstration">ABCフェス</span>
-                        
-                      <el-button
-                      @click="$refs.vuecal.next()"
-                      icon="el-icon-caret-right"
-                      type="text"
-                      style="font-size: 20px"
-                    ></el-button>
-          </el-button>
+                              <i class="el-icon-star-on" style="color:#ffa600"></i>
+                              <span class="demonstration">ABCフェス</span>
+                              
+                            <el-button
+                            @click="$refs.vuecal.next()"
+                            icon="el-icon-caret-right"
+                            type="text"
+                            style="font-size: 20px"
+                          ></el-button>
+                </div>
         </div>
         <div class="text item">
             <el-form :model="form">
@@ -1893,7 +1923,7 @@ export default {
         class: "shooting",
         title: '<i class="el-icon-message"></i>',
         content: '<i class="el-icon-video-camera-solid"></i>',
-        extra_bottom_right: '<i class="el-icon-user-solid" />',
+        extra_bottom_right: '<i class="el-icon-user-solid" /></i>',
         resizable: false,
       },
       {
@@ -1904,7 +1934,7 @@ export default {
         title:  '<i class="el-icon-lightning" style="color:#409EFF"></i>',
         class: "shooting",
         content: '<i class="el-icon-video-camera-solid"></i>',
-        extra_bottom_right: '<i class="el-icon-user-solid" />',
+        extra_bottom_right: '<i class="el-icon-user-solid" /></i>',
         resizable: false,
       },
       {
@@ -1915,7 +1945,7 @@ export default {
         title: '<i class="el-icon-lightning" style="color:#409EFF"></i>',
         class: "shooting",
         content: '<i class="el-icon-video-camera-solid"></i>',
-        extra_bottom_right: '<i class="el-icon-user-solid" />',
+        extra_bottom_right: '<i class="el-icon-user-solid" /></i>',
         resizable: false,
       },
       {
@@ -1936,7 +1966,7 @@ export default {
         // title: '<i class="el-icon-place"></i>',
         class: "error",
         content: '<i class="el-icon-download"></i>',
-        extra_bottom_left: '<i class="el-icon-warning" />',
+        extra_bottom_left: '<i class="el-icon-warning" /></i>',
         resizable: false,
       },
       {
@@ -1947,7 +1977,7 @@ export default {
         title: "☆ABCフェス　その他3件",
         class: "test1",
         content: '<i class="el-icon-download"></i>',
-        extra_bottom_left: '<i class="el-icon-warning" />',
+        extra_bottom_left: '<i class="el-icon-warning" /></i>',
         resizable: false,
       },
       {
@@ -1955,10 +1985,10 @@ export default {
         hidden: false,
         start: `2022-05-15 20:00`,
         end: `2022-05-15 21:30`,
-        title: "ABC",
+        title: "☆ABCフェス",
         class: "test2",
         content: '<i class="el-icon-download"></i>',
-        extra_bottom_left: '<i class="el-icon-warning" />',
+        extra_bottom_left: '<i class="el-icon-warning" /></i>',
         resizable: false,
       }
     );
@@ -2084,10 +2114,10 @@ $kate: #ff7fc8;
     color: #fff;
   }
   .charging {
-    background: #346888;
+    background: #004c6d;
   }
   .download {
-    background: #7aa6c2;
+    background: #004c6d;
   }
   .error {
     background: #ffa600;
@@ -2096,7 +2126,7 @@ $kate: #ff7fc8;
     background: #004c6d;
   }
   .shooting {
-    background: #5886a5;
+    background: #004c6d;
   }
   .maintain {
     background: repeating-linear-gradient(
