@@ -1,7 +1,34 @@
 <template>
   <div class="dashboard-container">
     <el-row>
-      <el-col :span="6">
+      <el-col :span="1">
+        <font-awesome-icon
+          icon="fa-solid fa-satellite"
+          style="width: 45px; height: 45px; color: #409eff; margin-top: 15px"
+        />
+      </el-col>
+      <el-col :span="4">
+        <el-card>
+          <div style="display: flex; justify-content: space-between">
+            <el-button type="success" circle></el-button>
+            <el-button
+              type="warning"
+              circle
+              disabled
+              style="background: transparent"
+            ></el-button>
+            <el-button
+              type="danger"
+              circle
+              disabled
+              style="background: transparent"
+            ></el-button>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="8" :offset="16">
         <el-card
           :body-style="{
             padding: '0px 5px 0px 10px',
@@ -12,7 +39,7 @@
           shadow="hover"
           class="box-card"
         >
-          <el-button type="text" style="font-size: 18px">1h</el-button>
+          <!-- <el-button type="text" style="font-size: 18px">1h</el-button>
           <el-button type="text" style="font-size: 18px">3h</el-button>
           <el-button type="text" style="font-size: 18px">12h</el-button>
           <el-button type="text" style="font-size: 18px">1d</el-button>
@@ -20,7 +47,20 @@
           <el-button type="text" style="font-size: 18px">1w</el-button>
           <el-button type="text" style="font-size: 18px"
             >Custom <i class="el-icon-date"></i
-          ></el-button>
+          ></el-button> -->
+          <el-date-picker
+            type="date"
+            placeholder=""
+            v-model="date1"
+            style="width: 450px"
+          ></el-date-picker>
+          <el-date-picker
+            type="date"
+            placeholder=""
+            v-model="date2"
+            style="width: 450px"
+          ></el-date-picker>
+          <el-button type="primary">搜索</el-button>
         </el-card>
       </el-col>
     </el-row>
@@ -39,7 +79,49 @@
             font-size: 16px;
           "
         >
-          Healthy Hosts
+          ユーザーアプリ
+        </p>
+        <el-divider></el-divider>
+        <line-chart :chart-data="lineChartData" />
+      </el-card>
+    </el-row>
+    <el-row>
+      <el-card
+        :body-style="{ padding: '5px 5px 10px 5px' }"
+        style="margin: 5px; margin-top: 15px"
+        shadow="hover"
+        class="box-card"
+      >
+        <p
+          style="
+            margin-bottom: -10px;
+            margin-left: 15px;
+            margin-right: 15px;
+            font-size: 16px;
+          "
+        >
+          サービス運用者アプリ
+        </p>
+        <el-divider></el-divider>
+        <line-chart :chart-data="lineChartData" />
+      </el-card>
+    </el-row>
+    <el-row>
+      <el-card
+        :body-style="{ padding: '5px 5px 10px 5px' }"
+        style="margin: 5px; margin-top: 15px"
+        shadow="hover"
+        class="box-card"
+      >
+        <p
+          style="
+            margin-bottom: -10px;
+            margin-left: 15px;
+            margin-right: 15px;
+            font-size: 16px;
+          "
+        >
+          衛星運用者アプリ
         </p>
         <el-divider></el-divider>
         <line-chart :chart-data="lineChartData" />
@@ -59,7 +141,7 @@ import LineChart from "./components/LineChart";
 
 const lineChartData = {
   newVisitis: {
-    expectedData: [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    expectedData: [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   },
 };
 
@@ -86,6 +168,8 @@ export default {
         limit: 5,
         sort: "+id",
       },
+      date1: null,
+      date2: null,
       loading: false,
       stlist: null,
       lineChartData: lineChartData.newVisitis,

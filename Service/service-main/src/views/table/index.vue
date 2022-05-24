@@ -5,21 +5,18 @@
       style="margin: 5px"
       shadow="hover"
     >
-      <el-input
-        placeholder="メールアドレス"
-        style="margin-right: 10px; width: 200px"
-        class="filter-item"
-      />
-      <el-input
-        placeholder="アカウント区分"
-        style="margin-right: 10px; width: 200px"
-        class="filter-item"
-      />
-      <el-input
-        placeholder="登録期間"
-        style="margin-right: 10px; width: 200px"
-        class="filter-item"
-      />
+      <el-select v-model="select_1" placeholder="予約撮影">
+        <el-option label="予約撮影" value="shanghai"></el-option>
+        <el-option label="リアルタイム" value="beijing"></el-option>
+      </el-select>
+      <el-date-picker
+        v-model="date_1"
+        type="daterange"
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+      >
+      </el-date-picker>
       <el-button
         v-waves
         class="filter-item"
@@ -60,11 +57,11 @@
           {{ scope.row.name }}
         </template>
       </el-table-column> -->
-      <el-table-column label="メールアドレス" align="center">
+      <!-- <el-table-column label="メールアドレス" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.email }}</span>
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column label="企業グループ" align="center">
         <template slot-scope="scope">
           {{ scope.row.email }}
@@ -124,7 +121,7 @@
                 <div>1</div>
               </el-col>
             </el-row>
-            <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
+            <!-- <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
               <el-col :span="10">
                 <div>メールアドレス</div>
               </el-col>
@@ -132,7 +129,7 @@
               <el-col :span="12" style="font-weight: normal">
                 <div>morize@gmail.com</div>
               </el-col>
-            </el-row>
+            </el-row> -->
             <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
               <el-col :span="10">
                 <div>企業グループ</div>
@@ -332,6 +329,8 @@ export default {
       listLoading: true,
       lineChartData: lineChartData.newVisitis,
       rowclick_show: false,
+      select_1: null,
+      date_1: [],
 
       notification_tableData: [
         {

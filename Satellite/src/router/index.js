@@ -74,6 +74,12 @@ export const constantRoutes = [
         component: () => import("@/views/shootingplan/index"),
         meta: { title: "カレンダー", icon: "form" },
       },
+      {
+        path: "detaillog",
+        name: "detaillog",
+        component: () => import("@/views/shootingplan/detaillog"),
+        meta: { title: "ダウンリンク量管理", icon: "form" },
+      },
     ],
   },
 
@@ -115,7 +121,6 @@ export const constantRoutes = [
     name: "Shootingframe",
     meta: { title: "撮影枠管理", icon: "el-icon-video-camera-solid" },
     children: [
-
       {
         path: "table2",
         name: "Table2",

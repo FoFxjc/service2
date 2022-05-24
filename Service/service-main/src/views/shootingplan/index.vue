@@ -546,12 +546,15 @@
             <el-form :model="form">
               <el-form-item label="時刻" :label-width="formLabelWidth">
                 <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-                  <el-input
-                    placeholder="20:00-21:00"
-                    v-model="input"
-                    :disabled="true"
+                  <el-time-picker
+                    is-range
+                    v-model="value1_date"
+                    range-separator="至"
+                    start-placeholder="开始时间"
+                    end-placeholder="结束时间"
+                    placeholder="选择时间范围"
                   >
-                  </el-input>
+                  </el-time-picker>
                 </el-col>
               </el-form-item>
 
@@ -561,18 +564,18 @@
                 </el-col>
 
                 <el-col :span="24" style="margin-left: 10px; font-size: 20px">
-                  <el-select v-model="form.region" placeholder="予約撮影">
+                  <el-select v-model="form.region1" placeholder="予約撮影">
                     <el-option label="予約撮影" value="shanghai"></el-option>
                     <el-option label="リアルタイム" value="beijing"></el-option>
                   </el-select>
                 </el-col>
 
                 <el-col :span="24" style="margin-left: 10px; font-size: 20px">
-                  <el-select v-model="form.region" placeholder="一般公開">
+                  <el-select v-model="form.region2" placeholder="一般公開">
                     <el-option label="一般公開" value="shanghai"></el-option>
                     <el-option
                       label="ムーブメント枠"
-                      value="shanghai"
+                      value="guangzhou"
                     ></el-option>
                     <el-option label="B2B利用" value="beijing"></el-option>
                   </el-select>
@@ -1041,12 +1044,15 @@
             <el-form :model="form">
               <el-form-item label="時刻" :label-width="formLabelWidth">
                 <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-                  <el-input
-                    placeholder="20:00-21:00"
-                    v-model="input"
-                    :disabled="true"
+                  <el-time-picker
+                    is-range
+                    v-model="value2_date"
+                    range-separator="至"
+                    start-placeholder="开始时间"
+                    end-placeholder="结束时间"
+                    placeholder="选择时间范围"
                   >
-                  </el-input>
+                  </el-time-picker>
                 </el-col>
               </el-form-item>
 
@@ -1056,7 +1062,7 @@
                 </el-col>
                 <div v-show="value2_switch">
                   <el-col :span="24" style="margin-left: 10px; font-size: 20px">
-                    <el-select v-model="form.region" placeholder="予約撮影">
+                    <el-select v-model="form.region3" placeholder="予約撮影">
                       <el-option label="予約撮影" value="shanghai"></el-option>
                       <el-option
                         label="リアルタイム"
@@ -1066,11 +1072,11 @@
                   </el-col>
 
                   <el-col :span="24" style="margin-left: 10px; font-size: 20px">
-                    <el-select v-model="form.region" placeholder="一般公開">
+                    <el-select v-model="form.region4" placeholder="一般公開">
                       <el-option label="一般公開" value="shanghai"></el-option>
                       <el-option
                         label="ムーブメント枠"
-                        value="shanghai"
+                        value="guangzhou"
                       ></el-option>
                       <el-option label="B2B利用" value="beijing"></el-option>
                     </el-select>
@@ -1150,12 +1156,15 @@
             <el-form :model="form">
               <el-form-item label="時刻" :label-width="formLabelWidth">
                 <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-                  <el-input
-                    placeholder="20:00-21:00"
-                    v-model="input"
-                    :disabled="true"
+                  <el-time-picker
+                    is-range
+                    v-model="value3_date"
+                    range-separator="至"
+                    start-placeholder="开始时间"
+                    end-placeholder="结束时间"
+                    placeholder="选择时间范围"
                   >
-                  </el-input>
+                  </el-time-picker>
                 </el-col>
               </el-form-item>
 
@@ -1165,7 +1174,7 @@
                 </el-col>
                 <div v-show="value1_switch">
                   <el-col :span="24" style="margin-left: 10px; font-size: 20px">
-                    <el-select v-model="form.region" placeholder="予約撮影">
+                    <el-select v-model="form.region5" placeholder="予約撮影">
                       <el-option label="予約撮影" value="shanghai"></el-option>
                       <el-option
                         label="リアルタイム"
@@ -1175,11 +1184,11 @@
                   </el-col>
 
                   <el-col :span="24" style="margin-left: 10px; font-size: 20px">
-                    <el-select v-model="form.region" placeholder="一般公開">
+                    <el-select v-model="form.region6" placeholder="一般公開">
                       <el-option label="一般公開" value="shanghai"></el-option>
                       <el-option
                         label="ムーブメント枠"
-                        value="shanghai"
+                        value="guangzhou"
                       ></el-option>
                       <el-option label="B2B利用" value="beijing"></el-option>
                     </el-select>
@@ -1350,6 +1359,9 @@ export default {
     value1_switch: false,
     value2_switch: false,
     value3_switch: false,
+    value1_date: [new Date(2022, 5, 15, 20, 0), new Date(2022, 5, 15, 21, 0)],
+    value2_date: [new Date(2022, 5, 15, 20, 0), new Date(2022, 5, 15, 21, 0)],
+    value3_date: [new Date(2022, 5, 15, 20, 0), new Date(2022, 5, 15, 21, 0)],
   }),
   computed: {
     // Get the Monday of the real time current week.
@@ -1901,7 +1913,8 @@ export default {
         end: `2022-05-10 12:00`,
         // title: "预约拍摄",
         class: "shooting",
-        title: '<i class="el-icon-message" style="color:#409EFF"></i>',
+        title:
+          '<i class="el-icon-message" style="color:#409EFF"></i><i class="el-icon-lightning" style="color:#409EFF;margin-left: 20px;"></i>',
         content: '<i class="el-icon-video-camera-solid"></i>',
         extra_bottom_right: '<i class="el-icon-user-solid" /></i>',
         resizable: false,
@@ -1913,7 +1926,8 @@ export default {
         end: `2022-05-09 12:00`,
         // title: "拍摄",
         class: "shooting",
-        title: '<i class="el-icon-message"></i>',
+        title:
+          '<i class="el-icon-message"></i><i class="el-icon-lightning" style="color:#409EFF;margin-left: 20px;"></i>',
         content: '<i class="el-icon-video-camera-solid"></i>',
         extra_bottom_right: '<i class="el-icon-user-solid" /></i>',
         resizable: false,
@@ -1923,7 +1937,8 @@ export default {
         hidden: true,
         start: `2022-05-12 7:30`,
         end: `2022-05-12 9:00`,
-        title: '<i class="el-icon-lightning" style="color:#409EFF"></i>',
+        title:
+          '<i class="el-icon-message"></i><i class="el-icon-lightning" style="color:#409EFF;margin-left: 20px;"></i>',
         class: "shooting",
         content: '<i class="el-icon-video-camera-solid"></i>',
         extra_bottom_right: '<i class="el-icon-user-solid" /></i>',
@@ -1934,7 +1949,8 @@ export default {
         hidden: true,
         start: `2022-05-13 9:00`,
         end: `2022-05-13 10:30`,
-        title: '<i class="el-icon-lightning" style="color:#409EFF"></i>',
+        title:
+          '<i class="el-icon-message"></i><i class="el-icon-lightning" style="color:#409EFF;margin-left: 20px;"></i>',
         class: "shooting",
         content: '<i class="el-icon-video-camera-solid"></i>',
         extra_bottom_right: '<i class="el-icon-user-solid" /></i>',

@@ -113,17 +113,6 @@
               撮影枠情報
             </p></el-col
           >
-          <el-col :offset="15" :span="1">
-            <el-button
-              class="filter-item"
-              type="primary"
-              size="small"
-              icon="el-icon-refresh-right"
-              @click="handleFilter"
-              circle
-            >
-            </el-button>
-          </el-col>
         </el-row>
 
         <el-divider></el-divider>
@@ -203,7 +192,7 @@
             </el-table-column>
           </el-table>
         </el-card>
-        <div style="margin: 20px 5px">
+        <div style="float:right;margin: 20px 5px">
           <el-button type="primary">予約キャンセル</el-button>
           <el-button type="danger">削除</el-button>
         </div>
@@ -966,7 +955,7 @@ export default {
           frame_type: "スタンダード",
           shooting_type: "リアルタイム",
           using_type: "未予約",
-          shooting_status: "未済",
+          shooting_status: "未計画",
         },
         {
           start_date: "2022-04-19 14:27:22",

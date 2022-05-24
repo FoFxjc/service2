@@ -39,7 +39,7 @@
               </el-col>
             </el-row>
           </el-form-item>
-          <el-form-item label="ユーザーグループ" width="200" >
+          <el-form-item label="ユーザーグループ" width="200">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
           <el-form-item label="ユーザー ID">
@@ -53,6 +53,9 @@
             </el-radio-group>
           </el-form-item>
         </el-form>
+        <el-button type="primary" style="float: right; margin: 20px 5px">
+          検索
+        </el-button>
       </el-card>
     </el-row>
     <el-row>
@@ -76,26 +79,6 @@
               操作ログ
             </p></el-col
           >
-          <el-col :offset="13" :span="4">
-            <el-row :gutter="30" justify="center" align="middle">
-              <el-col :span="12">
-                <div style="margin: 5px 0px">
-                  <el-checkbox v-model="checked">自動更新</el-checkbox>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <el-button
-                  class="filter-item"
-                  type="primary"
-                  size="small"
-                  icon="el-icon-refresh-right"
-                  @click="handleFilter"
-                  circle
-                >
-                </el-button>
-              </el-col>
-            </el-row>
-          </el-col>
         </el-row>
 
         <el-divider></el-divider>
@@ -132,12 +115,6 @@
             <el-table-column align="left" label="ユーザーグループ" width="200">
               <template slot-scope="scope">
                 <span>{{ scope.row.action_user_name }}</span>
-              </template>
-            </el-table-column>
-
-            <el-table-column align="left" label="メールアドレス" width="200">
-              <template slot-scope="scope">
-                <span>{{ scope.row.action_user_email }}</span>
               </template>
             </el-table-column>
 
