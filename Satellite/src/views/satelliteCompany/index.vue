@@ -4,10 +4,10 @@
       <el-card class="box-card">
         <el-row>
           <el-col :span="12">
-            <div style="font-weight: normal">111</div>
+            <div style="font-weight: normal">地上局</div>
           </el-col>
           <el-col :span="12" style="display: flex; justify-content: flex-end">
-            <el-button @click="dialogVisible1 = true">123</el-button></el-col
+            <el-button @click="dialogVisible1 = true" type="primary">追加</el-button></el-col
           >
         </el-row>
       </el-card>
@@ -63,7 +63,7 @@
                     "
                   >
                     <p>
-                      <span style="font-weight: bold">衛星ID: </span>
+                      <span style="font-weight: bold">地上局ID: </span>
                       <!-- <br /> -->
                       <el-button type="text">{{ item.id }}</el-button>
                     </p>
@@ -79,10 +79,10 @@
       <el-card class="box-card"
         ><el-row>
           <el-col :span="12">
-            <div style="font-weight: normal">111</div>
+            <div style="font-weight: normal">地上局衛星</div>
           </el-col>
           <el-col :span="12" style="display: flex; justify-content: flex-end">
-            <el-button @click="dialogVisible2 = true">123</el-button></el-col
+            <el-button @click="dialogVisible2 = true" type="primary">追加</el-button></el-col
           >
         </el-row></el-card
       >
@@ -99,7 +99,7 @@
                   :span="12"
                   style="display: flex; justify-content: flex-end"
                 >
-                  <div style="font-weight: normal">詳細</div></el-col
+                  <div style="font-weight: normal">Sphere1</div></el-col
                 >
               </el-row>
             </div>
@@ -126,14 +126,14 @@
                     "
                   >
                     <p>
-                      <span style="font-weight: bold">衛星ID: </span>
+                      <span style="font-weight: bold">InfostellarID(Sバンド): </span>
                       <!-- <br /> -->
-                      <el-button type="text">{{ item.id }}</el-button>
+                      <el-button type="text">S{{ item.id }}</el-button>
                     </p>
                     <p>
-                      <span style="font-weight: bold">衛星ID: </span>
+                      <span style="font-weight: bold">InfostellarID(Xバンド):</span>
                       <!-- <br /> -->
-                      <el-button type="text">{{ item.id2 }}</el-button>
+                      <el-button type="text">X{{ item.id }}</el-button>
                     </p>
                   </div>
                 </el-col>
@@ -145,48 +145,64 @@
     </div>
 
     <el-dialog
-      title="提示"
+      title=""
       :visible.sync="dialogVisible1"
       :before-close="handleClose"
     >
-      <el-form ref="form" :model="form" label-width="180px">
-        <el-form-item label="名前" style="width: 100%">
-          <el-input v-model="form.name" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="dialogVisible1 = false"
-            >作成</el-button
-          >
-          <el-button @click="dialogVisible1 = false">キャンセル</el-button>
-        </el-form-item>
+
+        <el-form :model="form">
+
+                    <el-form-item label="地上局名" :label-width="formLabelWidth">
+                    <el-col :span="18" style="margin-left: 10px; font-size: 20px">
+                      <el-input v-model="form.name" autocomplete="off">
+                      </el-input>
+                    </el-col>
+                    </el-form-item>
       </el-form>
+                  <span slot="footer" class="dialog-footer">
+                  <el-button @click="dialogFormVisible = false">作成</el-button>
+                  <el-button type="primary" @click="dialogFormVisible = false">キャンセル</el-button>
+                </span>
     </el-dialog>
 
     <el-dialog
-      title="提示"
+      title=""
       :visible.sync="dialogVisible2"
       :before-close="handleClose"
     >
-      <el-form ref="form" :model="form" label-width="180px">
-        <el-form-item label="名前" style="width: 100%">
-          <el-input v-model="form.name" />
-        </el-form-item>
-        <el-form-item label="社名" style="width: 100%">
-          <el-input v-model="form.name" />
-        </el-form-item>
-        <el-form-item label="メール" style="width: 100%">
-          <el-input v-model="form.name" />
-        </el-form-item>
-        <el-form-item label="APIパス" style="width: 100%">
-          <el-input v-model="form.name" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="dialogVisible2 = false"
-            >作成</el-button
-          >
-          <el-button @click="dialogVisible2 = false">キャンセル</el-button>
-        </el-form-item>
+        <el-form :model="form">
+                    <el-form-item label="地上局" :label-width="formLabelWidth">
+                    <el-col :span="18" style="margin-left: 10px; font-size: 20px">
+                      <el-input v-model="form.name" autocomplete="off">
+                      </el-input>
+                    </el-col>
+                    </el-form-item>
+
+                    <el-form-item label="衛星" :label-width="formLabelWidth">
+                    <el-col :span="18" style="margin-left: 10px; font-size: 20px">
+                      <el-input v-model="form.name" autocomplete="off">
+                      </el-input>
+                    </el-col>
+                    </el-form-item>
+
+                    <el-form-item label="InfostellarID(Sバンド)" :label-width="formLabelWidth">
+                    <el-col :span="18" style="margin-left: 10px; font-size: 20px">
+                      <el-input v-model="form.name" autocomplete="off">
+                      </el-input>
+                    </el-col>
+                    </el-form-item>
+
+                    <el-form-item label="InfostellarID(Xバンド)" :label-width="formLabelWidth">
+                    <el-col :span="18" style="margin-left: 10px; font-size: 20px">
+                      <el-input v-model="form.name" autocomplete="off">
+                      </el-input>
+                    </el-col>
+                    </el-form-item>
       </el-form>
+                  <span slot="footer" class="dialog-footer">
+                  <el-button @click="dialogFormVisible = false">作成</el-button>
+                  <el-button type="primary" @click="dialogFormVisible = false">キャンセル</el-button>
+                </span>
     </el-dialog>
   </div>
 </template>
@@ -222,22 +238,22 @@ export default {
       list: [
         {
           id: "123",
-          name: "123",
+          name: "岐阜",
         },
         {
-          id: "123",
-          name: "123",
+          id: "124",
+          name: "アゼルバイジャン",
         },
         {
-          id: "123",
-          name: "34343",
+          id: "125",
+          name: "沖縄",
         },
       ],
       list1: [
         {
           id: "123",
           id: "144466",
-          name: "123",
+          name: "岐阜",
         },
       ],
       listLoading: true,

@@ -6,7 +6,7 @@
       <el-col :span="6">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span style="font-weight: normal">111111</span>
+            <span style="font-weight: normal">Sphere-1</span>
             <el-button
               style="float: right; padding: 3px 0"
               type="text"
@@ -34,28 +34,29 @@
                   <p>
                     <span style="font-weight: bold">衛星ID: </span>
                     <!-- <br /> -->
-                    <el-button type="text">111111</el-button>
+                    <el-button type="text">241</el-button>
                   </p>
                   <p>
                     <span style="font-weight: bold">衛星名: </span>
                     <!-- <br /> -->
-                    <el-button type="text">111111</el-button>
+                    <el-button type="text">XXXX</el-button>
                   </p>
                   <p>
                     <span style="font-weight: bold">充電量: </span>
                     <!-- <br /> -->
-                    <el-button type="text">XX%</el-button>
+                    <!-- <el-button type="text">56%</el-button> -->
+                    <el-progress :text-inside="true" :stroke-width="22" :percentage="80" status="success"></el-progress>
                   </p>
                   <p>
                     <span style="font-weight: bold"
-                      >メモリーカード使用量:
+                      >SDカード使用量:
                     </span>
                     <!-- <br /> -->
-                    <el-button type="text">XX%</el-button>
+                    <el-progress :text-inside="true" :stroke-width="22" :percentage="50" status="warning"></el-progress>
                   </p>
                   <p>
                     <span style="font-weight: bold"> ステータス: </span>
-                    <el-tag> 111111 </el-tag>
+                    <el-tag> 正常 </el-tag>
                   </p>
                 </div>
               </el-col>
@@ -180,7 +181,8 @@
                 :span="8"
                 style="font-weight: normal; font-size: 16px; line-height: 26px"
               >
-                <div class="text">xx%</div>
+                <!-- <div class="text">xx%</div> -->
+                <el-progress :text-inside="true" :stroke-width="22" :percentage="80" status="success"></el-progress>
               </el-col>
               <el-col :span="8">
                 <div
@@ -205,14 +207,15 @@
                   class="label"
                   style="font-weight: bold; font-size: 16px; line-height: 26px"
                 >
-                  メモリーカード使用量
+                  SDカード使用量
                 </div>
               </el-col>
               <el-col
                 :span="8"
                 style="font-weight: normal; font-size: 16px; line-height: 26px"
               >
-                <div class="text">xx/xxGB (x%)</div>
+                <!-- <div class="text">xx/xxGB (x%)</div> -->
+                <el-progress :text-inside="true" :stroke-width="22" :percentage="50" status="warning"></el-progress>
               </el-col>
               <el-col :span="8">
                 <div

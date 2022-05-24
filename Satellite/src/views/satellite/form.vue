@@ -57,43 +57,8 @@
         shadow="hover"
         class="box-card"
       >
-        <el-row
-          style="
-            margin-bottom: -20px;
-            margin-left: 15px;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-          "
-        >
-          <el-col :span="8">
-            <p style="margin-left: 15px; margin-right: 15px; font-size: 16px">
-              <el-checkbox v-model="checked">Raw形式で表示</el-checkbox>
-            </p></el-col
-          >
-          <el-col :offset="13" :span="4">
-            <el-row :gutter="30" justify="center" align="middle">
-              <el-col :span="12">
-                <div style="margin: 5px 0px">
-                  <el-checkbox v-model="checked">自動更新</el-checkbox>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <el-button
-                  class="filter-item"
-                  type="primary"
-                  size="small"
-                  icon="el-icon-refresh-right"
-                  @click="handleFilter"
-                  circle
-                >
-                </el-button>
-              </el-col>
-            </el-row>
-          </el-col>
-        </el-row>
 
-        <el-divider></el-divider>
+
         <el-card
           :body-style="{ padding: '0px' }"
           style="margin: 5px; margin-top: 15px"
@@ -152,7 +117,7 @@
         >
           <el-col :span="8">
             <p style="margin-left: 15px; margin-right: 15px; font-size: 16px">
-              1111
+              衛星状況
             </p></el-col
           >
         </el-row>
@@ -163,42 +128,73 @@
           style="margin: 5px; margin-top: 15px"
           shadow="hover"
         >
-          <el-row>
-            <el-col :span="8">
-              <el-row :gutter="20" style="width: 100%; margin-bottom: 12px">
-                <el-col :span="10">
-                  <div>ユーザー ID</div>
-                </el-col>
+            <el-row
+              style="width: 60%; margin-bottom: 15px"
+              type="flex"
+              align="center"
+            >
+              <el-col :span="8">
+                <div
+                  class="label"
+                  style="font-weight: bold; font-size: 16px; line-height: 26px"
+                >
+                  SDカード使用量
+                </div>
+              </el-col>
+              <el-col
+                :span="8"
+                style="font-weight: normal; font-size: 16px; line-height: 26px"
+              >
+                <!-- <div class="text">xx/xxGB (x%)</div> -->
+                <el-progress :text-inside="true" :stroke-width="22" :percentage="50" status="warning"></el-progress>
+              </el-col>
+              <el-col :span="8">
+                <div
+                  class="reference"
+                  style="
+                    font-weight: normal;
+                    font-size: 16px;
+                    line-height: 26px;
+                  "
+                >
+                  2023-04-08 15:56:01 更新
+                </div>
+              </el-col>
+            </el-row>
+            <el-row
+              style="width: 60%; margin-bottom: 15px"
+              type="flex"
+              align="center"
+            >
+              <el-col :span="8">
+                <div
+                  class="label"
+                  style="font-weight: bold; font-size: 16px; line-height: 26px"
+                >
+                  充電量
+                </div>
+              </el-col>
+              <el-col
+                :span="8"
+                style="font-weight: normal; font-size: 16px; line-height: 26px"
+              >
+                <!-- <div class="text">xx%</div> -->
+                <el-progress :text-inside="true" :stroke-width="22" :percentage="80" status="success"></el-progress>
+              </el-col>
+              <el-col :span="8">
+                <div
+                  class="reference"
+                  style="
+                    font-weight: normal;
+                    font-size: 16px;
+                    line-height: 26px;
+                  "
+                >
+                  2023-04-08 15:56:01 更新
+                </div>
+              </el-col>
+            </el-row>
 
-                <el-col :span="12" style="font-weight: normal">
-                  <div>1</div>
-                </el-col>
-              </el-row>
-              <el-row :gutter="20" style="width: 100%; margin-bottom: 12px">
-                <el-col :span="10">
-                  <div>メールアドレス</div>
-                </el-col>
-
-                <el-col :span="12" style="font-weight: normal">
-                  <div>morize@gmail.com</div>
-                </el-col>
-              </el-row>
-              <el-row :gutter="20" style="width: 100%; margin-bottom: 12px">
-                <el-col :span="10">
-                  <div>企業グループ</div>
-                </el-col>
-
-                <el-col :span="12" style="font-weight: normal">
-                  <div>
-                    <el-button type="text">OUxXLTpl Corp.</el-button>
-                  </div>
-                </el-col>
-              </el-row>
-            </el-col>
-            <el-col :span="6">
-              <el-progress type="circle" :percentage="25"></el-progress>
-            </el-col>
-          </el-row>
         </el-card>
       </el-card>
     </el-row>
@@ -220,7 +216,7 @@
         >
           <el-col :span="8">
             <p style="margin-left: 15px; margin-right: 15px; font-size: 16px">
-              1111
+              衛星状況
             </p></el-col
           >
         </el-row>
@@ -231,46 +227,73 @@
           style="margin: 5px; margin-top: 15px"
           shadow="hover"
         >
-          <el-row>
-            <el-col :span="8">
-              <el-row :gutter="20" style="width: 100%; margin-bottom: 12px">
-                <el-col :span="10">
-                  <div>ユーザー ID</div>
-                </el-col>
+            <el-row
+              style="width: 60%; margin-bottom: 15px"
+              type="flex"
+              align="center"
+            >
+              <el-col :span="8">
+                <div
+                  class="label"
+                  style="font-weight: bold; font-size: 16px; line-height: 26px"
+                >
+                  SDカード使用量
+                </div>
+              </el-col>
+              <el-col
+                :span="8"
+                style="font-weight: normal; font-size: 16px; line-height: 26px"
+              >
+                <!-- <div class="text">xx/xxGB (x%)</div> -->
+                <el-progress :text-inside="true" :stroke-width="22" :percentage="40" status="warning"></el-progress>
+              </el-col>
+              <el-col :span="8">
+                <div
+                  class="reference"
+                  style="
+                    font-weight: normal;
+                    font-size: 16px;
+                    line-height: 26px;
+                  "
+                >
+                  2023-04-08 15:56:01 更新
+                </div>
+              </el-col>
+            </el-row>
+            <el-row
+              style="width: 60%; margin-bottom: 15px"
+              type="flex"
+              align="center"
+            >
+              <el-col :span="8">
+                <div
+                  class="label"
+                  style="font-weight: bold; font-size: 16px; line-height: 26px"
+                >
+                  充電量
+                </div>
+              </el-col>
+              <el-col
+                :span="8"
+                style="font-weight: normal; font-size: 16px; line-height: 26px"
+              >
+                <!-- <div class="text">xx%</div> -->
+                <el-progress :text-inside="true" :stroke-width="22" :percentage="90" status="success"></el-progress>
+              </el-col>
+              <el-col :span="8">
+                <div
+                  class="reference"
+                  style="
+                    font-weight: normal;
+                    font-size: 16px;
+                    line-height: 26px;
+                  "
+                >
+                  2023-04-08 15:56:01 更新
+                </div>
+              </el-col>
+            </el-row>
 
-                <el-col :span="12" style="font-weight: normal">
-                  <div>1</div>
-                </el-col>
-              </el-row>
-              <el-row :gutter="20" style="width: 100%; margin-bottom: 12px">
-                <el-col :span="10">
-                  <div>メールアドレス</div>
-                </el-col>
-
-                <el-col :span="12" style="font-weight: normal">
-                  <div>morize@gmail.com</div>
-                </el-col>
-              </el-row>
-              <el-row :gutter="20" style="width: 100%; margin-bottom: 12px">
-                <el-col :span="10">
-                  <div>企業グループ</div>
-                </el-col>
-
-                <el-col :span="12" style="font-weight: normal">
-                  <div>
-                    <el-button type="text">OUxXLTpl Corp.</el-button>
-                  </div>
-                </el-col>
-              </el-row>
-            </el-col>
-            <el-col :span="6">
-              <el-progress
-                type="circle"
-                :percentage="100"
-                status="success"
-              ></el-progress>
-            </el-col>
-          </el-row>
         </el-card>
       </el-card>
     </el-row>
@@ -284,16 +307,16 @@ export default {
       tableData: [
         {
           id: "123",
-          action_user_id: "2022-04-19 14:27:22",
-          action_user_name: "16",
-          action_user_email: "2022-04-19 14:27:22",
+          action_user_id: "19",
+          action_user_name: "2022-04-08 13:17:22",
+          action_user_email: "xxxx",
           action: "",
         },
         {
           id: "456",
-          action_user_id: "2022-04-19 14:27:22",
-          action_user_name: "16",
-          action_user_email: "2022-04-19 14:27:22",
+          action_user_id: "22",
+          action_user_name: "2022-04-08 14:27:22",
+          action_user_email: "xxxx",
           action: "",
         },
       ],

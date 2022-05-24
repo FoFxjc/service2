@@ -115,48 +115,49 @@ export const constantRoutes = [
     name: "Shootingframe",
     meta: { title: "撮影枠管理", icon: "el-icon-video-camera-solid" },
     children: [
-      // {
-      //   path: "table",
-      //   name: "Table",
-      //   component: () => import("@/views/Shootingframe/index"),
-      //   meta: { title: "撮影枠", icon: "table" },
-      // },
+
       {
         path: "table2",
         name: "Table2",
         component: () => import("@/views/Shootingframe/index2"),
         meta: { title: "撮影枠", icon: "table" },
       },
-      // {
-      //   path: "tree",
-      //   name: "Video Detail",
-      //   component: () => import("@/views/Shootingframe/detail"),
-      //   meta: { title: "ムーブメント枠", icon: "form" },
-      // },
+
       {
         path: "tree2",
         name: "Video Detail2",
+        hidden: true,
         component: () => import("@/views/Shootingframe/index3"),
         meta: { title: "ムーブメント枠", icon: "form" },
       },
       {
         path: "detail",
         name: "Detail",
+        hidden: true,
         component: () => import("@/views/Shootingframe/detail2"),
         meta: { title: "撮影枠詳細", icon: "form" },
       },
       {
         path: "detail2",
         name: "Detail2",
+        hidden: true,
         component: () => import("@/views/Shootingframe/detail3"),
         meta: { title: "撮影枠分割枠詳細", icon: "form" },
       },
       {
         path: "detail3",
         name: "Detail3",
+        hidden: true,
         component: () => import("@/views/Shootingframe/detail4"),
         meta: { title: "ムーブメント枠詳細", icon: "form" },
       },
+      // {
+      //   path: "resourcelist",
+      //   name: "Table",
+      //   hidden: true,
+      //   component: () => import("@/views/videoresouce/index2"),
+      //   meta: { title: "データ取得管理", icon: "table" },
+      // },
     ],
   },
 
@@ -183,6 +184,7 @@ export const constantRoutes = [
       {
         path: "detail",
         name: "Detail Satellite",
+        hidden: true,
         component: () => import("@/views/satellite/detail"),
         meta: { title: "詳細", icon: "form" },
       },
