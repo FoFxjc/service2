@@ -114,80 +114,118 @@
             font-size: 14px;
           "
         >
-          <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
-            <el-col :span="10">
-              <div>ユーザー ID</div>
-            </el-col>
+          <el-col :span="12">
+            <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
+              <el-col :span="10">
+                <div>ユーザー ID</div>
+              </el-col>
 
-            <el-col :span="12" style="font-weight: normal">
-              <div>1</div>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
-            <el-col :span="10">
-              <div>メールアドレス</div>
-            </el-col>
+              <el-col :span="12" style="font-weight: normal">
+                <div>1</div>
+              </el-col>
+            </el-row>
+            <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
+              <el-col :span="10">
+                <div>メールアドレス</div>
+              </el-col>
 
-            <el-col :span="12" style="font-weight: normal">
-              <div>morize@gmail.com</div>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
-            <el-col :span="10">
-              <div>企業グループ</div>
-            </el-col>
+              <el-col :span="12" style="font-weight: normal">
+                <div>morize@gmail.com</div>
+              </el-col>
+            </el-row>
+            <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
+              <el-col :span="10">
+                <div>企業グループ</div>
+              </el-col>
 
-            <el-col :span="12" style="font-weight: normal">
-              <div>
-                <el-button type="text">OUxXLTpl Corp.</el-button>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
-            <el-col :span="10">
-              <div>名前</div>
-            </el-col>
+              <el-col :span="12" style="font-weight: normal">
+                <div>
+                  <el-button type="text">OUxXLTpl Corp.</el-button>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
+              <el-col :span="10">
+                <div>名前</div>
+              </el-col>
 
-            <el-col :span="12" style="font-weight: normal">
-              <div>Cora Porter</div>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
-            <el-col :span="10">
-              <div>生年月日</div>
-            </el-col>
+              <el-col :span="12" style="font-weight: normal">
+                <div>Cora Porter</div>
+              </el-col>
+            </el-row>
+            <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
+              <el-col :span="10">
+                <div>生年月日</div>
+              </el-col>
 
-            <el-col :span="12" style="font-weight: normal">
-              <div>2000-01-01（22歳）</div>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
-            <el-col :span="10">
-              <div>電話番号</div>
-            </el-col>
+              <el-col :span="12" style="font-weight: normal">
+                <div>2000-01-01（22歳）</div>
+              </el-col>
+            </el-row>
+            <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
+              <el-col :span="10">
+                <div>電話番号</div>
+              </el-col>
 
-            <el-col :span="12" style="font-weight: normal">
-              <div>(540)582-6788</div>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
-            <el-col :span="10">
-              <div>アカウント区分</div>
-            </el-col>
+              <el-col :span="12" style="font-weight: normal">
+                <div>(540)582-6788</div>
+              </el-col>
+            </el-row>
+            <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
+              <el-col :span="10">
+                <div>アカウント区分</div>
+              </el-col>
 
-            <el-col :span="12" style="font-weight: normal">
-              <div>(PlaceHolder)</div>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
-            <el-col :span="10">
-              <div>登録日</div>
-            </el-col>
+              <el-col :span="12" style="font-weight: normal">
+                <div>(PlaceHolder)</div>
+              </el-col>
+            </el-row>
+            <el-row :gutter="20" style="width: 60%; margin-bottom: 12px">
+              <el-col :span="10">
+                <div>登録日</div>
+              </el-col>
 
-            <el-col :span="12" style="font-weight: normal">
-              <div>2022-10-22</div>
-            </el-col>
-          </el-row>
+              <el-col :span="12" style="font-weight: normal">
+                <div>2022-10-22</div>
+              </el-col>
+            </el-row></el-col
+          >
+          <el-col :span="8" :offset="4">
+            <el-row
+              style="
+                margin-bottom: -20px;
+                margin-left: 15px;
+                margin-right: -10px;
+                font-size: 16px;
+                display: flex;
+                weight: 300px;
+              "
+            >
+              <el-select
+                value="スタンダード"
+                placeholder="Type"
+                clearable
+                class="filter-item"
+                style="width: 130px"
+              >
+                <el-option value="All">スタンダード</el-option>
+                <el-option value="Public">ムーブメント</el-option>
+                <el-option value="Private">BtoB</el-option>
+              </el-select>
+              <el-button type="text" style="font-size: 18px; margin-left: 15px"
+                >1h</el-button
+              >
+              <el-button type="text" style="font-size: 18px">3h</el-button>
+              <el-button type="text" style="font-size: 18px">12h</el-button>
+              <el-button type="text" style="font-size: 18px">1d</el-button>
+              <el-button type="text" style="font-size: 18px">3d</el-button>
+              <el-button type="text" style="font-size: 18px">1w</el-button>
+              <el-button type="text" style="font-size: 18px"
+                >Custom <i class="el-icon-date"></i
+              ></el-button>
+            </el-row>
+            <line-chart :chart-data="lineChartData" />
+          </el-col>
         </div>
       </el-card>
       <el-card class="box-card" :body-style="{ padding: '5px 0px 10px 0px' }">
@@ -266,7 +304,18 @@
 <script>
 import { getList } from "@/api/table";
 
+import LineChart from "./components/LineChart";
+
+const lineChartData = {
+  newVisitis: {
+    expectedData: [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  },
+};
+
 export default {
+  components: {
+    LineChart,
+  },
   filters: {
     statusFilter(status) {
       const statusMap = {
@@ -281,7 +330,9 @@ export default {
     return {
       list: null,
       listLoading: true,
+      lineChartData: lineChartData.newVisitis,
       rowclick_show: false,
+
       notification_tableData: [
         {
           date: "2022-03-31 11:22:33",

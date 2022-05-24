@@ -158,7 +158,8 @@
         >
           <el-table-column prop="date" label="日時" width="300">
           </el-table-column>
-          <el-table-column prop="content" label="メールタイトル"> </el-table-column>
+          <el-table-column prop="content" label="メールタイトル">
+          </el-table-column>
           <el-table-column label="操作" width="300" align="center">
             <template slot-scope="scope">
               <el-button size="mini" type="info">詳細</el-button>
