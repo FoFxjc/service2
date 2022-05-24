@@ -70,12 +70,15 @@
           <el-row type="flex" justify="end">
             <el-input
               placeholder="イベント名称検索"
-              style="width: 200px;margin-left: 10px; "
+              style="width: 200px; margin-left: 10px"
               class="filter-item"
               v-model="search_title"
               @keyup.enter.native="handleFilter"
             />
-            <el-button type="primary" style="width: 200px; height: 40px;margin-left: 10px;" plain
+            <el-button
+              type="primary"
+              style="width: 200px; height: 40px; margin-left: 10px"
+              plain
               >イベント全件検索</el-button
             >
             <!-- <div
@@ -100,7 +103,11 @@
               ></el-button>
             </div> -->
           </el-row>
-          <el-row style="margin-top: 5px;margin-left: 10px;" type="flex" justify="end">
+          <el-row
+            style="margin-top: 5px; margin-left: 10px"
+            type="flex"
+            justify="end"
+          >
             <el-date-picker
               type="date"
               placeholder="開始"
@@ -111,7 +118,7 @@
               placeholder="終了"
               style="width: 200px"
             ></el-date-picker>
-            <el-button style="width: 100px;margin-left: 10px;" type="info" plain
+            <el-button style="width: 100px; margin-left: 10px" type="info" plain
               >一般公開</el-button
             >
           </el-row>
@@ -735,518 +742,498 @@
       </div>
     </el-dialog>
 
-    
-    <el-dialog :visible.sync="dialogFormVisible" >
+    <el-dialog :visible.sync="dialogFormVisible">
       <!-- メンテナンス運用設定時-->
       <div v-if="selected_week_type == '1'">
-      <el-form :model="form">
-        <el-form-item label="利用用途" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-          <el-input
-            placeholder="メンテナンス運用"
-            v-model="input"
-            :disabled="true">
-          </el-input>
-        </el-col>
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-            <el-button type="primary" @click="dialogDetailVisible = false">
-              メンテナンス運用設定
-            </el-button>
-        </el-col>
-        <el-col :span="4" style="margin-left: 10px; font-size: 20px">
-            <el-button type="warning" @click="dialogDetailVisible = false">
-              解除
-            </el-button>
-        </el-col>
-        </el-form-item>
-        <el-form-item label="時刻" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-          <el-input
-            placeholder="20:00-21:00"
-            v-model="input"
-            :disabled="true">
-          </el-input>
-        </el-col>
-        </el-form-item>
-        <el-form-item label="通信パス" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-          <el-input
-            placeholder="未予約"
-            v-model="input"
-            :disabled="true">
-          </el-input>
-        </el-col>
-        </el-form-item>
-      </el-form>
-
+        <el-form :model="form">
+          <el-form-item label="利用用途" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-input
+                placeholder="メンテナンス運用"
+                v-model="input"
+                :disabled="true"
+              >
+              </el-input>
+            </el-col>
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-button type="primary" @click="dialogDetailVisible = false">
+                メンテナンス運用設定
+              </el-button>
+            </el-col>
+            <el-col :span="4" style="margin-left: 10px; font-size: 20px">
+              <el-button type="warning" @click="dialogDetailVisible = false">
+                解除
+              </el-button>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="時刻" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-input
+                placeholder="20:00-21:00"
+                v-model="input"
+                :disabled="true"
+              >
+              </el-input>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="通信パス" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-input placeholder="未予約" v-model="input" :disabled="true">
+              </el-input>
+            </el-col>
+          </el-form-item>
+        </el-form>
       </div>
       <!-- 未設定時 -->
       <div v-if="selected_week_type == '2'">
-      <el-form :model="form">
-        <el-form-item label="利用用途" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-          <el-input
-            placeholder="未設定"
-            v-model="input"
-            :disabled="true">
-          </el-input>
-        </el-col>
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-            <el-button type="primary" @click="dialogDetailVisible = false">
-              メンテナンス運用設定
-            </el-button>
-        </el-col>
-        <el-col :span="4" style="margin-left: 10px; font-size: 20px">
-            <!-- <el-button type="warning" @click="dialogDetailVisible = false">
+        <el-form :model="form">
+          <el-form-item label="利用用途" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-input placeholder="未設定" v-model="input" :disabled="true">
+              </el-input>
+            </el-col>
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-button type="primary" @click="dialogDetailVisible = false">
+                メンテナンス運用設定
+              </el-button>
+            </el-col>
+            <el-col :span="4" style="margin-left: 10px; font-size: 20px">
+              <!-- <el-button type="warning" @click="dialogDetailVisible = false">
               解除
             </el-button> -->
-        </el-col>
-        </el-form-item>
-        <el-form-item label="時刻" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-          <el-input
-            placeholder="20:00-21:00"
-            v-model="input"
-            :disabled="true">
-          </el-input>
-        </el-col>
-        </el-form-item>
-        <el-form-item label="通信パス" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-          <el-input
-            placeholder="未予約"
-            v-model="input"
-            :disabled="true">
-          </el-input>
-        </el-col>
-        </el-form-item>
-      </el-form>
-
+            </el-col>
+          </el-form-item>
+          <el-form-item label="時刻" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-input
+                placeholder="20:00-21:00"
+                v-model="input"
+                :disabled="true"
+              >
+              </el-input>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="通信パス" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-input placeholder="未予約" v-model="input" :disabled="true">
+              </el-input>
+            </el-col>
+          </el-form-item>
+        </el-form>
       </div>
       <!-- 予約撮影時-->
       <div v-if="selected_week_type == '3'">
-      <el-form :model="form">
-        <el-form-item label="利用用途" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-          <el-input
-            placeholder="予約撮影"
-            v-model="input"
-            :disabled="true">
-          </el-input>
-        </el-col>
+        <el-form :model="form">
+          <el-form-item label="利用用途" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-input placeholder="予約撮影" v-model="input" :disabled="true">
+              </el-input>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="時刻" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-input
+                placeholder="20:00-21:00"
+                v-model="input"
+                :disabled="true"
+              >
+              </el-input>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="通信パス" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-input placeholder="未予約" v-model="input" :disabled="true">
+              </el-input>
+            </el-col>
+          </el-form-item>
 
-        </el-form-item>
-        <el-form-item label="時刻" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-          <el-input
-            placeholder="20:00-21:00"
-            v-model="input"
-            :disabled="true">
-          </el-input>
-        </el-col>
-        </el-form-item>
-        <el-form-item label="通信パス" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-          <el-input
-            placeholder="未予約"
-            v-model="input"
-            :disabled="true">
-          </el-input>
-        </el-col>
-        </el-form-item>
-
-        <el-form-item label="詳細" :label-width="formLabelWidth">
-        <el-col :span="12" style="margin-left: 10px; font-size: 20px">
-          <el-tag type="info" >優先度</el-tag>
-          <el-dropdown split-button type="primary" style="margin-left: 59px; font-size: 20px">
-            standard
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>low</el-dropdown-item>
-              <el-dropdown-item>high</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </el-col>
-        <el-col :span="12" style="margin-left: 10px; font-size: 20px">
-          <el-tag type="info" >利用形式</el-tag>
-          <el-dropdown split-button type="primary" style="margin-left: 50px; font-size: 20px">
-            一般公開
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>ムーブメント枠</el-dropdown-item>
-              <el-dropdown-item>B2B利用</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </el-col>
-        </el-form-item>
-         <el-form-item label="公開状況" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-          <el-input
-            placeholder="未公開"
-            v-model="input"
-            :disabled="true">
-          </el-input>
-        </el-col>
-        </el-form-item>       
-
-
-      </el-form>
+          <el-form-item label="詳細" :label-width="formLabelWidth">
+            <el-col :span="12" style="margin-left: 10px; font-size: 20px">
+              <el-tag type="info">優先度</el-tag>
+              <el-dropdown
+                split-button
+                type="primary"
+                style="margin-left: 59px; font-size: 20px"
+              >
+                standard
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>low</el-dropdown-item>
+                  <el-dropdown-item>high</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </el-col>
+            <el-col :span="12" style="margin-left: 10px; font-size: 20px">
+              <el-tag type="info">利用形式</el-tag>
+              <el-dropdown
+                split-button
+                type="primary"
+                style="margin-left: 50px; font-size: 20px"
+              >
+                一般公開
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>ムーブメント枠</el-dropdown-item>
+                  <el-dropdown-item>B2B利用</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="公開状況" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-input placeholder="未公開" v-model="input" :disabled="true">
+              </el-input>
+            </el-col>
+          </el-form-item>
+        </el-form>
       </div>
       <!-- ダウンリンク運用時 -->
       <div v-if="selected_week_type == '4'">
-      <el-form :model="form">
-        <el-form-item label="利用用途" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-          <el-input
-            placeholder="ダウンリンク"
-            v-model="input"
-            :disabled="true">
-          </el-input>
-        </el-col>
-        <!-- <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+        <el-form :model="form">
+          <el-form-item label="利用用途" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-input
+                placeholder="ダウンリンク"
+                v-model="input"
+                :disabled="true"
+              >
+              </el-input>
+            </el-col>
+            <!-- <el-col :span="8" style="margin-left: 10px; font-size: 20px">
             <el-button type="primary" @click="dialogDetailVisible = false">
               メンテナンス運用設定
             </el-button>
         </el-col> -->
-        <el-col :span="4" style="margin-left: 10px; font-size: 20px">
-            <!-- <el-button type="warning" @click="dialogDetailVisible = false">
+            <el-col :span="4" style="margin-left: 10px; font-size: 20px">
+              <!-- <el-button type="warning" @click="dialogDetailVisible = false">
               解除
             </el-button> -->
-        </el-col>
-        </el-form-item>
-        <el-form-item label="時刻" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-          <el-input
-            placeholder="20:00-21:00"
-            v-model="input"
-            :disabled="true">
-          </el-input>
-        </el-col>
-        </el-form-item>
-        <el-form-item label="通信パス" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-          <el-input
-            placeholder="予約済み"
-            v-model="input"
-            :disabled="true">
-          </el-input>
-        </el-col>
-        </el-form-item>
-        <el-form-item label="" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-
-        </el-col>
-        <el-col :span="4" style="margin-left: 74px; font-size: 20px">
-            <el-button type="primary" @click="dialogDetailVisible = false">
-              ダウンリンク計画作成
-            </el-button>
-        </el-col>
-
-        </el-form-item>
-      </el-form>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="時刻" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-input
+                placeholder="20:00-21:00"
+                v-model="input"
+                :disabled="true"
+              >
+              </el-input>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="通信パス" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-input placeholder="予約済み" v-model="input" :disabled="true">
+              </el-input>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+            </el-col>
+            <el-col :span="4" style="margin-left: 74px; font-size: 20px">
+              <el-button type="primary" @click="dialogDetailVisible = false">
+                ダウンリンク計画作成
+              </el-button>
+            </el-col>
+          </el-form-item>
+        </el-form>
       </div>
       <!-- 成立検証結果、問題があった場合 -->
       <div v-if="selected_week_type == '5'">
-      <el-form :model="form">
-        <el-form-item label="利用用途" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-          <el-input
-            placeholder="ダウンリンク運用"
-            v-model="input"
-            :disabled="true">
-          </el-input>
-
-        </el-col>
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-            <i
-              class="el-icon-warning-outline"
-              style="color: #ff4240; margin-left: 10px; font-size: 20px"
-            ></i>
-        </el-col>
-
-        </el-form-item>
-        <el-form-item label="時刻" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-          <el-input
-            placeholder="20:00-21:00"
-            v-model="input"
-            :disabled="true">
-          </el-input>
-        </el-col>
-        </el-form-item>
-        <el-form-item label="通信パス" :label-width="formLabelWidth">
-        <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-          <el-input
-            placeholder="未予約"
-            v-model="input"
-            :disabled="true">
-          </el-input>
-        </el-col>
-        </el-form-item>
- 
- 
-         <el-form-item label="通信パス" :label-width="formLabelWidth">
-          <el-col :span="8" style="margin-left: 10px; font-size: 10px">
-            <el-row
-              style="border: 1px black solid; width: 100%; padding: 10px"
-              align="center"
-              justify="center"
-            >
-              <div>
-                <i
-                  class="el-icon-warning-outline"
-                  style="color: #ff4240; margin-left: 10px; font-size: 20px"
-                ></i>
-              </div>
-              <div>
-                <span style="color: #ff4240; margin-left: 10px; font-size: 10px"
-                  >成立検証に失敗しました</span
-                >
-              </div>
-              <span style="color: #ff4240; margin-left: 10px; font-size: 10px"
-                >原因：XXXXX</span
+        <el-form :model="form">
+          <el-form-item label="利用用途" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-input
+                placeholder="ダウンリンク運用"
+                v-model="input"
+                :disabled="true"
               >
-              <div>
+              </el-input>
+            </el-col>
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <i
+                class="el-icon-warning-outline"
+                style="color: #ff4240; margin-left: 10px; font-size: 20px"
+              ></i>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="時刻" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-input
+                placeholder="20:00-21:00"
+                v-model="input"
+                :disabled="true"
+              >
+              </el-input>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="通信パス" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+              <el-input placeholder="未予約" v-model="input" :disabled="true">
+              </el-input>
+            </el-col>
+          </el-form-item>
+
+          <el-form-item label="通信パス" :label-width="formLabelWidth">
+            <el-col :span="8" style="margin-left: 10px; font-size: 10px">
+              <el-row
+                style="border: 1px black solid; width: 100%; padding: 10px"
+                align="center"
+                justify="center"
+              >
+                <div>
+                  <i
+                    class="el-icon-warning-outline"
+                    style="color: #ff4240; margin-left: 10px; font-size: 20px"
+                  ></i>
+                </div>
+                <div>
+                  <span
+                    style="color: #ff4240; margin-left: 10px; font-size: 10px"
+                    >成立検証に失敗しました</span
+                  >
+                </div>
                 <span style="color: #ff4240; margin-left: 10px; font-size: 10px"
-                  >解決策：XXXX</span
+                  >原因：XXXXX</span
                 >
-              </div>
-            </el-row>
-          </el-col>
-         </el-form-item>
-        
-        <el-form-item label="" :label-width="formLabelWidth">
+                <div>
+                  <span
+                    style="color: #ff4240; margin-left: 10px; font-size: 10px"
+                    >解決策：XXXX</span
+                  >
+                </div>
+              </el-row>
+            </el-col>
+          </el-form-item>
 
-        <el-col :span="4" style="margin-left: 175px; font-size: 20px">
-            <el-button type="primary" @click="dialogDetailVisible = false">
-              再計画
-            </el-button>
-        </el-col>
-
-        </el-form-item>
-      </el-form>
+          <el-form-item label="" :label-width="formLabelWidth">
+            <el-col :span="4" style="margin-left: 175px; font-size: 20px">
+              <el-button type="primary" @click="dialogDetailVisible = false">
+                再計画
+              </el-button>
+            </el-col>
+          </el-form-item>
+        </el-form>
       </div>
       <!-- Test 1 -->
       <div v-if="selected_week_type == '6'">
       
-            <el-card class="box-card">
-              <div slot="header" class="clearfix">
-                <span>イベント詳細</span>
-                <div class="text item">
-                          <el-button
-                            @click="$refs.vuecal.previous()"
-                            icon="el-icon-caret-left"
-                            type="text"
-                            style="font-size: 20px"
-                          ></el-button>
-
-                              <i class="el-icon-star-on" style="color:#ffa600"></i>
-                              <span class="demonstration">ABCフェス</span>
-                              
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>イベント詳細</span>
+                  <div class="text item">
                             <el-button
-                            @click="$refs.vuecal.next()"
-                            icon="el-icon-caret-right"
-                            type="text"
-                            style="font-size: 20px"
-                          ></el-button>
-                </div>
-              </div>
-              <div class="text item">
-                  <el-form :model="form">
-                    <el-form-item label="時刻" :label-width="formLabelWidth">
-                    <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-                      <el-input
-                        placeholder="20:00-21:00"
-                        v-model="input"
-                        :disabled="true">
-                      </el-input>
-                    </el-col>
-                    </el-form-item>
+                              @click="$refs.vuecal.previous()"
+                              icon="el-icon-caret-left"
+                              type="text"
+                              style="font-size: 20px"
+                            ></el-button>
 
-                    <el-form-item label="撮影周回" :label-width="formLabelWidth">
+                                <i class="el-icon-star-on" style="color:#ffa600"></i>
+                                <span class="demonstration">ABCフェス</span>
+                                
+                              <el-button
+                              @click="$refs.vuecal.next()"
+                              icon="el-icon-caret-right"
+                              type="text"
+                              style="font-size: 20px"
+                            ></el-button>
+                  </div>
+          </div>
+          <div class="text item">
+              <el-form :model="form">
+                <el-form-item label="時刻" :label-width="formLabelWidth">
+                  <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+                    <el-input
+                      placeholder="20:00-21:00"
+                      v-model="input"
+                      :disabled="true"
+                    >
+                    </el-input>
+                  </el-col>
+                </el-form-item>
+
+                <el-form-item label="撮影周回" :label-width="formLabelWidth">
+                  <el-col :span="24" style="margin-left: 10px; font-size: 20px">
+                    <el-switch v-model="value2_switch"> </el-switch>
+                  </el-col>
+                  <div v-show="value2_switch">
+                    <el-col :span="24" style="margin-left: 10px; font-size: 20px">
+                      <el-select v-model="form.region" placeholder="予約撮影">
+                        <el-option label="予約撮影" value="shanghai"></el-option>
+                        <el-option
+                          label="リアルタイム"
+                          value="beijing"
+                        ></el-option>
+                      </el-select>
+                    </el-col>
 
                     <el-col :span="24" style="margin-left: 10px; font-size: 20px">
-                    <el-switch v-model="value1">
-                    </el-switch>
+                      <el-select v-model="form.region" placeholder="一般公開">
+                        <el-option label="一般公開" value="shanghai"></el-option>
+                        <el-option
+                          label="ムーブメント枠"
+                          value="shanghai"
+                        ></el-option>
+                        <el-option label="B2B利用" value="beijing"></el-option>
+                      </el-select>
                     </el-col>
 
                     <el-col :span="24" style="margin-left: 10px; font-size: 20px">
-
-
-                        <el-select v-model="form.region" placeholder="予約撮影">
-                            <el-option label="予約撮影" value="shanghai"></el-option>
-                            <el-option label="リアルタイム" value="beijing"></el-option>
-                        </el-select>
-
+                      <el-button type="primary" style="margin-left: 165px"
+                        >適用</el-button
+                      >
                     </el-col>
-                    
-                    <el-col :span="24" style="margin-left: 10px; font-size: 20px">
-                        <el-select v-model="form.region" placeholder="一般公開">
-                            <el-option label="一般公開" value="shanghai"></el-option>
-                            <el-option label="ムーブメント枠" value="shanghai"></el-option>
-                            <el-option label="B2B利用" value="beijing"></el-option>
-                        </el-select>
+                  </div>
+                </el-form-item>
 
-                    </el-col>
+                <el-form-item label="撮影補正周回" :label-width="formLabelWidth">
+                  <el-col :span="24" style="margin-left: 10px; font-size: 20px">
+                    <el-switch v-model="value3_switch"> </el-switch>
+                    <div v-show="value3_switch"></div>
+                  </el-col>
+                </el-form-item>
 
-                    <el-col :span="24" style="margin-left: 10px; font-size: 20px">
-                    <el-button type="primary"  style="margin-left: 165px;" >適用</el-button>
-                    </el-col>
-              
-                    </el-form-item>
+                <el-form-item label="通信パス" :label-width="formLabelWidth">
+                  <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+                    <el-input
+                      placeholder="未予約"
+                      v-model="input"
+                      :disabled="true"
+                    >
+                    </el-input>
+                  </el-col>
+                </el-form-item>
 
+                <el-form-item label="運用計画" :label-width="formLabelWidth">
+                  <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+                    <el-input placeholder="確定" v-model="input" :disabled="true">
+                    </el-input>
+                  </el-col>
+                </el-form-item>
 
-                    <el-form-item label="撮影補正周回" :label-width="formLabelWidth">
-
-                    <el-col :span="24" style="margin-left: 10px; font-size: 20px">
-                    <el-switch v-model="value1">
-                    </el-switch>
-                    </el-col>
-                    </el-form-item>
-
-                    <el-form-item label="通信パス" :label-width="formLabelWidth">
-                    <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-                      <el-input
-                        placeholder="未予約"
-                        v-model="input"
-                        :disabled="true">
-                      </el-input>
-                    </el-col>
-                    </el-form-item>
-
-                    <el-form-item label="運用計画" :label-width="formLabelWidth">
-                    <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-                      <el-input
-                        placeholder="確定"
-                        v-model="input"
-                        :disabled="true">
-                      </el-input>
-                    </el-col>
-                    </el-form-item>       
-
-                    <el-form-item label="ダウンロード予定日" :label-width="formLabelWidth">
-                    <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-                      <el-input
-                        placeholder="――"
-                        v-model="input"
-                        :disabled="true">
-                      </el-input>
-                    </el-col>
-                    </el-form-item>       
-
-
-                  </el-form>
-              </div>
-            </el-card>
+                <el-form-item
+                  label="ダウンロード予定日"
+                  :label-width="formLabelWidth"
+                >
+                  <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+                    <el-input placeholder="――" v-model="input" :disabled="true">
+                    </el-input>
+                  </el-col>
+                </el-form-item>
+              </el-form>
+            </div>
+        </el-card>
 
       </div>
       <!-- Test 2 -->
       <div v-if="selected_week_type == '7'">
-      <el-card class="box-card">
-        <div slot="header" class="clearfix">
-          <span>イベント詳細</span>
-                <div class="text item">
-                          <el-button
-                            @click="$refs.vuecal.previous()"
-                            icon="el-icon-caret-left"
-                            type="text"
-                            style="font-size: 20px"
-                          ></el-button>
-
-                              <i class="el-icon-star-on" style="color:#ffa600"></i>
-                              <span class="demonstration">ABCフェス</span>
-                              
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>イベント詳細</span>
+                  <div class="text item">
                             <el-button
-                            @click="$refs.vuecal.next()"
-                            icon="el-icon-caret-right"
-                            type="text"
-                            style="font-size: 20px"
-                          ></el-button>
-                </div>
-        </div>
-        <div class="text item">
-            <el-form :model="form">
-              <el-form-item label="時刻" :label-width="formLabelWidth">
-              <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-                <el-input
-                  placeholder="20:00-21:00"
-                  v-model="input"
-                  :disabled="true">
-                </el-input>
-              </el-col>
-              </el-form-item>
+                              @click="$refs.vuecal.previous()"
+                              icon="el-icon-caret-left"
+                              type="text"
+                              style="font-size: 20px"
+                            ></el-button>
 
-              <el-form-item label="撮影周回" :label-width="formLabelWidth">
+                                <i class="el-icon-star-on" style="color:#ffa600"></i>
+                                <span class="demonstration">ABCフェス</span>
+                                
+                              <el-button
+                              @click="$refs.vuecal.next()"
+                              icon="el-icon-caret-right"
+                              type="text"
+                              style="font-size: 20px"
+                            ></el-button>
+                  </div>
+          </div>
+          <div class="text item">
+              <el-form :model="form">
+                <el-form-item label="時刻" :label-width="formLabelWidth">
+                  <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+                    <el-input
+                      placeholder="20:00-21:00"
+                      v-model="input"
+                      :disabled="true"
+                    >
+                    </el-input>
+                  </el-col>
+                </el-form-item>
 
-              <el-col :span="24" style="margin-left: 10px; font-size: 20px">
-              <el-switch v-model="value1">
-              </el-switch>
-              </el-col>
+                <el-form-item label="撮影周回" :label-width="formLabelWidth">
+                  <el-col :span="24" style="margin-left: 10px; font-size: 20px">
+                    <el-switch v-model="value1_switch"> </el-switch>
+                  </el-col>
+                  <div v-show="value1_switch">
+                    <el-col :span="24" style="margin-left: 10px; font-size: 20px">
+                      <el-select v-model="form.region" placeholder="予約撮影">
+                        <el-option label="予約撮影" value="shanghai"></el-option>
+                        <el-option
+                          label="リアルタイム"
+                          value="beijing"
+                        ></el-option>
+                      </el-select>
+                    </el-col>
 
-              <el-col :span="24" style="margin-left: 10px; font-size: 20px">
+                    <el-col :span="24" style="margin-left: 10px; font-size: 20px">
+                      <el-select v-model="form.region" placeholder="一般公開">
+                        <el-option label="一般公開" value="shanghai"></el-option>
+                        <el-option
+                          label="ムーブメント枠"
+                          value="shanghai"
+                        ></el-option>
+                        <el-option label="B2B利用" value="beijing"></el-option>
+                      </el-select>
+                    </el-col>
 
+                    <el-col :span="24" style="margin-left: 10px; font-size: 20px">
+                      <el-button type="primary" style="margin-left: 165px"
+                        >適用</el-button
+                      >
+                    </el-col>
+                  </div>
+                </el-form-item>
 
-                  <el-select v-model="form.region" placeholder="予約撮影">
-                      <el-option label="予約撮影" value="shanghai"></el-option>
-                      <el-option label="リアルタイム" value="beijing"></el-option>
-                  </el-select>
+                <el-form-item label="撮影補正周回" :label-width="formLabelWidth">
+                  <el-col :span="24" style="margin-left: 10px; font-size: 20px">
+                    <el-switch v-model="value3_switch"> </el-switch>
+                    <div v-show="value3_switch"></div>
+                  </el-col>
+                </el-form-item>
 
-              </el-col>
-              
-              <el-col :span="24" style="margin-left: 10px; font-size: 20px">
-                  <el-select v-model="form.region" placeholder="一般公開">
-                      <el-option label="一般公開" value="shanghai"></el-option>
-                      <el-option label="ムーブメント枠" value="shanghai"></el-option>
-                      <el-option label="B2B利用" value="beijing"></el-option>
-                  </el-select>
+                <el-form-item label="通信パス" :label-width="formLabelWidth">
+                  <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+                    <el-input
+                      placeholder="未予約"
+                      v-model="input"
+                      :disabled="true"
+                    >
+                    </el-input>
+                  </el-col>
+                </el-form-item>
 
-              </el-col>
+                <el-form-item label="運用計画" :label-width="formLabelWidth">
+                  <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+                    <el-input placeholder="確定" v-model="input" :disabled="true">
+                    </el-input>
+                  </el-col>
+                </el-form-item>
 
-              <el-col :span="24" style="margin-left: 10px; font-size: 20px">
-              <el-button type="primary"  style="margin-left: 165px;" >適用</el-button>
-              </el-col>
-        
-              </el-form-item>
-
-              <el-form-item label="通信パス" :label-width="formLabelWidth">
-              <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-                <el-input
-                  placeholder="未予約"
-                  v-model="input"
-                  :disabled="true">
-                </el-input>
-              </el-col>
-              </el-form-item>
-
-
-
-              <el-form-item label="運用計画" :label-width="formLabelWidth">
-              <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-                <el-input
-                  placeholder="確定"
-                  v-model="input"
-                  :disabled="true">
-                </el-input>
-              </el-col>
-              </el-form-item>       
-
-              <el-form-item label="ダウンロード予定日" :label-width="formLabelWidth">
-              <el-col :span="8" style="margin-left: 10px; font-size: 20px">
-                <el-input
-                  placeholder="――"
-                  v-model="input"
-                  :disabled="true">
-                </el-input>
-              </el-col>
-              </el-form-item>       
-
-
-            </el-form>
-        </div>
-      </el-card>
+                <el-form-item
+                  label="ダウンロード予定日"
+                  :label-width="formLabelWidth"
+                >
+                  <el-col :span="8" style="margin-left: 10px; font-size: 20px">
+                    <el-input placeholder="――" v-model="input" :disabled="true">
+                    </el-input>
+                  </el-col>
+                </el-form-item>
+              </el-form>
+            </div>
+        </el-card>
       </div>
+
     </el-dialog>
-
-
-
 
     <el-dialog title="イベント追加" :visible.sync="dialogCreationVisible">
       <el-form :model="form">
@@ -1362,6 +1349,9 @@ export default {
     },
     formLabelWidth: "160px",
     showingevents: [],
+    value1_switch: false,
+    value2_switch: false,
+    value3_switch: false,
   }),
   computed: {
     // Get the Monday of the real time current week.
@@ -1931,7 +1921,7 @@ export default {
         hidden: true,
         start: `2022-05-12 7:30`,
         end: `2022-05-12 9:00`,
-        title:  '<i class="el-icon-lightning" style="color:#409EFF"></i>',
+        title: '<i class="el-icon-lightning" style="color:#409EFF"></i>',
         class: "shooting",
         content: '<i class="el-icon-video-camera-solid"></i>',
         extra_bottom_right: '<i class="el-icon-user-solid" /></i>',
